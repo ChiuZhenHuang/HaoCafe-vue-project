@@ -185,6 +185,7 @@
             class="btn btn-primary"
             @click="$emit('update-product', tempProduct)"
           >
+          <!-- 將使用者輸入後的資料emit給外層 -->
             確認
           </button>
         </div>
@@ -205,6 +206,7 @@ export default {
   },
   watch: {
     product () {
+      // 監聽內層接收的product資料，放進內層的tempProduct
       this.tempProduct = this.product
     }
   },
