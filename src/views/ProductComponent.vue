@@ -19,10 +19,11 @@
         <td>{{ item.category }}</td>
         <td>{{ item.title }}</td>
         <td class="text-right">
-          {{ item.origin_price }}
+          <!-- 全域屬性，千分位方法 -->
+          {{ $filters.currency(item.origin_price) }}
         </td>
         <td class="text-right">
-          {{ item.price }}
+          {{ $filters.currency(item.price) }}
         </td>
         <td>
           <span class="text-success" v-if="item.is_enabled">啟用</span>
@@ -37,6 +38,7 @@
       </tr>
     </tbody>
   </table>
+  <Pagination :pages="pagination" @emit-pages="getProducts"></Pagination>
   <!-- props給內層的product為這裡的tempProduct資料 -->
   <!-- 內層emit出來的資料觸發updateProduct事件 -->
   <ProductModal ref="productModal" :product="tempProduct" @update-product="updateProduct"></ProductModal>
@@ -47,6 +49,7 @@
 <script>
 import ProductModal from '../components/ProductsModal.vue'
 import DelModal from '../components/DelModal.vue'
+import Pagination from '../components/Pagination.vue'
 
 export default {
   data () {
@@ -60,14 +63,16 @@ export default {
   },
   components: {
     ProductModal,
-    DelModal
+    DelModal,
+    Pagination
   },
   // 取得外層provide進來的emitter功能
   inject: ['emitter'],
   methods: {
     // 取得最新資料
-    getProducts () {
-      const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/products`
+    // 預設page為第一頁
+    getProducts (page = 1) {
+      const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/products?page=${page}`
       this.isLoading = true // 讀取資料時觸發loading效果
       this.$http.get(api)
         .then((res) => {
@@ -133,17 +138,9 @@ export default {
         productComponent.hideModal()
         if (response.data.success) {
           this.getProducts()
-          this.emitter.emit('push-message', {
-            style: 'success',
-            title: '更新成功'
-          })
+          this.$httpMessageState(response)
         } else {
-          this.emitter.emit('push-message', {
-            style: 'danger',
-            title: '更新失敗',
-            content: response.data.message.join('、')
-            // 將更新失敗產生的message帶入分別渲染到畫面
-          })
+          this.$httpMessageState(response)
         }
       })
     }

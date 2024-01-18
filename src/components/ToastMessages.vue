@@ -1,6 +1,6 @@
 <template>
   <!-- 定位在右上方 -->
-  <div class="toast-container position-absolute pe-3 top-0 end-0">
+  <div class="toast-container position-absolute pe-3 top-0 end-0" style="z-index: 1050">
     <!-- 將內層Toast元件用列表展示出來 -->
     <!-- :msg="msg"代表內層props的msg為這裡的msg資料 -->
     <Toast v-for="(msg, key) in messages" :key="key"
@@ -23,7 +23,7 @@ export default {
   // 取得外層provide進來的emitter功能
   inject: ['emitter'],
   mounted () {
-    // message為外部傳進來的資訊
+    // msg為外部傳進來的資訊
     this.emitter.on('push-message', (msg) => {
       // 若資料沒傳入style的話，style預設為success
       const { style = 'success', title, content } = msg

@@ -218,6 +218,7 @@ export default {
   },
   mixins: [modalMixin],
   methods: {
+    // 存入圖片使用
     uploadFile () {
       const uploadedFile = this.$refs.fileInput.files[0]
       const formData = new FormData()
