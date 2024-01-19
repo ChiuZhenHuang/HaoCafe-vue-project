@@ -41,6 +41,7 @@
           </tr>
           </tbody>
         </table>
+        <Pagination :pages="pagination" @emit-pages="getProducts"></Pagination>
       </div>
       <!-- 購物車列表 -->
       <div class="col-md-5">
@@ -50,7 +51,7 @@
               <tr>
                 <th></th>
                 <th>品名</th>
-                <th style="width: 110px">數量</th>
+                <th style="width: 130px">數量</th>
                 <th>單價</th>
               </tr>
             </thead>
@@ -60,8 +61,9 @@
                 <td>
                   <button type="button" class="btn btn-outline-danger btn-sm"
                           :disabled="status.loadingItem === item.id"
-                          @click="removeCartItem(item.id)">
+                          @click="removeCartItem(item)">
                           <i class="bi bi-trash"></i>
+                          <!-- 刪除 -->
                   </button>
                 </td>
                 <td>
@@ -72,9 +74,11 @@
                 </td>
                 <td>
                   <div class="input-group input-group-sm">
-                    <input type="number" class="form-control"
-                          v-model.number="item.qty">
-                    <div class="input-group-text">/ {{ item.product.unit }}</div>
+                    <input type="number" class="form-control" min="1" :max="item.product.unit"
+                          v-model.number="item.qty"
+                          :disabled="status.loadingItem === item.id"
+                          @change="updateCart(item)">
+                    <div class="input-group-text">/ {{ item.product.unit }} 件</div>
                   </div>
                 </td>
                 <td class="text-end">
@@ -106,37 +110,103 @@
         </div>
       </div>
     </div>
+    <!-- 建立訂單表單 -->
+    <div class="my-5 row justify-content-center">
+      <Form class="col-md-6" v-slot="{ errors }"
+            @submit="createOrder">
+        <div class="mb-3">
+          <label for="email" class="form-label">Email</label>
+          <Field id="email" name="email" type="email" class="form-control"
+                  :class="{ 'is-invalid': errors['email'] }"
+                  placeholder="請輸入 Email" rules="email|required"
+                  v-model="form.user.email"></Field>
+          <ErrorMessage name="email" class="invalid-feedback"></ErrorMessage>
+        </div>
+
+        <div class="mb-3">
+          <label for="name" class="form-label">收件人姓名</label>
+          <Field id="name" name="姓名" type="text" class="form-control"
+                  :class="{ 'is-invalid': errors['姓名'] }"
+                  placeholder="請輸入姓名" rules="required"
+                  v-model="form.user.name"></Field>
+          <ErrorMessage name="姓名" class="invalid-feedback"></ErrorMessage>
+        </div>
+
+        <div class="mb-3">
+          <label for="tel" class="form-label">收件人電話</label>
+          <Field id="tel" name="電話" type="tel" class="form-control"
+                  :class="{ 'is-invalid': errors['電話'] }"
+                  placeholder="請輸入電話" rules="required"
+                  v-model="form.user.tel"></Field>
+          <ErrorMessage name="電話" class="invalid-feedback"></ErrorMessage>
+        </div>
+
+        <div class="mb-3">
+          <label for="address" class="form-label">收件人地址</label>
+          <Field id="address" name="地址" type="text" class="form-control"
+                  :class="{ 'is-invalid': errors['地址'] }"
+                  placeholder="請輸入地址" rules="required"
+                  v-model="form.user.address"></Field>
+          <ErrorMessage name="地址" class="invalid-feedback"></ErrorMessage>
+        </div>
+
+        <div class="mb-3">
+          <label for="message" class="form-label">留言</label>
+          <textarea name="" id="message" class="form-control" cols="30" rows="10"
+                    v-model="form.message"></textarea>
+        </div>
+        <div class="text-end">
+          <button class="btn btn-danger">送出訂單</button>
+        </div>
+      </Form>
+    </div>
   </div>
 </template>
 
 <script>
+import Pagination from '../components/Pagination.vue'
+
 export default {
   data () {
     return {
       products: [],
       product: {},
-      // status的用途??
       status: {
         loadingItem: '' // 對應品項id
       },
       cart: {}, // 存放目前已加至購物車內產品
-      coupon_code: ''
+      coupon_code: '', // 優惠券號碼
+      form: {
+        user: {
+          name: '',
+          email: '',
+          tel: '',
+          address: ''
+        },
+        message: ''
+      },
+      pagination: {}
     }
   },
+  components: { Pagination },
+  inject: ['emitter'],
   methods: {
-    getProducts () {
-      const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/products/all`
+    // 取得產品列表資料
+    getProducts (page = 1) {
+      const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/products/?page=${page}`
       this.isLoading = true
-      this.$http.get(url).then((response) => {
-        console.log('products:', response)
-        this.products = response.data.products
+      this.$http.get(url).then((res) => {
+        console.log('products:', res)
+        this.products = res.data.products
         this.isLoading = false
+        this.pagination = res.data.pagination
       })
     },
+    // 前往詳細資料頁面
     getProduct (id) {
-      // 前往詳細資料頁面
       this.$router.push(`/user/product/${id}`)
     },
+    // 加到購物車
     addCart (id) {
       const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`
       // 讀取資料前先讓loadingItem等於id資料，觸發disabled避免用戶重複加入購物車
@@ -151,8 +221,10 @@ export default {
           // 讀取資料完成將disabled取消，讓用戶知道已經完成加入購物車
           this.status.loadingItem = ''
           this.$httpMessageState(res, '加入購物車')
+          this.getCart()
         })
     },
+    // 取得購物車列表
     getCart () {
       const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`
       this.isLoading = true
@@ -160,10 +232,44 @@ export default {
         .then((res) => {
           this.cart = res.data.data
           this.isLoading = false
+          // console.log(this.cart)
         })
+    },
+    // 更新購物車數量
+    updateCart (item) {
+      const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart/${item.id}`
+      this.isLoading = true // 轉換購物車數量同時整個頁面loading
+      this.status.loadingItem = item.id
+      const cart = {
+        product_id: item.product_id,
+        qty: item.qty
+      }
+      this.$http.put(url, { data: cart }).then((res) => {
+        // console.log(res)
+        this.status.loadingItem = ''
+        this.getCart()
+      })
+    },
+    // 建立訂單表單
+    createOrder () {
+      const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/order`
+      const order = this.form
+      // 將用戶建立訂單資料傳到api
+      this.$http.post(url, { data: order }).then((res) => {
+        console.log(res)
+      })
+    },
+    // 刪除購物車品項
+    removeCartItem (item) {
+      const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart/${item.id}`
+      this.$http.delete(url).then((res) => {
+        this.updateCart(item)
+        this.emitter.emit('push-message', {
+          style: 'warning',
+          title: '已刪除產品'
+        })
+      })
     }
-    // removeCartItem () {
-    // }
   },
   created () {
     this.getProducts()
