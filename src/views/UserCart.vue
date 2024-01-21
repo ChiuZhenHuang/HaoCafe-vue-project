@@ -51,7 +51,8 @@
               <tr>
                 <th></th>
                 <th>品名</th>
-                <th style="width: 130px">數量</th>
+                <th>數量</th>
+                <th>庫存數</th>
                 <th>單價</th>
               </tr>
             </thead>
@@ -63,7 +64,6 @@
                           :disabled="status.loadingItem === item.id"
                           @click="removeCartItem(item)">
                           <i class="bi bi-trash"></i>
-                          <!-- 刪除 -->
                   </button>
                 </td>
                 <td>
@@ -78,9 +78,9 @@
                           v-model.number="item.qty"
                           :disabled="status.loadingItem === item.id"
                           @change="updateCart(item)">
-                    <div class="input-group-text">/ {{ item.product.unit }} 件</div>
                   </div>
                 </td>
+                  <td><div class="input-group-text">{{ item.product.unit }} 件</div></td>
                 <td class="text-end">
                   <small v-if="cart.final_total !== cart.total" class="text-success">折扣價：</small>
                   {{ $filters.currency(item.final_total) }}
@@ -89,12 +89,21 @@
             </template>
             </tbody>
             <tfoot>
-            <tr>
+            <tr  v-if="cart.final_total == cart.total">
               <td colspan="3" class="text-end">總計</td>
               <td class="text-end">{{ $filters.currency(cart.total) }}</td>
             </tr>
+            <tr v-else>
+              <td colspan="3" class="text-end">總計</td>
+              <td class="text-end"><del>{{ $filters.currency(cart.total) }}</del></td>
+            </tr>
+            <!-- 如果最終價格和總計價格不同再顯示(已使用優惠券) -->
             <tr v-if="cart.final_total !== cart.total">
-              <td colspan="3" class="text-end text-success">折扣價</td>
+              <td colspan="3" class="text-end">已折扣金額</td>
+              <td class="text-end">{{ $filters.currency(cart.total - cart.final_total) }}</td>
+            </tr>
+            <tr v-if="cart.final_total !== cart.total">
+              <td colspan="3" class="text-end text-success">應付金額</td>
               <td class="text-end text-success">{{ $filters.currency(cart.final_total) }}</td>
             </tr>
             </tfoot>
@@ -136,7 +145,7 @@
           <label for="tel" class="form-label">收件人電話</label>
           <Field id="tel" name="電話" type="tel" class="form-control"
                   :class="{ 'is-invalid': errors['電話'] }"
-                  placeholder="請輸入電話" rules="required"
+                  placeholder="請輸入電話" :rules="isPhone"
                   v-model="form.user.tel"></Field>
           <ErrorMessage name="電話" class="invalid-feedback"></ErrorMessage>
         </div>
@@ -175,7 +184,7 @@ export default {
         loadingItem: '' // 對應品項id
       },
       cart: {}, // 存放目前已加至購物車內產品
-      coupon_code: '', // 優惠券號碼
+      coupon_code: '', // 用戶輸入優惠券號碼
       form: {
         user: {
           name: '',
@@ -185,12 +194,18 @@ export default {
         },
         message: ''
       },
-      pagination: {}
+      pagination: {},
+      isLoading: false
     }
   },
   components: { Pagination },
   inject: ['emitter'],
   methods: {
+    // 驗證電話是否正確
+    isPhone (value) {
+      const phoneNumber = /^(09)[0-9]{8}$/
+      return phoneNumber.test(value) ? true : '需要正確的電話號碼'
+    },
     // 取得產品列表資料
     getProducts (page = 1) {
       const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/products/?page=${page}`
@@ -232,7 +247,7 @@ export default {
         .then((res) => {
           this.cart = res.data.data
           this.isLoading = false
-          // console.log(this.cart)
+          console.log('購物車產品', this.cart)
         })
     },
     // 更新購物車數量
@@ -250,13 +265,16 @@ export default {
         this.getCart()
       })
     },
-    // 建立訂單表單
+    // 送出訂單表單
     createOrder () {
       const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/order`
+      this.isLoading = true
       const order = this.form
       // 將用戶建立訂單資料傳到api
       this.$http.post(url, { data: order }).then((res) => {
         console.log(res)
+        this.$httpMessageState(res, '訂單送出')
+        this.getCart()
       })
     },
     // 刪除購物車品項
@@ -269,6 +287,21 @@ export default {
           title: '已刪除產品'
         })
       })
+    },
+    // 套用優惠券
+    addCouponCode () {
+      const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/coupon`
+      const coupon = {
+        code: this.coupon_code
+      }
+      this.$http.post(url, { data: coupon })
+        .then((res) => {
+          console.log(res)
+          this.$httpMessageState(res, '套用優惠券')
+          this.getCart()
+          // 優惠碼使用成功後清除優惠碼資料
+          this.coupon_code = ''
+        })
     }
   },
   created () {

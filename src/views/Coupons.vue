@@ -59,6 +59,7 @@ export default {
     couponModal,
     Pagination
   },
+  inject: ['emitter'],
   data () {
     return {
       coupons: {},
@@ -117,7 +118,7 @@ export default {
         const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/coupon/${this.tempCoupon.id}`
         this.$http.put(url, { data: this.tempCoupon }).then((res) => {
           console.log(res)
-          this.$httpMessageState(res, '新增優惠券')
+          this.$httpMessageState(res, '更新優惠券')
           this.getCoupons()
           this.$refs.couponModal.hideModal()
         })
@@ -129,7 +130,10 @@ export default {
       this.isLoading = true
       this.$http.delete(url).then((res) => {
         // console.log(res, this.tempCoupon)
-        this.$httpMessageState(res, '刪除優惠券')
+        this.emitter.emit('push-message', {
+          style: 'warning',
+          title: '已刪除優惠券'
+        })
         const delComponent = this.$refs.delModal
         delComponent.hideModal()
         this.getCoupons()

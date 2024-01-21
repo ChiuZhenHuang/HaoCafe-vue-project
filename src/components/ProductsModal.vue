@@ -208,6 +208,10 @@ export default {
     product () {
       // 監聽內層接收的product資料，放進內層的tempProduct
       this.tempProduct = this.product
+      // 多圖範例
+      if (!this.tempProduct.images) {
+        this.tempProduct.images = []
+      }
     }
   },
   data () {

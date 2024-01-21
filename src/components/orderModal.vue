@@ -1,8 +1,4 @@
 <template>
-  orderModal
-</template>
-
-<!-- <template>
   <div class="modal fade" id="productModal" tabindex="-1" role="dialog"
       aria-labelledby="exampleModalLabel" aria-hidden="true" ref="modal">
     <div class="modal-dialog modal-xl" role="document">
@@ -35,6 +31,11 @@
                   <tr>
                     <th>地址</th>
                     <td>{{ tempOrder.user.address }}</td>
+                  </tr>
+                  <!-- 用戶若有留言才顯示留言 -->
+                  <tr v-if="tempOrder.message">
+                    <th>留言</th>
+                    <td>{{ tempOrder.message }}</td>
                   </tr>
                 </tbody>
               </table>
@@ -103,12 +104,13 @@
                   data-bs-dismiss="modal">取消
           </button>
           <button type="button" class="btn btn-primary"
-                  @click="$emit('update-order', tempOrder)">確認</button>
+                  >確認</button>
+                  <!-- @click="$emit('update-order', tempOrder)" -->
         </div>
       </div>
     </div>
   </div>
-</template> -->
+</template>
 <script>
 import modalMixin from '@/mixins/modalMixin'
 
@@ -121,13 +123,18 @@ export default {
   },
   data () {
     return {
-      modal: {},
-      tempOrder: {}
+      status: {},
+      modal: '',
+      tempOrder: {},
+      isPaid: false
     }
   },
+  emits: ['update-order'],
+  // inject: ['emitter'],
   watch: {
     order () {
       this.tempOrder = this.order
+      this.isPaid = this.tempOrder.is_paid
     }
   },
   mixins: [modalMixin]
