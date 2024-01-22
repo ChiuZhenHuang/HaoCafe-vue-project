@@ -16,7 +16,7 @@
     <tbody v-for="(item, key) in orders" :key="key">
       <!-- <tr v-if="orders.length"
             :class="{'text-secondary': !item.is_paid}"> -->
-        <tr>
+      <tr>
         <td>{{ $filters.date(item.create_at) }}</td>
         <td>{{ item.user.name }}</td>
         <td><span v-text="item.user.email" v-if="item.user"></span></td>
@@ -54,7 +54,7 @@
       </tr>
     </tbody>
   </table>
-  <OrderModal ref="orderModal" :order="tempOrder" @update-paid="updatePaid"></OrderModal>
+  <OrderModal ref="orderModal" :order="tempOrder"></OrderModal>
   <DelModal ref="delModal" :item="tempOrder" @del-item="delOrder"></DelModal>
   <Pagination :pages="pagination" @emit-pages="getOrders"></Pagination>
 </template>

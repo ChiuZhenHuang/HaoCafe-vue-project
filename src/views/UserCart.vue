@@ -19,6 +19,7 @@
                   :style="{backgroundImage: `url(${item.imageUrl})`}"></div>
             </td>
             <td><a href="#" class="text-dark">{{ item.title }}</a></td>
+            <!-- 更改點選後進入userProduct頁面 -->
             <td>
               <div class="h5" v-if="!item.price">{{ item.origin_price }} 元</div>
               <del class="h6" v-if="item.price">原價 {{ item.origin_price }} 元</del>
@@ -99,7 +100,7 @@
             </tr>
             <!-- 如果最終價格和總計價格不同再顯示(已使用優惠券) -->
             <tr v-if="cart.final_total !== cart.total">
-              <td colspan="3" class="text-end">已折扣金額</td>
+              <td colspan="3" class="text-end">已折扣</td>
               <td class="text-end">{{ $filters.currency(cart.total - cart.final_total) }}</td>
             </tr>
             <tr v-if="cart.final_total !== cart.total">
@@ -272,9 +273,11 @@ export default {
       const order = this.form
       // 將用戶建立訂單資料傳到api
       this.$http.post(url, { data: order }).then((res) => {
-        console.log(res)
+        console.log('送出訂單資料', res)
         this.$httpMessageState(res, '訂單送出')
         this.getCart()
+        // 前往付款頁面
+        this.$router.push(`/user/checkout/${res.data.orderId}`)
       })
     },
     // 刪除購物車品項

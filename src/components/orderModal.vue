@@ -103,7 +103,7 @@
           <button type="button" class="btn btn-outline-secondary"
                   data-bs-dismiss="modal">取消
           </button>
-          <button type="button" class="btn btn-primary"
+          <button type="button" class="btn btn-primary" data-bs-dismiss="modal"
                   >確認</button>
                   <!-- @click="$emit('update-order', tempOrder)" -->
         </div>
@@ -129,7 +129,7 @@ export default {
       isPaid: false
     }
   },
-  emits: ['update-order'],
+  // emits: ['update-order'],
   // inject: ['emitter'],
   watch: {
     order () {

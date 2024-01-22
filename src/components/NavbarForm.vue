@@ -6,10 +6,13 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarText">
       <div class="navbar-nav me-auto mb-2 mb-lg-0">
-          <router-link  class="nav-link" aria-current="page" to="/dashboard/productComponent">產品</router-link>
-          <router-link  class="nav-link" aria-current="page" to="/dashboard/orders">訂單</router-link>
-          <router-link  class="nav-link" aria-current="page" to="/dashboard/coupons">優惠券</router-link>
-          <a class="nav-link" href="#" @click.prevent="logout">登出</a>
+        <router-link  class="nav-link" aria-current="page" to="/dashboard/productComponent">產品</router-link>
+        <router-link  class="nav-link" aria-current="page" to="/dashboard/orders">訂單</router-link>
+        <router-link  class="nav-link" aria-current="page" to="/dashboard/coupons">優惠券</router-link>
+        <a class="nav-link" href="#" @click.prevent="logout">登出</a>
+      </div>
+      <div>
+        <router-link  class="nav-link" aria-current="page" to="/user/cart">產品介面</router-link>
       </div>
     </div>
   </div>
