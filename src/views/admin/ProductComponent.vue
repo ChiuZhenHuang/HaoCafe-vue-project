@@ -47,9 +47,9 @@
 </template>
 
 <script>
-import ProductModal from '../components/ProductsModal.vue'
-import DelModal from '../components/DelModal.vue'
-import Pagination from '../components/Pagination.vue'
+import ProductModal from '@/components/ProductsModal.vue'
+import DelModal from '@/components/DelModal.vue'
+import Pagination from '@/components/Pagination.vue'
 
 export default {
   data () {
@@ -99,6 +99,7 @@ export default {
       this.tempProduct = { ...item }
       const delModal = this.$refs.delModal
       delModal.showModal()
+      console.log(item)
     },
     delProduct () {
       const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/product/${this.tempProduct.id}`

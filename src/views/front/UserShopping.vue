@@ -1,8 +1,9 @@
 <template>
   <LoadingComponent :active="isLoading"></LoadingComponent>
-  <div class="container">
+  <div class="container" style="margin-top:85px">
     <div class="row mt-4">
-      <div class="col-md-7">
+      <!-- 產品列表 -->
+      <div class="col">
         <table class="table align-middle">
           <thead>
           <tr>
@@ -45,7 +46,7 @@
         <Pagination :pages="pagination" @emit-pages="getProducts"></Pagination>
       </div>
       <!-- 購物車列表 -->
-      <div class="col-md-5">
+      <!-- <div class="col-md-5">
         <div class="sticky-top">
           <table class="table align-middle">
             <thead>
@@ -98,7 +99,6 @@
               <td colspan="3" class="text-end">總計</td>
               <td class="text-end"><del>{{ $filters.currency(cart.total) }}</del></td>
             </tr>
-            <!-- 如果最終價格和總計價格不同再顯示(已使用優惠券) -->
             <tr v-if="cart.final_total !== cart.total">
               <td colspan="3" class="text-end">已折扣</td>
               <td class="text-end">{{ $filters.currency(cart.total - cart.final_total) }}</td>
@@ -118,10 +118,10 @@
             </div>
           </div>
         </div>
-      </div>
+      </div> -->
     </div>
     <!-- 建立訂單表單 -->
-    <div class="my-5 row justify-content-center">
+    <!-- <div class="my-5 row justify-content-center">
       <Form class="col-md-6" v-slot="{ errors }"
             @submit="createOrder">
         <div class="mb-3">
@@ -169,31 +169,20 @@
           <button class="btn btn-danger">送出訂單</button>
         </div>
       </Form>
-    </div>
+    </div> -->
   </div>
 </template>
 
 <script>
-import Pagination from '../components/Pagination.vue'
+import Pagination from '@/components/Pagination.vue'
 
 export default {
   data () {
     return {
       products: [],
-      product: {},
+      // product: {},
       status: {
         loadingItem: '' // 對應品項id
-      },
-      cart: {}, // 存放目前已加至購物車內產品
-      coupon_code: '', // 用戶輸入優惠券號碼
-      form: {
-        user: {
-          name: '',
-          email: '',
-          tel: '',
-          address: ''
-        },
-        message: ''
       },
       pagination: {},
       isLoading: false
@@ -203,10 +192,10 @@ export default {
   inject: ['emitter'],
   methods: {
     // 驗證電話是否正確
-    isPhone (value) {
-      const phoneNumber = /^(09)[0-9]{8}$/
-      return phoneNumber.test(value) ? true : '需要正確的電話號碼'
-    },
+    // isPhone (value) {
+    //   const phoneNumber = /^(09)[0-9]{8}$/
+    //   return phoneNumber.test(value) ? true : '需要正確的電話號碼'
+    // },
     // 取得產品列表資料
     getProducts (page = 1) {
       const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/products/?page=${page}`
@@ -249,61 +238,6 @@ export default {
           this.cart = res.data.data
           this.isLoading = false
           console.log('購物車產品', this.cart)
-        })
-    },
-    // 更新購物車數量
-    updateCart (item) {
-      const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart/${item.id}`
-      this.isLoading = true // 轉換購物車數量同時整個頁面loading
-      this.status.loadingItem = item.id
-      const cart = {
-        product_id: item.product_id,
-        qty: item.qty
-      }
-      this.$http.put(url, { data: cart }).then((res) => {
-        // console.log(res)
-        this.status.loadingItem = ''
-        this.getCart()
-      })
-    },
-    // 送出訂單表單
-    createOrder () {
-      const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/order`
-      this.isLoading = true
-      const order = this.form
-      // 將用戶建立訂單資料傳到api
-      this.$http.post(url, { data: order }).then((res) => {
-        console.log('送出訂單資料', res)
-        this.$httpMessageState(res, '訂單送出')
-        this.getCart()
-        // 前往付款頁面
-        this.$router.push(`/user/checkout/${res.data.orderId}`)
-      })
-    },
-    // 刪除購物車品項
-    removeCartItem (item) {
-      const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart/${item.id}`
-      this.$http.delete(url).then((res) => {
-        this.updateCart(item)
-        this.emitter.emit('push-message', {
-          style: 'warning',
-          title: '已刪除產品'
-        })
-      })
-    },
-    // 套用優惠券
-    addCouponCode () {
-      const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/coupon`
-      const coupon = {
-        code: this.coupon_code
-      }
-      this.$http.post(url, { data: coupon })
-        .then((res) => {
-          console.log(res)
-          this.$httpMessageState(res, '套用優惠券')
-          this.getCart()
-          // 優惠碼使用成功後清除優惠碼資料
-          this.coupon_code = ''
         })
     }
   },

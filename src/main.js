@@ -4,6 +4,9 @@ import VueAxios from 'vue-axios'
 import Loading from 'vue-loading-overlay'
 import 'vue-loading-overlay/dist/css/index.css'
 import 'bootstrap-icons/font/bootstrap-icons.css'
+// 引入bootstrap的js功能
+import 'bootstrap/dist/js/bootstrap.bundle.min.js'
+import 'popper.js'
 
 // 表單驗證vee-validate套件
 import {

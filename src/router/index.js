@@ -1,5 +1,5 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
+import HomeView from '../views/front/HomeView.vue'
 
 const routes = [
   {
@@ -13,45 +13,53 @@ const routes = [
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
+    component: () => import(/* webpackChunkName: "about" */ '../views/front/AboutView.vue')
   },
   {
     path: '/login',
-    component: () => import('../views/LoginForm.vue')
+    component: () => import('../views/front/LoginForm.vue')
   },
   {
     path: '/dashboard',
-    component: () => import('../views/DashBoard.vue'),
+    component: () => import('../views/admin/DashBoard.vue'),
     children: [
       {
         path: 'productComponent',
-        component: () => import('../views/ProductComponent.vue')
+        component: () => import('../views/admin/ProductComponent.vue')
       },
       {
         path: 'orders',
-        component: () => import('../views/Orders.vue')
+        component: () => import('../views/admin/Orders.vue')
       },
       {
         path: 'coupons',
-        component: () => import('../views/Coupons.vue')
+        component: () => import('../views/admin/Coupons.vue')
       }
     ]
   },
   {
     path: '/user',
-    component: () => import('../views/UserBoard.vue'),
+    component: () => import('../views/front/UserBoard.vue'),
     children: [
       {
+        path: 'shopping',
+        component: () => import('../views/front/UserShopping.vue')
+      },
+      {
         path: 'cart',
-        component: () => import('../views/UserCart.vue')
+        component: () => import('../views/front/UserCart.vue')
       },
       {
         path: 'product/:productId',
-        component: () => import('../views/UserProduct.vue')
+        component: () => import('../views/front/UserProduct.vue')
+      },
+      {
+        path: 'form',
+        component: () => import('../views/front/UserForm.vue')
       },
       {
         path: 'checkout/:orderId',
-        component: () => import('../views/UserCheckOut.vue')
+        component: () => import('../views/front/UserCheckOut.vue')
       }
     ]
   }

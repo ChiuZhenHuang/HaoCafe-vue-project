@@ -1,7 +1,7 @@
 <template>
   <LoadingComponent :active="isLoading"></LoadingComponent>
-  <div class="my-5 row justify-content-center">
-    <form class="col-md-6" @submit.prevent="payOrder">
+  <div class="my-5 row justify-content-center" >
+    <form class="col-md-6" @submit.prevent="payOrder" style="margin-top:85px">
       <table class="table align-middle">
         <thead>
         <th>品名</th>
@@ -12,13 +12,13 @@
         <tr v-for="item in order.products" :key="item.id">
           <td>{{ item.product.title }}</td>
           <td>{{ item.qty }}/{{ item.product.unit }}</td>
-          <td class="text-end">{{ item.final_total }}</td>
+          <td class="text-end">{{ $filters.currency(item.final_total) }}</td>
         </tr>
         </tbody>
         <tfoot>
         <tr>
           <td colspan="2" class="text-end">總計</td>
-          <td class="text-end">{{ order.total }}</td>
+          <td class="text-end">{{ $filters.currency(order.total) }} 元</td>
         </tr>
         </tfoot>
       </table>

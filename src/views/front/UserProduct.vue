@@ -1,9 +1,9 @@
 <template>
   <LoadingComponent :active="isLoading"></LoadingComponent>
-  <div class="container">
+  <div class="container"  style="margin-top:85px">
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb">
-        <li class="breadcrumb-item"><router-link to="/user/cart">購物車</router-link></li>
+        <li class="breadcrumb-item"><router-link to="/user/shopping">更多商品</router-link></li>
         <li class="breadcrumb-item active" aria-current="page">{{ product.title }}</li>
       </ol>
     </nav>
@@ -13,6 +13,7 @@
         <div>{{ product.content }}</div>
         <div>{{ product.description }}</div>
         <img :src="product.imageUrl" alt="" class="img-fluid mb-3">
+        <img v-for="(image, index) in product.images" :key="index" :src="image" alt="" class="img-fluid mb-3">
       </article>
       <div class="col-4">
         <div class="h5" v-if="!product.price">{{ product.origin_price }} 元</div>

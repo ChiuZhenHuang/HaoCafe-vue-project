@@ -12,7 +12,7 @@
         <a class="nav-link" href="#" @click.prevent="logout">登出</a>
       </div>
       <div>
-        <router-link  class="nav-link" aria-current="page" to="/user/cart">產品介面</router-link>
+        <router-link  class="nav-link" aria-current="page" to="/user/shopping">產品介面</router-link>
       </div>
     </div>
   </div>

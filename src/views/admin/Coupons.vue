@@ -46,9 +46,9 @@
 </template>
 
 <script>
-import DelModal from '../components/DelModal.vue'
-import couponModal from '../components/couponModal.vue'
-import Pagination from '../components/Pagination.vue'
+import DelModal from '@/components/DelModal.vue'
+import couponModal from '@/components/couponModal.vue'
+import Pagination from '@/components/Pagination.vue'
 
 export default {
   props: {
