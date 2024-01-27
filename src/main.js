@@ -8,6 +8,8 @@ import 'bootstrap-icons/font/bootstrap-icons.css'
 import 'bootstrap/dist/js/bootstrap.bundle.min.js'
 import 'popper.js'
 
+import 'animate.css'
+
 // 表單驗證vee-validate套件
 import {
   Form, Field, ErrorMessage, defineRule, configure

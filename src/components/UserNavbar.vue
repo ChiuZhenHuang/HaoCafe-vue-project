@@ -1,9 +1,9 @@
 <template>
   <div>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-      <div class="container-fluid">
+    <nav class="navbar navbar-expand-lg" :class="{ 'fixed-top': isFixedTop, 'bg-transparent': isTransparent, 'bg-black': !isTransparent }">
+      <div class="container-fluid bg-transparent">
         <router-link class="navbar-brand" to="/">
-          <img src="https://th.bing.com/th/id/OIG.FLGaPpu5qAW67jdLNK.1?w=1024&h=1024&rs=1&pid=ImgDetMain" class="d-block" style="height: 50px;width: 50px;" alt="...">
+          <img src="https://i.pinimg.com/564x/e6/e8/69/e6e8691e77bd66ca772d620f22d61d9b.jpg" class="d-block" style="height: 60px;width: 60px;" alt="...">
         </router-link>
         <!-- 手機漢堡鈕 -->
         <button class="navbar-toggler ml-auto" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebar" aria-controls="sidebar">
@@ -15,7 +15,7 @@
             <router-link class="nav-link" to="/about">關於我們</router-link>
           </li>
           <li class="nav-item">
-            <router-link class="nav-link" to="/user/shopping">前往購物</router-link>
+            <router-link class="nav-link" to="/user/shopping">商品列表</router-link>
           </li>
           <li class="nav-item">
             <router-link class="nav-link" to="/dashboard/productComponent">管理產品</router-link>
@@ -57,3 +57,32 @@
     </div>
   </div>
 </template>
+
+<script>
+export default {
+  data () {
+    return {
+      isFixedTop: false,
+      isTransparent: true
+    }
+  },
+  mounted () {
+    window.addEventListener('scroll', this.handleScroll)
+  },
+  methods: {
+    handleScroll () {
+      // 獲取滾動的距離
+      const scrollY = window.scrollY
+
+      // 設置 isFixedTop 屬性，當滾動距離超過某個值時固定在頂部
+      this.isFixedTop = scrollY > 50
+
+      // 設置 isTransparent 屬性，根據滾動距離來判斷背景色
+      this.isTransparent = scrollY <= 50
+    }
+  },
+  beforeUnmount () {
+    window.removeEventListener('scroll', this.handleScroll)
+  }
+}
+</script>
