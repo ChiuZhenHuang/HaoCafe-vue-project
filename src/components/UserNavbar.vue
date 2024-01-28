@@ -38,7 +38,7 @@
       <div class="offcanvas-body">
         <ul class="navbar-nav flex-column">
           <li class="nav-item">
-            <router-link class="nav-link" to="/about">關於我們</router-link>
+            <router-link class="nav-link" to="/about" >關於我們</router-link>
           </li>
           <li class="nav-item">
             <router-link class="nav-link" to="/user/shopping">前往購物</router-link>
@@ -70,10 +70,15 @@ export default {
     window.addEventListener('scroll', this.handleScroll)
   },
   methods: {
+    goAbout () {
+      window.scrollTo({
+        top: 525,
+        behavior: 'smooth' // 平滑效果
+      })
+    },
     handleScroll () {
       // 獲取滾動的距離
       const scrollY = window.scrollY
-
       // 設置 isFixedTop 屬性，當滾動距離超過某個值時固定在頂部
       this.isFixedTop = scrollY > 50
 

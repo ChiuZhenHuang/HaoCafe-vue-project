@@ -12166,7 +12166,6 @@ textarea.form-control-lg {
 
 .carousel-inner {
   margin-top: -85px;
-  width: 100vw;
   position: relative;
 }
 .carousel-inner .text {
@@ -12176,10 +12175,10 @@ textarea.form-control-lg {
   transform: translate(-50%, -50%);
   text-align: center;
   color: white;
-  z-index: 15;
+  z-index: 5;
   font-size: 1.5rem;
 }
-.carousel-inner .text a {
+.carousel-inner .text .nav-link {
   display: inline-block;
   margin-top: 20px;
   font-size: 1.5rem;
@@ -12191,8 +12190,53 @@ textarea.form-control-lg {
   border: 1px solid white;
   transition: 0.7s;
 }
-.carousel-inner .text a:hover {
+.carousel-inner .text .nav-link:hover {
   background-color: rgba(255, 255, 255, 0.3);
+}
+
+.home-main {
+  background-color: rgb(40, 40, 40);
+}
+
+.main-item {
+  width: 100%;
+  height: auto;
+}
+.main-item img {
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+}
+.main-item .text {
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin-top: -50px;
+  background-color: black;
+  line-height: 10px;
+  padding: 0 20px;
+  text-align: start;
+  writing-mode: vertical-lr;
+  color: white;
+}
+.main-item .text p {
+  font-size: 2rem;
+  width: 100%;
+}
+.main-item .text p:nth-of-type(1) {
+  margin-top: -100px;
+}
+.main-item .text p:nth-of-type(2) {
+  margin-top: 100px;
+}
+
+footer {
+  background-color: rgb(146, 144, 144);
+  color: white;
+  text-align: center;
+  height: 100px;
+  line-height: 100px;
 }
 
 @media screen and (max-width: 768px) {
@@ -12203,10 +12247,22 @@ textarea.form-control-lg {
     font-size: 1.2rem;
     justify-content: center;
   }
+  .main-item .text {
+    writing-mode: horizontal-tb;
+    margin-top: 0;
+    text-align: center;
+    line-height: 40px;
+  }
+  .main-item .text p:nth-of-type(1) {
+    margin-top: 20px;
+  }
+  .main-item .text p:nth-of-type(2) {
+    margin-top: 0px;
+  }
 }
 .navbar {
   transition: background-color 0.3s ease;
-  z-index: 20;
+  z-index: 15;
 }
 
 /* 設置初始背景為透明 */
@@ -12274,5 +12330,50 @@ textarea.form-control-lg {
 @media screen and (max-width: 768px) {
   .item .text {
     margin-top: 0px;
+  }
+}
+.main-about {
+  margin-top: -85px;
+  background-color: rgb(21, 21, 21);
+  position: relative;
+}
+.main-about .about-item {
+  color: white;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.main-about .about-item h3, .main-about .about-item .h3 {
+  font-family: "Dancing Script", cursive;
+  margin: 20px 0;
+  position: absolute;
+  top: 15%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 5rem;
+}
+.main-about .about-item img {
+  width: 100%;
+  height: auto;
+}
+.main-about .about-item .middle-img {
+  position: absolute;
+  left: 50%;
+  top: 100%;
+  transform: translate(-50%, -50%);
+  width: 230px;
+  height: 230px;
+  z-index: 10;
+}
+.main-about .about-item p {
+  padding: 0 30px;
+  line-height: 2.5rem;
+}
+
+@media screen and (max-width: 992px) {
+  .main-about .about-item h3, .main-about .about-item .h3 {
+    position: static;
+    transform: translate(0%, 0%);
   }
 }/*# sourceMappingURL=all.css.map */

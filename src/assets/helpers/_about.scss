@@ -1,0 +1,52 @@
+// about
+.main-about{
+  margin-top: -85px;
+  background-color: rgb(21, 21, 21);
+  position: relative;
+  .about-item{
+    color: white;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content:center;
+    h3{
+      // google-font
+      font-family: 'Dancing Script', cursive;
+      margin: 20px 0;
+      position: absolute;
+      top:15%;
+      left: 50%;
+      transform: translate(-50%,-50%);
+      font-size: 5rem;
+    }
+    img{
+      width: 100%;
+      height: auto;
+    }
+    .middle-img{
+      position: absolute;
+      left:50%;
+      top:100%;
+      transform: translate(-50%,-50%);
+      width: 230px;
+      height: 230px;
+      z-index: 10;
+    }
+    p{
+      padding: 0 30px;
+      line-height: 2.5rem;
+    }
+  }
+}
+
+// 平板以下
+  @media screen and (max-width: 992px){
+    .main-about{
+      .about-item{
+        h3{
+          position: static;
+          transform: translate(0%,0%);
+        }
+      }
+    }
+  } 

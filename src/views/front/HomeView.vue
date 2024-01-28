@@ -7,7 +7,7 @@
     <div class="carousel-inner">
       <div class="text">
         <p>咖啡是一種藝術，每一杯都是一幅畫，每一口都是一首詩。</p>
-        <a href="#">來去逛逛</a>
+        <router-link class="nav-link" to="/user/shopping">來去逛逛</router-link>
       </div>
       <div class="carousel-item active">
         <img src="../../assets/images/coffee-5.avif" class="d-block w-100" alt="...">
@@ -30,28 +30,32 @@
   </div>
 
   <!-- 中間面板 -->
-<!-- <div class="container">
-  <div class="row">
-    <div class="col-md-6 mt-2">
-      <div class="col-12 col-md-7 main-pic">
-        <div class="main-item">
-          <img src="https://i.pinimg.com/564x/af/ad/86/afad86046f8d420692a612ccef4f05b6.jpg" alt="">
+  <div class="container-fluid home-main">
+    <div class="row">
+      <div class="col-12 col-md-5 offset-md-1 mt-3">
+        <div class="col-12 col-md-7 main-pic">
+          <div class="main-item">
+            <img src="https://i.pinimg.com/564x/af/ad/86/afad86046f8d420692a612ccef4f05b6.jpg" alt="">
+          </div>
         </div>
-      </div>
-      <div class="col-12 col-md-7 offset-md-5">
-        <div class="main-item">
-          <div class="text">
-            <p>「表達自己，</p>
-            <p>來一杯濃縮咖啡。」</p>
+        <div class="col-12 col-md-7 offset-md-4">
+          <div class="main-item">
+            <div class="text">
+              <p>「表達自己，</p>
+              <p>來一杯濃縮咖啡。」</p>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-    <div class="col-md-6">
-      <h1>Coffee</h1>
+      <div class="col-md-5 mt-3">
+        <div>還不確定放啥</div>
+      </div>
     </div>
   </div>
-</div> -->
+
+  <footer>
+    <p>&copy; 2024 好咖 | 本網站為學習用途</p>
+  </footer>
 
 </template>
 
@@ -69,30 +73,3 @@ export default {
   }
 }
 </script>
-
-<!-- <script>
-export default {
-  data () {
-    return {
-    }
-  },
-  mounted () {
-    window.addEventListener('scroll', this.handleScroll)
-  },
-  methods: {
-    handleScroll () {
-      // 獲取滾動的距離
-      const scrollY = window.scrollY
-
-      // 設置 isFixedTop 屬性，當滾動距離超過某個值時固定在頂部
-      // this.isFixedTop = scrollY > 50
-
-      // 設置 isTransparent 屬性，根據滾動距離來判斷背景色
-      // this.isTransparent = scrollY <= 50
-    }
-  },
-  beforeUnmount () {
-    window.removeEventListener('scroll', this.handleScroll)
-  }
-}
-</script> -->
