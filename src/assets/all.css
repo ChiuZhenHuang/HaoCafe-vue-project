@@ -12196,18 +12196,18 @@ textarea.form-control-lg {
 
 .home-main {
   background-color: rgb(40, 40, 40);
+  color: white;
 }
-
-.main-item {
+.home-main .main-item {
   width: 100%;
   height: auto;
 }
-.main-item img {
+.home-main .main-item img {
   width: 100%;
   height: 100%;
   border-radius: 10px;
 }
-.main-item .text {
+.home-main .main-item .text {
   border-radius: 10px;
   display: flex;
   align-items: center;
@@ -12218,21 +12218,68 @@ textarea.form-control-lg {
   padding: 0 20px;
   text-align: start;
   writing-mode: vertical-lr;
-  color: white;
 }
-.main-item .text p {
+.home-main .main-item .text p {
   font-size: 2rem;
   width: 100%;
 }
-.main-item .text p:nth-of-type(1) {
+.home-main .main-item .text p:nth-of-type(1) {
   margin-top: -100px;
 }
-.main-item .text p:nth-of-type(2) {
+.home-main .main-item .text p:nth-of-type(2) {
   margin-top: 100px;
+}
+.home-main .news {
+  height: 100%;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}
+.home-main .news h2, .home-main .news .h2 {
+  font-family: "Dancing Script", cursive;
+  font-size: 4rem;
+}
+.home-main .news p {
+  font-family: "Zen Kurenaido", sans-serif;
+}
+
+.banner {
+  position: relative;
+  color: black;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 2rem;
+  padding: 10px 0;
+}
+.banner button {
+  font-size: 1.5rem;
+  border-radius: 10px;
+  transition: 0.7s;
+  padding: 5px;
+}
+.banner button:hover {
+  color: white;
+  background-color: rgb(0, 0, 0);
+}
+
+.banner::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("https://i.imgur.com/Q26skQL.jpg");
+  background-size: cover;
+  opacity: 0.25;
+  pointer-events: none;
 }
 
 footer {
-  background-color: rgb(146, 144, 144);
+  background-color: rgb(40, 40, 40);
   color: white;
   text-align: center;
   height: 100px;
@@ -12247,17 +12294,20 @@ footer {
     font-size: 1.2rem;
     justify-content: center;
   }
-  .main-item .text {
+  .home-main .main-item .text {
     writing-mode: horizontal-tb;
     margin-top: 0;
     text-align: center;
     line-height: 40px;
   }
-  .main-item .text p:nth-of-type(1) {
+  .home-main .main-item .text p:nth-of-type(1) {
     margin-top: 20px;
   }
-  .main-item .text p:nth-of-type(2) {
+  .home-main .main-item .text p:nth-of-type(2) {
     margin-top: 0px;
+  }
+  .banner {
+    font-size: 1.3rem;
   }
 }
 .navbar {
@@ -12275,20 +12325,27 @@ footer {
   background-color: black !important;
 }
 
-.navbar-nav {
-  left: 0%;
-  right: 0%;
-  margin: auto;
+.navbar-brand {
   display: flex;
+  justify-content: center;
+  align-content: center;
+}
+
+.navbar-nav {
+  background-color: transparent;
 }
 .navbar-nav .nav-item {
+  background-color: transparent;
   position: relative;
   transform: translateY(0px);
-  transition: 0.3s;
+  transition: 0.5s;
   margin: 0 10px;
 }
 .navbar-nav .nav-item .nav-link {
   color: white;
+}
+.navbar-nav .nav-item .nav-link i {
+  background-color: rgba(255, 255, 255, 0);
 }
 .navbar-nav .nav-item::after {
   content: "";
@@ -12296,7 +12353,7 @@ footer {
   left: 50%;
   right: 50%;
   border-bottom: 1px solid #ffffff;
-  transition: 0.3s;
+  transition: 0.5s;
 }
 .navbar-nav .nav-item:hover {
   transform: translateY(-2px);
@@ -12348,25 +12405,25 @@ footer {
   font-family: "Dancing Script", cursive;
   margin: 20px 0;
   position: absolute;
-  top: 15%;
+  top: 10%;
   left: 50%;
   transform: translate(-50%, -50%);
   font-size: 5rem;
 }
 .main-about .about-item img {
   width: 100%;
-  height: auto;
 }
 .main-about .about-item .middle-img {
   position: absolute;
   left: 50%;
-  top: 100%;
+  top: 50%;
   transform: translate(-50%, -50%);
   width: 230px;
   height: 230px;
   z-index: 10;
 }
 .main-about .about-item p {
+  font-family: "Zen Kurenaido", sans-serif;
   padding: 0 30px;
   line-height: 2.5rem;
 }
@@ -12375,5 +12432,12 @@ footer {
   .main-about .about-item h3, .main-about .about-item .h3 {
     position: static;
     transform: translate(0%, 0%);
+  }
+}
+@media screen and (max-width: 768px) {
+  .main-about .about-item .middle-img {
+    width: 200px;
+    height: 200px;
+    border-radius: 10px;
   }
 }/*# sourceMappingURL=all.css.map */

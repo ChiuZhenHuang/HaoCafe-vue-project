@@ -11,27 +11,41 @@
   background-color: black !important;
 }
 
-.navbar-nav{
-  left: 0%;
-  right: 0%;
-  margin: auto;
+// 將LOGO置中對齊
+.navbar-brand{
   display: flex;
+  justify-content: center;
+  align-content: center;
+}
+
+.navbar-nav{
+  // left: 0%;
+  // right: 0%;
+  // margin: auto;
+  // display: flex;
+  background-color: transparent;
   .nav-item{
+    background-color: transparent;
     position: relative;
     transform: translateY(0px);
-    transition: .3s;
+    transition: .5s;
     margin: 0 10px;
     .nav-link{
-        color: white;
+      color: white;
+      i{
+        // 透明背景
+        background-color: rgba(255, 255, 255, 0);
+      }
     }
   }
+  // 標題下底線
   .nav-item::after{
     content: '';
     position: absolute;
     left: 50%;
     right: 50%;
     border-bottom: 1px solid #ffffff;
-    transition: .3s;
+    transition: .5s;
   }
   // 字體向上位移
   .nav-item:hover{

@@ -3,10 +3,6 @@
   <div class="about">
     <userNav></userNav>
   </div>
-  <!-- 英文字體google-font 先用link -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
   <!-- about -->
   <div class="container-fluid  main-about">
     <div class="row">
@@ -17,6 +13,13 @@
       </div>
       <div class="col-12 col-md-6 about-item">
         <img src="https://media.discordapp.net/attachments/848579800130256906/1200749359113965620/IMG_2075.jpg?ex=65c74ffc&is=65b4dafc&hm=8fddf682e2ab6ac64e34569dfdb0d5dd9a68b07f9aa069df8322b112ca79e479&=&format=webp&width=441&height=662" alt="">
+      </div>
+      <div class="col-12 col-md-6 about-item">
+          <img src="../../assets/images/coffee-item1.png" alt="">
+      </div>
+      <div class="col-12 col-md-6 about-item ">
+        <p>我們將咖啡視為一種藝術形式，每一杯都是由經驗豐富的咖啡師用心調製的藝術品。品味「好咖」，感受咖啡的多重層次。</p>
+        <p>我們注重可持續發展，並致力於與來自各地的咖啡豆生產商建立合作關係。這不僅保證了我們的咖啡豆的品質，還有助於支持農民和維護環境。</p>
       </div>
     </div>
   </div>

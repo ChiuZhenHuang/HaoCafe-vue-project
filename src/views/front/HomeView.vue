@@ -32,7 +32,7 @@
   <!-- 中間面板 -->
   <div class="container-fluid home-main">
     <div class="row">
-      <div class="col-12 col-md-5 offset-md-1 mt-3">
+      <div class="col-12 col-md-5 offset-md-1 mt-3 mb-3">
         <div class="col-12 col-md-7 main-pic">
           <div class="main-item">
             <img src="https://i.pinimg.com/564x/af/ad/86/afad86046f8d420692a612ccef4f05b6.jpg" alt="">
@@ -47,8 +47,30 @@
           </div>
         </div>
       </div>
-      <div class="col-md-5 mt-3">
-        <div>還不確定放啥</div>
+      <div class="col-12 col-md-5  mt-3 mb-3">
+        <div class="main-item news">
+          <h2>News</h2>
+          <div>
+          <span>2020 / 05 / 19</span><p>店長榮獲好咖品質金牌獎！全面85折</p>
+          <span>2020 / 05 / 19</span><p>周年慶！輸入優惠碼：9，享有九折</p>
+          <span>2020 / 05 / 19</span><p>好咖 即將上市</p>
+          <span>2020 / 05 / 19</span><p>好咖 整修中，敬請期待！</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12 banner">
+        <div>
+          <strong>還沒領取優惠券？</strong>
+          <div>
+            <strong>速速領取專屬優惠券！</strong>
+            <button type="button">GO</button>
+          </div>
+        </div>
       </div>
     </div>
   </div>

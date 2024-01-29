@@ -14,39 +14,52 @@
       font-family: 'Dancing Script', cursive;
       margin: 20px 0;
       position: absolute;
-      top:15%;
+      top:10%;
       left: 50%;
       transform: translate(-50%,-50%);
       font-size: 5rem;
     }
     img{
       width: 100%;
-      height: auto;
     }
     .middle-img{
       position: absolute;
       left:50%;
-      top:100%;
+      top:50%;
       transform: translate(-50%,-50%);
       width: 230px;
       height: 230px;
       z-index: 10;
     }
     p{
+      font-family: 'Zen Kurenaido', sans-serif;
       padding: 0 30px;
       line-height: 2.5rem;
     }
   }
 }
 
-// 平板以下
-  @media screen and (max-width: 992px){
-    .main-about{
-      .about-item{
-        h3{
-          position: static;
-          transform: translate(0%,0%);
-        }
+// 平板
+@media screen and (max-width: 992px){
+  .main-about{
+    .about-item{
+      h3{
+        position: static;
+        transform: translate(0%,0%);
       }
     }
-  } 
+  }
+} 
+
+// 手機
+@media screen and (max-width: 768px){
+  .main-about{
+    .about-item{
+      .middle-img{
+        width: 200px;
+        height: 200px;
+        border-radius: 10px;
+      }
+    }
+  }
+} 
