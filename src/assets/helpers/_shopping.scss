@@ -1,0 +1,40 @@
+.shop{
+  background-color: black; // 暫時用一下
+}
+.list-group{
+  list-style:none;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  .list-group-item{
+
+    border-radius: 10px;
+  }
+  li{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 5px;
+    width: 80%;
+  }
+    input, button {
+      padding: 5px 10px;
+      width: 80px;
+      border: none;
+      outline: none;
+      background-color: white;
+    }
+    button{
+      width: 35px;
+      border-radius: 0 200px 200px 0;
+      background-color: white;
+      i{
+        background-color:transparent;
+      }
+    }
+    input{
+      border-radius: 200px 0 0 200px;
+    }
+  
+}

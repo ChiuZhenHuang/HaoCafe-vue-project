@@ -60,6 +60,10 @@ const routes = [
       {
         path: 'checkout/:orderId',
         component: () => import('../views/front/UserCheckOut.vue')
+      },
+      {
+        path: 'favorites',
+        component: () => import('../views/front/Favorites.vue')
       }
     ]
   }

@@ -28,7 +28,7 @@
     background-color: transparent;
     position: relative;
     transform: translateY(0px);
-    transition: .5s;
+    transition: .3s;
     margin: 0 10px;
     .nav-link{
       color: white;
@@ -45,7 +45,7 @@
     left: 50%;
     right: 50%;
     border-bottom: 1px solid #ffffff;
-    transition: .5s;
+    transition: .3s; 
   }
   // 字體向上位移
   .nav-item:hover{
@@ -56,6 +56,9 @@
     left: 0%;
     right: 0%;
   }
+  
+  
+
 }
 
 

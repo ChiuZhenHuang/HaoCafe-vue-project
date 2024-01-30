@@ -23,9 +23,9 @@ export default {
   mounted () {
     const toastEl = this.$refs.toast
     const toast = new ToastComponent(toastEl, {
-      delay: 6000
+      delay: 3000
     })
-    // 有出現訊息時，會顯示6秒
+    // 有出現訊息時，會顯示3秒
     toast.show()
   }
 }

@@ -12165,7 +12165,7 @@ textarea.form-control-lg {
 }
 
 .carousel-inner {
-  margin-top: -85px;
+  margin-top: -76px;
   position: relative;
 }
 .carousel-inner .text {
@@ -12195,12 +12195,35 @@ textarea.form-control-lg {
 }
 
 .home-main {
-  background-color: rgb(40, 40, 40);
+  position: relative;
+  background-size: cover;
+  background-image: url("https://i.imgur.com/yR8HxLG.jpg");
   color: white;
+}
+.home-main .mask {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
 }
 .home-main .main-item {
   width: 100%;
   height: auto;
+  position: relative;
+  z-index: 2;
+}
+.home-main .main-item .left {
+  flex-direction: column;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.home-main .main-item .left img {
+  width: 55%;
+  margin: 10px 0;
+  border-radius: 0;
 }
 .home-main .main-item img {
   width: 100%;
@@ -12246,6 +12269,9 @@ textarea.form-control-lg {
 }
 
 .banner {
+  background-image: url("https://i.imgur.com/a1L0U0U.jpg");
+  background-attachment: fixed;
+  background-size: cover;
   position: relative;
   color: black;
   display: flex;
@@ -12253,29 +12279,24 @@ textarea.form-control-lg {
   align-items: center;
   font-size: 2rem;
   padding: 10px 0;
+  letter-spacing: 0.1em;
+}
+.banner strong {
+  color: white;
 }
 .banner button {
+  color: rgb(255, 255, 255);
+  background-color: rgb(0, 0, 0);
+  border: 1px solid white;
   font-size: 1.5rem;
   border-radius: 10px;
   transition: 0.7s;
   padding: 5px;
 }
 .banner button:hover {
-  color: white;
-  background-color: rgb(0, 0, 0);
-}
-
-.banner::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-image: url("https://i.imgur.com/Q26skQL.jpg");
-  background-size: cover;
-  opacity: 0.25;
-  pointer-events: none;
+  color: rgb(0, 0, 0);
+  background-color: rgb(255, 255, 255);
+  border: 1px solid rgb(0, 0, 0);
 }
 
 footer {
@@ -12338,7 +12359,7 @@ footer {
   background-color: transparent;
   position: relative;
   transform: translateY(0px);
-  transition: 0.5s;
+  transition: 0.3s;
   margin: 0 10px;
 }
 .navbar-nav .nav-item .nav-link {
@@ -12353,7 +12374,7 @@ footer {
   left: 50%;
   right: 50%;
   border-bottom: 1px solid #ffffff;
-  transition: 0.5s;
+  transition: 0.3s;
 }
 .navbar-nav .nav-item:hover {
   transform: translateY(-2px);
@@ -12440,4 +12461,43 @@ footer {
     height: 200px;
     border-radius: 10px;
   }
+}
+.shop {
+  background-color: black;
+}
+
+.list-group {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+}
+.list-group .list-group-item {
+  border-radius: 10px;
+}
+.list-group li {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 5px;
+  width: 80%;
+}
+.list-group input, .list-group button {
+  padding: 5px 10px;
+  width: 80px;
+  border: none;
+  outline: none;
+  background-color: white;
+}
+.list-group button {
+  width: 35px;
+  border-radius: 0 200px 200px 0;
+  background-color: white;
+}
+.list-group button i {
+  background-color: transparent;
+}
+.list-group input {
+  border-radius: 200px 0 0 200px;
 }/*# sourceMappingURL=all.css.map */

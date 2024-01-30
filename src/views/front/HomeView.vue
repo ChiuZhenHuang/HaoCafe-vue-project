@@ -4,9 +4,9 @@
   </div>
   <!-- 幻燈片 -->
   <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
-    <div class="carousel-inner">
-      <div class="text">
-        <p>咖啡是一種藝術，每一杯都是一幅畫，每一口都是一首詩。</p>
+    <div class="carousel-inner ">
+      <div class="text bg-transparent">
+        <p class="bg-transparent">咖啡是一種藝術，每一杯都是一幅畫，每一口都是一首詩。</p>
         <router-link class="nav-link" to="/user/shopping">來去逛逛</router-link>
       </div>
       <div class="carousel-item active">
@@ -32,7 +32,8 @@
   <!-- 中間面板 -->
   <div class="container-fluid home-main">
     <div class="row">
-      <div class="col-12 col-md-5 offset-md-1 mt-3 mb-3">
+      <div class="mask"></div>
+      <!-- <div class="col-12 col-md-5 offset-md-1 mt-3 mb-3">
         <div class="col-12 col-md-7 main-pic">
           <div class="main-item">
             <img src="https://i.pinimg.com/564x/af/ad/86/afad86046f8d420692a612ccef4f05b6.jpg" alt="">
@@ -46,8 +47,17 @@
             </div>
           </div>
         </div>
+      </div> -->
+      <div class="col-12 col-md-4 mt-3 mb-3">
+        <div class="main-item">
+          <div class="left">
+            <img src="https://i.imgur.com/Ee0Isz0.jpg">
+            <img src="https://i.imgur.com/LqGBzES.jpg">
+            <img src="https://i.imgur.com/zXIMLuE.jpg">
+          </div>
+        </div>
       </div>
-      <div class="col-12 col-md-5  mt-3 mb-3">
+      <div class="col-12 col-md-8 mt-3 mb-3">
         <div class="main-item news">
           <h2>News</h2>
           <div>

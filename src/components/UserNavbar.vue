@@ -3,17 +3,17 @@
     <nav class="navbar navbar-expand-lg" :class="{ 'fixed-top': isFixedTop, 'bg-transparent': isTransparent, 'bg-black': !isTransparent }">
       <div class="container-fluid bg-transparent">
         <div>
-          <router-link class="navbar-brand" to="/">
+          <router-link to="/">
             <img src="https://i.pinimg.com/564x/e6/e8/69/e6e8691e77bd66ca772d620f22d61d9b.jpg" class="d-block" style="height: 60px;width: 60px;" alt="...">
           </router-link>
         </div>
         <div>
         <!-- 手機漢堡鈕 -->
-          <button class="navbar-toggler ml-auto" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebar" aria-controls="sidebar">
+          <button class="navbar-toggler ml-auto bg-transparent" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebar" aria-controls="sidebar">
             <span class="navbar-toggler-icon"></span>
           </button>
         <!-- 桌機導覽列 -->
-          <ul  id="navbarNav" class="navbar-nav collapse navbar-collapse">
+          <ul  id="navbarNav" class="navbar-nav collapse navbar-collapse bg-transparent">
             <li class="nav-item">
               <router-link class="nav-link" to="/about">關於我們</router-link>
             </li>
@@ -26,6 +26,9 @@
             <li class="nav-item">
               <router-link class="nav-link" to="/login"><i class="bi bi-person-gear"></i> 登入</router-link>
             </li>
+            <li class="nav-item">
+            <router-link class="nav-link" to="/user/favorites"><i class="bi bi-heart"></i></router-link>
+          </li>
             <li class="nav-item">
               <router-link class="nav-link" to="/user/cart"><i class="bi bi-cart"></i></router-link>
             </li>
@@ -52,6 +55,9 @@
           </li>
           <li class="nav-item">
             <router-link class="nav-link" to="/login"><i class="bi bi-person-gear"></i> 登入</router-link>
+          </li>
+          <li class="nav-item">
+            <router-link class="nav-link" to="/user/favorites"><i class="bi bi-heart"></i></router-link>
           </li>
           <li class="nav-item">
             <router-link class="nav-link" to="/user/cart"><i class="bi bi-cart"></i></router-link>

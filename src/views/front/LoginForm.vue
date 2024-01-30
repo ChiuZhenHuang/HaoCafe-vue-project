@@ -1,5 +1,6 @@
 <template>
   <div class="container mt-5">
+    <userNav></userNav>
     <form class="row justify-content-center"
       @submit.prevent="signIn">
       <div class="col-md-6">
@@ -37,6 +38,8 @@
 </template>
 
 <script>
+import userNav from '@/components/UserNavbar.vue'
+
 export default {
   data () {
     return {
@@ -46,6 +49,7 @@ export default {
       }
     }
   },
+  components: { userNav },
   methods: {
     signIn () {
       const api = `${process.env.VUE_APP_API}admin/signin`
