@@ -10,7 +10,7 @@
         <router-link class="nav-link" to="/user/shopping">來去逛逛</router-link>
       </div>
       <div class="carousel-item active">
-        <img src="../../assets/images/coffee-5.avif" class="d-block w-100" alt="...">
+        <img src="../../assets/images/coffee-5.avif"  class="d-block w-100" alt="...">
       </div>
       <div class="carousel-item">
         <img src="../../assets/images/coffee-2.avif" class="d-block w-100" alt="...">
@@ -78,6 +78,7 @@
           <strong>還沒領取優惠券？</strong>
           <div>
             <strong>速速領取專屬優惠券！</strong>
+            <!-- @click="copyCouponCode" -->
             <button type="button">GO</button>
           </div>
         </div>
@@ -96,9 +97,26 @@
 import userNav from '@/components/UserNavbar.vue'
 
 export default {
+  data () {
+    return {
+      // couponCode: 9
+    }
+  },
   name: 'HomeView',
   components: {
     userNav
+  },
+  methods: {
+    // copyCouponCode () {
+    //   this.$clipboard.writeText(this.couponCode)
+    //     .then(() => {
+    //       console.log('優惠碼已複製到剪貼板')
+    //       // 你可以在這裡添加通知或其他反饋
+    //     })
+    //     .catch((error) => {
+    //       console.error('複製失敗:', error)
+    //     })
+    // }
   },
   created () {
     // console.log(process.env.VUE_APP_API, process.env.VUE_APP_PATH)

@@ -5,7 +5,7 @@
       <li class="page-item" v-if="pages.has_pre">
         <a class="page-link" href="#" aria-label="Previous" @click.prevent="previousPage(pages)"
         >
-        <span aria-hidden="true">上一頁</span>
+        <span aria-hidden="true">&laquo;</span>
         </a>
       </li>
       <li class="page-item" v-for="page in pages.total_pages" :key="page"
@@ -17,7 +17,7 @@
       <!-- 在最後一頁時不顯示 -->
       <li class="page-item" v-if="pages.has_next">
         <a class="page-link" href="#" aria-label="Next" @click.prevent="nextPage(pages)">
-          <span aria-hidden="true">下一頁</span>
+          <span aria-hidden="true">&raquo;</span>
         </a>
       </li>
     </ul>

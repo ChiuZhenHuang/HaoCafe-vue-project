@@ -9,11 +9,16 @@
             <input type="search" v-model="search" value="" placeholder="" @input="handleSearchChange">
             <button><i class="bi bi-search"></i></button>
           </li>
-          <li class="list-group-item" style="cursor: pointer" @click="selectCategory('')">全部商品</li>
-          <li class="list-group-item" style="cursor: pointer" @click="selectCategory('淺烘培')">淺烘培</li>
-          <li class="list-group-item" style="cursor: pointer" @click="selectCategory('中烘培')">中烘培</li>
-          <li class="list-group-item" style="cursor: pointer" @click="selectCategory('深烘培')">深烘培</li>
-          <li class="list-group-item" style="cursor: pointer" @click="selectCategory('周邊商品')">周邊商品</li>
+          <li class="list-group-item" :class="{'active': selectedCategory === ''}"
+          style="cursor: pointer" @click="search === '' && selectCategory('')">全部商品</li>
+          <li class="list-group-item" :class="{'active': selectedCategory === '淺烘培'}"
+          style="cursor: pointer" @click="search === '' && selectCategory('淺烘培')">淺烘培</li>
+          <li class="list-group-item" :class="{'active': selectedCategory === '中烘培'}"
+          style="cursor: pointer" @click="search === '' && selectCategory('中烘培')">中烘培</li>
+          <li class="list-group-item" :class="{'active': selectedCategory === '深烘培'}"
+          style="cursor: pointer" @click="search === '' && selectCategory('深烘培')">深烘培</li>
+          <li class="list-group-item" :class="{'active': selectedCategory === '周邊商品'}"
+          style="cursor: pointer" @click="search === '' && selectCategory('周邊商品')">周邊商品</li>
         </ul>
       </div>
       <!-- 右側產品 -->
@@ -34,6 +39,12 @@
                     <div class="h5" v-if="item.price">特價 {{ item.price }} 元</div>
                   </td>
                   <td>
+                    <button v-if="!item.isFavorite" type="button" class="btn btn-outline-info" @click="addToFavorites(item)">
+                      <i class="bi bi-heart"></i>
+                    </button>
+                    <button v-else type="button" class="btn btn-outline-info" @click="removeToFavorites(item)">
+                      <i class="bi bi-heart-fill"></i>
+                    </button>
                     <div class="btn-group btn-group-sm">
                       <button type="button" class="btn btn-outline-secondary"
                           @click="getProduct(item.id)">
@@ -45,8 +56,6 @@
                           <span v-if="this.status.loadingItem === item.id" class="spinner-border spinner-border-sm" aria-hidden="true"></span>
                         加到購物車
                       </button>
-                      <button v-if="!item.isFavorite" type="button" class="btn btn-outline-info" @click="addToFavorites(item)">收藏</button>
-                      <button v-else type="button" class="btn btn-outline-info" @click="removeToFavorites(item)">移除收藏</button>
                     </div>
                   </td>
                 </tr>
@@ -54,8 +63,7 @@
             </table>
           </div>
           <!-- 顯示全部商品時才顯示頁數 -->
-          <Pagination v-if="selectedCategory === ''" :pages="pagination" @emit-pages="getProducts"></Pagination>
-          <!-- <Favorites :isFavorites="favorites"></Favorites> -->
+          <Pagination v-if="selectedCategory === '' && search === '' " :pages="pagination" @emit-pages="getProducts"></Pagination>
         </div>
       </div>
     </div>
@@ -64,21 +72,21 @@
 
 <script>
 import Pagination from '@/components/Pagination.vue'
-// import Favorites from '@/views/front/Favorites.vue'
 
 export default {
   data () {
     return {
-      products: [],
-      search: '',
+      products: [], // 單頁產品
+      allProducts: [], // 所有產品
+      search: '', // 搜詢內容
       selectedCategory: '', // 烘培類型
       status: {
         loadingItem: '' // 對應品項id
       },
-      pagination: {},
-      isLoading: false,
+      pagination: {}, // 分頁
+      isLoading: false, // 整個頁面loading
       favorites: [], // 收藏的商品
-      love: [] // 存放是否已收藏
+      isActive: false // 篩選欄是否被選擇
     }
   },
   components: { Pagination },
@@ -86,29 +94,76 @@ export default {
   computed: {
     // 搜尋及篩選
     filterProducts () {
-      return this.products.filter(item => {
-        const titleMatch = item.title.match(new RegExp(this.search, 'i'))
-        const categoryMatch = !this.selectedCategory || item.category === this.selectedCategory
-        return titleMatch && categoryMatch
-      })
+      // 輸入搜尋，從所有產品中查找
+      if (this.search !== '') {
+        return this.allProducts.filter((item) => {
+          return item.title.match(new RegExp(this.search, 'i'))
+        })
+      } else if (this.selectedCategory !== '') {
+        // 如果選擇篩選種類，從所有產品中進行篩選
+        return this.allProducts.filter((item) => {
+          return item.category === this.selectedCategory
+        })
+      } else {
+        // 如果選擇全部商品，渲染單頁產品(有頁數)
+        return this.products
+      }
     }
+    // 輸入搜尋，從所有產品中查找
+    //   if (this.search !== '') {
+    //     return this.allProducts.filter(item => {
+    //       return item.title.match(new RegExp(this.search, 'i'))
+    //     })
+    //   } else {
+    //     // 如果選擇全部商品，渲染單頁產品(有頁數)，反之篩選種類的話，從所有產品中進行篩選
+    //     const sourceArray = this.selectedCategory === '' ? this.products : this.allProducts
+    //     return sourceArray.filter(item => {
+    //       return this.selectedCategory === '' || item.category === this.selectedCategory
+    //     })
+    //   }
+    // }
   },
   methods: {
+    // 取得單頁產品資料
     getProducts (page = 1) {
       // 一頁最多只能取得10筆資料
       const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/products/?page=${page}`
       this.isLoading = true
       this.$http.get(url).then((res) => {
-        console.log('products:', res)
-        this.products = res.data.products
+        // this.products = res.data.products
         this.isLoading = false
         this.pagination = res.data.pagination
-        this.love = res.data.products.map(item => ({ ...item, isFavorite: false })) // 添加isFavorite屬性，用於收藏功能
+        this.products = res.data.products.map(item => ({ ...item, isFavorite: this.isProductFavorite(item) }))
+      })
+    },
+    // 取得所有產品資料
+    getAllProducts () {
+      const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/products/all`
+      // this.isLoading = true
+      this.$http.get(url).then((res) => {
+        // this.isLoading = false
+        this.allProducts = res.data.products.map(item => ({ ...item, isFavorite: this.isProductFavorite(item) }))
+        // 將所有產品內的isFavorite取代頁面產品內的isFavorite，以利同步確認是否已收藏
+        this.products = this.products.map(product => {
+          const matchingProduct = this.allProducts.find(p => p.id === product.id)
+          return matchingProduct ? { ...product, isFavorite: matchingProduct.isFavorite } : product
+        })
       })
     },
     // 前往詳細資料頁面
     getProduct (id) {
       this.$router.push(`/user/product/${id}`)
+    },
+    // 取得購物車列表
+    getCart () {
+      const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`
+      this.isLoading = true
+      this.$http.get(url)
+        .then((res) => {
+          this.cart = res.data.data
+          this.isLoading = false
+          console.log('購物車產品', this.cart)
+        })
     },
     // 加到購物車
     addCart (id) {
@@ -128,11 +183,15 @@ export default {
           this.getCart()
         })
     },
-    // 加到收藏,畫面重新渲染資料就消失??
+    // 收藏產品比對頁面產品
+    isProductFavorite (product) {
+      return this.favorites.some(favProduct => favProduct.id === product.id)
+    },
+    // 加到收藏
     addToFavorites (item) {
-      console.log(item)
       const isAlreadyFavorite = this.favorites.some(favProduct => favProduct.id === item.id)
       if (!isAlreadyFavorite) {
+        // 若原先收藏內不存在就push
         this.favorites.push(item)
         this.saveFavoritesToLocalStorage()
         this.emitter.emit('push-message', {
@@ -159,37 +218,26 @@ export default {
     saveFavoritesToLocalStorage () {
       localStorage.setItem('favorites', JSON.stringify(this.favorites))
     },
-    // loadFavoritesFromLocalStorage () {
-    // // 從 localStorage 中加載資料，如果有的話
-    //   const storedFavorites = localStorage.getItem('favorites')
-    //   this.isFavorites = storedFavorites ? JSON.parse(storedFavorites) : []
-    // },
-    // 取得購物車列表
-    getCart () {
-      const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`
-      this.isLoading = true
-      this.$http.get(url)
-        .then((res) => {
-          this.cart = res.data.data
-          this.isLoading = false
-          console.log('購物車產品', this.cart)
-        })
+    // 從 localStorage 中提取資料到 favorites
+    loadFavoritesFromLocalStorage () {
+      const favoritesFromStorage = JSON.parse(localStorage.getItem('favorites')) || []
+      this.favorites = favoritesFromStorage
     },
     // 篩選烘培度
     selectCategory (category) {
       this.selectedCategory = category
+      this.getAllProducts()
     },
-    // 在搜尋框內容改變時，觸發 selectCategory 方法
+    // 在搜尋框內容送出時，觸發 selectCategory 方法
     handleSearchChange () {
-      this.selectCategory()
+      this.selectCategory('')
     }
   },
   created () {
     this.getProducts()
     this.getCart()
+    this.getAllProducts()
+    this.loadFavoritesFromLocalStorage()
   }
-  // mounted () {
-  //   this.loadFavoritesFromLocalStorage()
-  // }
 }
 </script>

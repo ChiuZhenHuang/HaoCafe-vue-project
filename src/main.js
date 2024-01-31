@@ -25,6 +25,8 @@ import router from './router'
 import { currency, date } from './methods/filters'
 import $httpMessageState from './methods/pushMessageState'
 
+// import VueClipboard from 'vue-clipboard2'
+
 Object.keys(rules).forEach((rule) => {
   defineRule(rule, rules[rule])
 })
@@ -44,8 +46,11 @@ app.config.globalProperties.$httpMessageState = $httpMessageState
 
 app.use(VueAxios, axios)
 app.use(router)
+// Use VueClipboard插件
+// app.use(VueClipboard)
 // 全域註冊loading套件，因可能很多地方都會用到
 app.component('LoadingComponent', Loading)
+
 // 全域註冊表單驗證
 app.component('Form', Form)
 app.component('Field', Field)
