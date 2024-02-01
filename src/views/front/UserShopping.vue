@@ -6,7 +6,8 @@
       <div class="col-12 col-md-2">
         <ul class="list-group">
           <li>
-            <input type="search" v-model="search" value="" placeholder="" @input="handleSearchChange">
+            <input type="search" v-model="search" value="" placeholder=""
+            @input="handleInput" @compositionstart="handleCompositionStart" @compositionend="handleCompositionEnd">
             <button><i class="bi bi-search"></i></button>
           </li>
           <li class="list-group-item" :class="{'active': selectedCategory === ''}"
@@ -86,7 +87,8 @@ export default {
       pagination: {}, // 分頁
       isLoading: false, // 整個頁面loading
       favorites: [], // 收藏的商品
-      isActive: false // 篩選欄是否被選擇
+      isActive: false, // 篩選欄是否被選擇
+      isComposing: false // 是否進行中文輸入
     }
   },
   components: { Pagination },
@@ -105,23 +107,9 @@ export default {
           return item.category === this.selectedCategory
         })
       } else {
-        // 如果選擇全部商品，渲染單頁產品(有頁數)
         return this.products
       }
     }
-    // 輸入搜尋，從所有產品中查找
-    //   if (this.search !== '') {
-    //     return this.allProducts.filter(item => {
-    //       return item.title.match(new RegExp(this.search, 'i'))
-    //     })
-    //   } else {
-    //     // 如果選擇全部商品，渲染單頁產品(有頁數)，反之篩選種類的話，從所有產品中進行篩選
-    //     const sourceArray = this.selectedCategory === '' ? this.products : this.allProducts
-    //     return sourceArray.filter(item => {
-    //       return this.selectedCategory === '' || item.category === this.selectedCategory
-    //     })
-    //   }
-    // }
   },
   methods: {
     // 取得單頁產品資料
@@ -142,12 +130,13 @@ export default {
       // this.isLoading = true
       this.$http.get(url).then((res) => {
         // this.isLoading = false
-        this.allProducts = res.data.products.map(item => ({ ...item, isFavorite: this.isProductFavorite(item) }))
-        // 將所有產品內的isFavorite取代頁面產品內的isFavorite，以利同步確認是否已收藏
-        this.products = this.products.map(product => {
-          const matchingProduct = this.allProducts.find(p => p.id === product.id)
-          return matchingProduct ? { ...product, isFavorite: matchingProduct.isFavorite } : product
-        })
+        this.allProducts = res.data.products
+        // this.allProducts = res.data.products.map(item => ({ ...item, isFavorite: this.isProductFavorite(item) }))
+        // 將所有產品內的isFavorite取代頁面產品內的isFavorite，以利同步確認是否已收藏`，目前不確定要不要留
+        // this.products = this.products.map(product => {
+        //   const matchingProduct = this.allProducts.find(p => p.id === product.id)
+        //   return matchingProduct ? { ...product, isFavorite: matchingProduct.isFavorite } : product
+        // })
       })
     },
     // 前往詳細資料頁面
@@ -189,16 +178,12 @@ export default {
     },
     // 加到收藏
     addToFavorites (item) {
-      const isAlreadyFavorite = this.favorites.some(favProduct => favProduct.id === item.id)
-      if (!isAlreadyFavorite) {
-        // 若原先收藏內不存在就push
-        this.favorites.push(item)
-        this.saveFavoritesToLocalStorage()
-        this.emitter.emit('push-message', {
-          style: 'success',
-          title: '已加入收藏'
-        })
-      }
+      this.favorites.push(item)
+      this.saveFavoritesToLocalStorage()
+      this.emitter.emit('push-message', {
+        style: 'success',
+        title: '已加入收藏'
+      })
       item.isFavorite = true
     },
     // 移除收藏
@@ -226,11 +211,40 @@ export default {
     // 篩選烘培度
     selectCategory (category) {
       this.selectedCategory = category
-      this.getAllProducts()
+      // 篩選全部商品時，重新取得 this.products 內的 isFavorite值，同步收藏按鈕
+      if (category === '') {
+        this.products = this.products.map(product => {
+          const matchingProduct = this.allProducts.find(p => p.id === product.id)
+          return matchingProduct ? { ...product, isFavorite: matchingProduct.isFavorite } : product
+        })
+      } else if (this.search !== '' || category !== '') {
+        // 搜尋或篩選非全部商品狀態時，更新 this.allProducts 內的 isFavorite值，同步收藏按鈕
+        this.allProducts = this.allProducts.map(item => ({ ...item, isFavorite: this.isProductFavorite(item) }))
+      }
     },
-    // 在搜尋框內容送出時，觸發 selectCategory 方法
+    // 如果搜尋文字並非中文，就觸發 handleSearchChange
+    handleInput () {
+      if (!this.isComposing) {
+        this.handleSearchChange()
+      }
+    },
+    // 中文輸入開始
+    handleCompositionStart () {
+      this.isComposing = true
+    },
+    // 中文輸入結束，結束後觸發 handleSearchChange
+    handleCompositionEnd () {
+      this.isComposing = false
+      this.handleSearchChange()
+    },
+    // 在搜尋框內容送出時，觸發 selectCategory 篩選
     handleSearchChange () {
-      this.selectCategory('')
+      if (this.search === '') {
+        this.selectCategory('')
+      } else {
+        // 只要不是空就可
+        this.selectCategory('search')
+      }
     }
   },
   created () {
