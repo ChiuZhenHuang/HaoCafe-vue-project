@@ -10,11 +10,9 @@
 
 <script>
 export default {
-  // props: ['isFavorites'],
   data () {
     return {
       isFavorites: []
-      // product: []
     }
   },
   computed: {
@@ -28,14 +26,13 @@ export default {
     // }
   },
   created () {
-  // 在 Vue 實例創建時，從 localStorage 中加載收藏資料
+  // 從 localStorage 中加載收藏資料
     this.loadFavoritesFromLocalStorage()
   },
   methods: {
     // 取得儲存收藏產品資料
     loadFavoritesFromLocalStorage () {
       const favoritesData = JSON.parse(localStorage.getItem('favorites')) || []
-      // 然後你可以將資料設置到 Vue 實例的數據屬性中
       this.isFavorites = favoritesData
     }
   }

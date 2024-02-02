@@ -1,69 +1,67 @@
 <template>
   <LoadingComponent :active="isLoading"></LoadingComponent>
-  <div class="container-fluid shop" >
+  <div class="container-fluid shop">
     <div class="row">
     <!-- 左側選單 -->
-      <div class="col-12 col-md-2">
+      <div class="col-12 col-md-2 select">
         <ul class="list-group">
-          <li>
+          <li class="mt-2 mb-1">
             <input type="search" v-model="search" value="" placeholder=""
             @input="handleInput" @compositionstart="handleCompositionStart" @compositionend="handleCompositionEnd">
             <button><i class="bi bi-search"></i></button>
           </li>
-          <li class="list-group-item" :class="{'active': selectedCategory === ''}"
+          <li class="list-group-item mt-2 mb-1" :class="{'active': selectedCategory === ''}"
           style="cursor: pointer" @click="search === '' && selectCategory('')">全部商品</li>
-          <li class="list-group-item" :class="{'active': selectedCategory === '淺烘培'}"
+          <li class="list-group-item mt-2 mb-1" :class="{'active': selectedCategory === '淺烘培'}"
           style="cursor: pointer" @click="search === '' && selectCategory('淺烘培')">淺烘培</li>
-          <li class="list-group-item" :class="{'active': selectedCategory === '中烘培'}"
+          <li class="list-group-item mt-2 mb-1" :class="{'active': selectedCategory === '中烘培'}"
           style="cursor: pointer" @click="search === '' && selectCategory('中烘培')">中烘培</li>
-          <li class="list-group-item" :class="{'active': selectedCategory === '深烘培'}"
+          <li class="list-group-item mt-2 mb-1" :class="{'active': selectedCategory === '深烘培'}"
           style="cursor: pointer" @click="search === '' && selectCategory('深烘培')">深烘培</li>
-          <li class="list-group-item" :class="{'active': selectedCategory === '周邊商品'}"
+          <li class="list-group-item mt-2 mb-1" :class="{'active': selectedCategory === '周邊商品'}"
           style="cursor: pointer" @click="search === '' && selectCategory('周邊商品')">周邊商品</li>
         </ul>
       </div>
       <!-- 右側產品 -->
-      <div class="col-12 col-md-10">
+      <div class="col-12 col-md-10" id="product">
         <div class="row">
-          <div class="col-12 col-md-6 col-xl-4" v-for="item in filterProducts" :key="item.id">
-            <table class="table align-middle">
-              <tbody>
-                <tr>
-                  <td style="width: 150px">
-                    <div style="height: 100px; background-size: cover; background-position: center"
-                      :style="{backgroundImage: `url(${item.imageUrl})`}"></div>
-                  </td>
-                  <td><p class="text-dark" style="cursor: pointer" @click="getProduct(item.id)">{{ item.title }}</p></td>
-                  <td>
+          <div class="col-12 col-md-6 col-xl-4 frame" v-for="item in filterProducts" :key="item.id">
+            <div class="card">
+              <div class="card-top">
+                <button v-if="!item.isFavorite" type="button" class="btn btn-outline-info" @click="addToFavorites(item)">
+                  <i class="bi bi-heart"></i>
+                </button>
+                <button v-else type="button" class="btn btn-outline-info" @click="removeToFavorites(item)">
+                  <i class="bi bi-heart-fill"></i>
+                </button>
+                <img :src="item.imageUrl" class="card-img-top" alt="產品圖片">
+                <div class="more">
+                  <button type="button" class="btn btn-outline-secondary"
+                    @click="getProduct(item.id)">More...
+                  </button>
+                </div>
+              </div>
+              <div class="card-body h-100 w-100">
+                <h5 class="title" style="cursor: pointer" @click="getProduct(item.id)">{{ item.title }}</h5>
+                <div class="d-flex justify-content-between">
+                  <div class="left">
                     <div class="h5" v-if="!item.price">{{ item.origin_price }} 元</div>
-                    <del class="h6" v-if="item.price">原價 {{ item.origin_price }} 元</del>
-                    <div class="h5" v-if="item.price">特價 {{ item.price }} 元</div>
-                  </td>
-                  <td>
-                    <button v-if="!item.isFavorite" type="button" class="btn btn-outline-info" @click="addToFavorites(item)">
-                      <i class="bi bi-heart"></i>
-                    </button>
-                    <button v-else type="button" class="btn btn-outline-info" @click="removeToFavorites(item)">
-                      <i class="bi bi-heart-fill"></i>
-                    </button>
-                    <div class="btn-group btn-group-sm">
-                      <button type="button" class="btn btn-outline-secondary"
-                          @click="getProduct(item.id)">
-                        查看更多
-                      </button>
-                      <button type="button" class="btn btn-outline-danger"
+                    <del class="h5" v-if="item.price">NT$ {{ item.origin_price }} 元</del>
+                    <div class="h6" v-if="item.price">NT$ {{ item.price }} 元/盒</div>
+                  </div>
+                  <div class="right ml-auto">
+                    <button type="button add-cart" class="btn btn-outline-danger"
                       :disabled="this.status.loadingItem === item.id"
-                            @click="addCart(item.id)">
-                          <span v-if="this.status.loadingItem === item.id" class="spinner-border spinner-border-sm" aria-hidden="true"></span>
-                        加到購物車
-                      </button>
-                    </div>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+                      @click="addCart(item.id)">
+                      <span v-if="this.status.loadingItem === item.id" class="spinner-border spinner-border-sm" aria-hidden="true"></span>
+                      <i class="bi bi-cart4"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
-          <!-- 顯示全部商品時才顯示頁數 -->
+          <!-- 渲染全部商品時才顯示頁數 -->
           <Pagination v-if="selectedCategory === '' && search === '' " :pages="pagination" @emit-pages="getProducts"></Pagination>
         </div>
       </div>
@@ -77,9 +75,10 @@ import Pagination from '@/components/Pagination.vue'
 export default {
   data () {
     return {
+      visible: true,
       products: [], // 單頁產品
       allProducts: [], // 所有產品
-      search: '', // 搜詢內容
+      search: '', // 搜尋內容
       selectedCategory: '', // 烘培類型
       status: {
         loadingItem: '' // 對應品項id
@@ -118,7 +117,6 @@ export default {
       const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/products/?page=${page}`
       this.isLoading = true
       this.$http.get(url).then((res) => {
-        // this.products = res.data.products
         this.isLoading = false
         this.pagination = res.data.pagination
         this.products = res.data.products.map(item => ({ ...item, isFavorite: this.isProductFavorite(item) }))
@@ -127,16 +125,8 @@ export default {
     // 取得所有產品資料
     getAllProducts () {
       const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/products/all`
-      // this.isLoading = true
       this.$http.get(url).then((res) => {
-        // this.isLoading = false
         this.allProducts = res.data.products
-        // this.allProducts = res.data.products.map(item => ({ ...item, isFavorite: this.isProductFavorite(item) }))
-        // 將所有產品內的isFavorite取代頁面產品內的isFavorite，以利同步確認是否已收藏`，目前不確定要不要留
-        // this.products = this.products.map(product => {
-        //   const matchingProduct = this.allProducts.find(p => p.id === product.id)
-        //   return matchingProduct ? { ...product, isFavorite: matchingProduct.isFavorite } : product
-        // })
       })
     },
     // 前往詳細資料頁面

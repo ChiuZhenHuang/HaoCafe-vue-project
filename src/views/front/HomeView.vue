@@ -29,7 +29,7 @@
     </button>
   </div>
 
-  <!-- 中間面板 -->
+  <!-- 消息 -->
   <div class="container-fluid home-main">
     <div class="row">
       <div class="mask"></div>
@@ -51,9 +51,18 @@
       <div class="col-12 col-md-4 mt-3 mb-3">
         <div class="main-item">
           <div class="left">
-            <img src="https://i.imgur.com/Ee0Isz0.jpg">
-            <img src="https://i.imgur.com/LqGBzES.jpg">
-            <img src="https://i.imgur.com/zXIMLuE.jpg">
+            <div class="item">
+              <img src="https://i.imgur.com/Ee0Isz0.jpg">
+              <button type="button" class="btn btn-outline-dark">關於我們</button>
+            </div>
+            <div class="item">
+              <img src="https://i.imgur.com/LqGBzES.jpg">
+              <button type="button" class="btn btn-outline-dark">產品列表</button>
+            </div>
+            <div class="item">
+              <img src="https://i.imgur.com/zXIMLuE.jpg">
+              <button type="button" class="btn btn-outline-dark">收藏列表</button>
+            </div>
           </div>
         </div>
       </div>
@@ -61,16 +70,29 @@
         <div class="main-item news">
           <h2>News</h2>
           <div>
-          <span>2020 / 05 / 19</span><p>店長榮獲好咖品質金牌獎！全面85折</p>
-          <span>2020 / 05 / 19</span><p>周年慶！輸入優惠碼：9，享有九折</p>
-          <span>2020 / 05 / 19</span><p>好咖 即將上市</p>
-          <span>2020 / 05 / 19</span><p>好咖 整修中，敬請期待！</p>
+            <div class="txt">
+              <div>2024 / 01 / 19</div>
+              <p>周年慶！輸入優惠碼：9，享有九折</p>
+            </div>
+            <div class="txt">
+              <div>2023 / 08 / 19</div>
+              <p>店長榮獲好咖品質金牌獎！全館優惠促銷中</p>
+            </div>
+            <div class="txt">
+              <div>2023 / 05 / 20</div>
+              <p>好咖 即將上市</p>
+            </div>
+            <div class="txt">
+              <div>2023 / 04 / 30</div>
+              <p>好咖 整修中，敬請期待！</p>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
 
+  <!-- 領取優惠 -->
   <div class="container-fluid">
     <div class="row">
       <div class="col-12 banner">

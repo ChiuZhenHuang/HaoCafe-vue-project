@@ -12206,51 +12206,75 @@ textarea.form-control-lg {
   left: 0;
   height: 100%;
   width: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.2);
+}
+.home-main::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-image: url("https://i.imgur.com/yR8HxLG.jpg");
+  background-size: cover;
+  filter: blur(5px);
 }
 .home-main .main-item {
   width: 100%;
-  height: auto;
+  height: 100%;
   position: relative;
   z-index: 2;
 }
 .home-main .main-item .left {
-  flex-direction: column;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.home-main .main-item .left img {
-  width: 55%;
-  margin: 10px 0;
-  border-radius: 0;
-}
-.home-main .main-item img {
-  width: 100%;
   height: 100%;
-  border-radius: 10px;
-}
-.home-main .main-item .text {
-  border-radius: 10px;
-  display: flex;
-  align-items: center;
   flex-direction: column;
-  margin-top: -50px;
-  background-color: black;
-  line-height: 10px;
-  padding: 0 20px;
-  text-align: start;
-  writing-mode: vertical-lr;
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
 }
-.home-main .main-item .text p {
-  font-size: 2rem;
+.home-main .main-item .left .item {
+  width: 55%;
+  flex-direction: column;
+  display: flex;
+  align-items: end;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+}
+.home-main .main-item .left .item img {
   width: 100%;
+  margin: 10px;
+  border-radius: 0;
+  transition: scale 0.5s ease, opacity 0.5s linear;
 }
-.home-main .main-item .text p:nth-of-type(1) {
-  margin-top: -100px;
+.home-main .main-item .left .item button {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  transition: 0.8s;
+  background-color: rgba(99, 99, 99, 0.4);
+  color: rgb(255, 255, 255);
 }
-.home-main .main-item .text p:nth-of-type(2) {
-  margin-top: 100px;
+.home-main .main-item .left .item button:hover {
+  background-color: rgb(0, 0, 0);
+  color: rgb(255, 255, 255);
+}
+.home-main .main-item .left .item:hover img {
+  transform: scale(1.1);
+  background-color: rgba(0, 0, 0, 0.2);
+}
+.home-main .main-item .left .item:hover button {
+  opacity: 1;
+}
+.home-main .main-item .left:has(img:hover) img:not(:hover) {
+  scale: 0.8;
+  opacity: 0.7;
+}
+.home-main .main-item .left:has(button:hover) img:not(:hover) {
+  scale: 0.8;
+  opacity: 0.7;
 }
 .home-main .news {
   height: 100%;
@@ -12264,8 +12288,14 @@ textarea.form-control-lg {
   font-family: "Dancing Script", cursive;
   font-size: 4rem;
 }
-.home-main .news p {
+.home-main .news .txt {
   font-family: "Zen Kurenaido", sans-serif;
+  margin: 60px;
+  line-height: 30px;
+  color: rgb(255, 255, 255);
+}
+.home-main .news .txt div {
+  color: rgba(230, 177, 107, 0.911);
 }
 
 .banner {
@@ -12326,6 +12356,13 @@ footer {
   }
   .home-main .main-item .text p:nth-of-type(2) {
     margin-top: 0px;
+  }
+  .home-main .main-item .left {
+    flex-direction: row;
+    justify-content: space-around;
+  }
+  .home-main .main-item .left img {
+    width: 90%;
   }
   .banner {
     font-size: 1.3rem;
@@ -12463,41 +12500,160 @@ footer {
   }
 }
 .shop {
-  background-color: black;
+  background-color: rgb(255, 255, 255);
 }
 
-.list-group {
+.select {
+  display: flex;
+  align-items: start;
+  justify-content: center;
+}
+.select .list-group {
+  width: 100%;
   list-style: none;
   display: flex;
   align-items: center;
   flex-direction: column;
   justify-content: center;
 }
-.list-group .list-group-item {
+.select .list-group .active {
+  background-color: rgb(0, 0, 0);
+  border-color: white;
+}
+.select .list-group .list-group-item {
+  border-top-width: 1px;
   border-radius: 10px;
 }
-.list-group li {
+.select .list-group .list-group-item:hover {
+  background-color: rgb(0, 0, 0);
+  border-color: white;
+  color: white;
+}
+.select .list-group li {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 5px;
   width: 80%;
 }
-.list-group input, .list-group button {
+.select .list-group input, .select .list-group button {
   padding: 5px 10px;
   width: 80px;
   border: none;
   outline: none;
   background-color: white;
 }
-.list-group button {
+.select .list-group button {
   width: 35px;
   border-radius: 0 200px 200px 0;
   background-color: white;
 }
-.list-group button i {
+.select .list-group button i {
   background-color: transparent;
 }
-.list-group input {
+.select .list-group input {
   border-radius: 200px 0 0 200px;
+}
+
+#product {
+  padding: 20px 100px;
+}
+#product .frame {
+  padding: 25px;
+  display: flex;
+  justify-content: center;
+}
+#product .frame .card {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#product .frame .card .card-top {
+  width: 100%;
+  text-align: center;
+  position: relative;
+}
+#product .frame .card .card-top img {
+  width: 100%;
+  height: 250px;
+  transition: opacity 0.5s ease;
+}
+#product .frame .card .card-top .btn-outline-info {
+  border: none;
+  border-radius: 50%;
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 10;
+}
+#product .frame .card .card-top .more {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  transition: opacity 0.5s ease;
+}
+#product .frame .card .card-top .more .btn-outline-secondary:hover {
+  color: black;
+}
+#product .frame .card .card-top:hover .more {
+  opacity: 1;
+}
+#product .frame .card .card-top:hover img {
+  opacity: 1;
+}
+#product .frame .card .card-top:hover .btn-outline-secondary {
+  border: 1px solid rgb(255, 255, 255);
+  background-color: rgb(255, 255, 0);
+}
+#product .frame .card .card-body {
+  padding: 10px;
+  background-color: antiquewhite;
+}
+#product .frame .card .card-body .title {
+  text-align: center;
+  font-size: 1.2rem;
+}
+#product .frame .card .card-body .left, #product .frame .card .card-body .right {
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+}
+#product .frame .card .card-body .left .h5, #product .frame .card .card-body .right .h5 {
+  font-size: 1rem;
+}
+#product .frame .card .card-body .left .h6, #product .frame .card .card-body .right .h6 {
+  font-weight: bolder;
+  color: red;
+}
+#product .frame .card .card-body .left .btn, #product .frame .card .card-body .right .btn {
+  margin: 2px;
+}
+
+@media screen and (max-width: 992px) {
+  #product {
+    padding: 20px 70px;
+  }
+}
+@media screen and (max-width: 768px) {
+  #product {
+    padding: 20px 120px;
+  }
+  .select .list-group {
+    width: 50%;
+  }
+}
+@media screen and (max-width: 576px) {
+  #product {
+    padding: 20px 50px;
+  }
 }/*# sourceMappingURL=all.css.map */

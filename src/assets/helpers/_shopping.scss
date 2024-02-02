@@ -1,40 +1,169 @@
 .shop{
-  background-color: black; // 暫時用一下
+  background-color: rgb(255, 255, 255); // 暫時用一下
 }
-.list-group{
-  list-style:none;
+// 搜尋及篩選欄
+.select{
   display: flex;
-  align-items: center;
-  flex-direction: column;
+  align-items: start;
   justify-content: center;
-  .list-group-item{
-
-    border-radius: 10px;
-  }
-  li{
+  .list-group{
+    width: 100%;
+    list-style:none;
     display: flex;
     align-items: center;
-    justify-content: center;
-    margin: 5px;
-    width: 80%;
-  }
-    input, button {
-      padding: 5px 10px;
-      width: 80px;
-      border: none;
-      outline: none;
-      background-color: white;
-    }
-    button{
-      width: 35px;
-      border-radius: 0 200px 200px 0;
-      background-color: white;
-      i{
-        background-color:transparent;
+    flex-direction: column;
+    justify-content: center;    
+    .active{
+        background-color: rgb(0, 0, 0);
+        border-color:white
+      }
+    .list-group-item{
+      border-top-width: 1px; // 預設為0會導致上方border消失
+      border-radius: 10px;
+      &:hover{
+        background-color: rgb(0, 0, 0);
+        border-color:white;
+        color:white;
       }
     }
-    input{
-      border-radius: 200px 0 0 200px;
+    li{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 80%;
     }
-  
+      input, button {
+        padding: 5px 10px;
+        width: 80px;
+        border: none;
+        outline: none;
+        background-color: white;
+      }
+      button{
+        width: 35px;
+        border-radius: 0 200px 200px 0;
+        background-color: white;
+        i{
+          background-color:transparent;
+        }
+      }
+      input{
+        border-radius: 200px 0 0 200px;
+      }
+    
+  }
+}
+
+// 產品
+#product{
+  padding: 20px 100px;
+  .frame{
+  padding:25px;
+  display: flex;
+  justify-content: center;
+    .card{
+      width: 100%;
+      // aspect-ratio: 2/1.2;
+      height: 100%;
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      // 上方圖片欄
+      .card-top{
+        width: 100%;
+        text-align: center;
+        position: relative;
+        img{
+          width: 100%;
+          height: 250px;
+          transition: opacity 0.5s ease;
+        }
+        // 收藏鈕
+        .btn-outline-info{
+          border: none;
+          border-radius: 50%;
+          position:absolute;
+          top:0;
+          right:0;
+          z-index: 10;
+        }
+        .more{
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          height: 100%;
+          width: 100%;
+          position: absolute;
+          top:50%;
+          left: 50%;
+          transform: translate(-50%,-50%);
+          opacity: 0;
+          background-color: rgba(0,0,0,.6);
+          transition: opacity 0.5s ease;
+          .btn-outline-secondary{
+            &:hover{
+              color: black;
+            }
+          }
+        }        
+        &:hover .more{
+          opacity: 1;
+        }
+        &:hover img{
+          opacity: 1;
+        }
+        &:hover .btn-outline-secondary{
+          border: 1px solid rgb(255, 255, 255);
+          background-color: rgb(255, 255, 0);
+        }
+      }
+      .card-body{
+        padding: 10px;
+        background-color: antiquewhite;
+        .title{
+          text-align: center;
+          font-size: 1.2rem;
+        }
+        .left, .right{
+          display: flex;
+          flex-direction: column;
+          justify-content: end;
+          .h5{
+            font-size: 1rem;
+          }
+          .h6{
+            font-weight:bolder;
+            color: red;
+          }
+          .btn{
+            margin: 2px;
+          }
+        }
+      }
+    }
+  }
+}
+
+
+
+@media screen and (max-width: 992px){
+  #product{
+    padding: 20px 70px;
+  }
+}
+@media screen and (max-width: 768px){
+  #product{
+    padding: 20px 120px;
+  }
+  .select{
+    .list-group{
+      width: 50%;
+    }
+  }
+}
+@media screen and (max-width: 576px){
+  #product{
+    padding: 20px 50px;
+  }
 }

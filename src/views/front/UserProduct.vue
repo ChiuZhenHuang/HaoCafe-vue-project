@@ -3,7 +3,7 @@
   <div class="container"  style="margin-top:85px">
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb">
-        <li class="breadcrumb-item"><router-link to="/user/shopping">更多商品</router-link></li>
+        <li class="breadcrumb-item"><router-link to="/user/shopping">全部商品</router-link></li>
         <li class="breadcrumb-item active" aria-current="page">{{ product.category }}</li>
         <li class="breadcrumb-item active" aria-current="page">{{ product.title }}</li>
       </ol>
