@@ -5,6 +5,7 @@
         {{ item.title }}
       </li>
     </ul>
+    收藏產品數量： {{ isFavorites.length }}
   </div>
 </template>
 
@@ -14,16 +15,6 @@ export default {
     return {
       isFavorites: []
     }
-  },
-  computed: {
-    // product () {
-    //   if (Array.isArray(this.isFavorites)) {
-    //     return [...this.isFavorites] // 使用複製的陣列以觸發重新渲染
-    //   } else {
-    //     console.error('isFavorites is not an array')
-    //     return []
-    //   }
-    // }
   },
   created () {
   // 從 localStorage 中加載收藏資料

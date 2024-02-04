@@ -1,7 +1,8 @@
 <template>
   <div>
-    <nav class="navbar navbar-expand-lg" :class="{ 'fixed-top': isFixedTop, 'bg-transparent': isTransparent, 'bg-black': !isTransparent }">
-      <div class="container-fluid bg-transparent">
+    <nav class="navbar navbar-expand-lg fixed-top"
+    :class="{ 'bg-transparent': isTransparent, 'bg-black': !isTransparent }" :style="{'height': dynamicHeight + 'px' }">
+      <div class="container-fluid bg-transparent" >
         <div>
           <router-link to="/">
             <img src="https://i.pinimg.com/564x/e6/e8/69/e6e8691e77bd66ca772d620f22d61d9b.jpg" class="d-block" style="height: 60px;width: 60px;" alt="...">
@@ -10,7 +11,7 @@
         <div>
         <!-- 手機漢堡鈕 -->
           <button class="navbar-toggler ml-auto bg-transparent" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebar" aria-controls="sidebar">
-            <span class="navbar-toggler-icon"></span>
+            <i class="bi bi-border-width"></i>
           </button>
         <!-- 桌機導覽列 -->
           <ul  id="navbarNav" class="navbar-nav collapse navbar-collapse bg-transparent">
@@ -24,13 +25,13 @@
               <router-link class="nav-link" to="/dashboard/productComponent">管理產品</router-link>
             </li>
             <li class="nav-item">
-              <router-link class="nav-link" to="/login"><i class="bi bi-person-gear"></i> 登入</router-link>
+              <router-link class="nav-link" to="/user/favorites"><i class="bi bi-heart"></i></router-link>
             </li>
             <li class="nav-item">
-            <router-link class="nav-link" to="/user/favorites"><i class="bi bi-heart"></i></router-link>
-          </li>
-            <li class="nav-item">
               <router-link class="nav-link" to="/user/cart"><i class="bi bi-cart"></i></router-link>
+            </li>
+            <li class="nav-item">
+              <router-link class="nav-link" to="/login"><i class="bi bi-person-gear"></i> 後台管理</router-link>
             </li>
           </ul>
         </div>
@@ -54,13 +55,13 @@
             <router-link class="nav-link" to="/dashboard/productComponent">管理產品</router-link>
           </li>
           <li class="nav-item">
-            <router-link class="nav-link" to="/login"><i class="bi bi-person-gear"></i> 登入</router-link>
-          </li>
-          <li class="nav-item">
             <router-link class="nav-link" to="/user/favorites"><i class="bi bi-heart"></i></router-link>
           </li>
           <li class="nav-item">
             <router-link class="nav-link" to="/user/cart"><i class="bi bi-cart"></i></router-link>
+          </li>
+          <li class="nav-item">
+            <router-link class="nav-link" to="/login"><i class="bi bi-person-gear"></i> 後台管理</router-link>
           </li>
         </ul>
       </div>
@@ -72,32 +73,50 @@
 export default {
   data () {
     return {
-      isFixedTop: false,
-      isTransparent: true
+      isTransparent: true,
+      scrollY: 0,
+      windowWidth: window.innerWidth,
+      initialHeight: 100, // 初始navbar高度
+      scrolledHeight: 76 // 下滑頁面時navbar高度
+    }
+  },
+  watch: {
+    // 螢幕寬度改變時觸發handleScroll，取得高度資料
+    windowWidth (newWidth, oldWidth) {
+      this.handleScroll()
+    }
+  },
+  computed: {
+    // navbar高度設定
+    dynamicHeight () {
+      // 手機板navbar高度保持76px
+      if (this.windowWidth < 768) {
+        return this.scrolledHeight
+      } else {
+        return this.scrollY > 50 ? this.scrolledHeight : this.initialHeight
+      }
+    }
+  },
+  methods: {
+    // 判斷螢幕寬
+    handleResize () {
+      this.windowWidth = window.innerWidth
+    },
+    // 判斷Y軸位置
+    handleScroll () {
+      // 獲取滾動的距離
+      this.scrollY = window.scrollY
+      // 設置 isTransparent 屬性，根據滾動距離來判斷背景色
+      this.isTransparent = this.scrollY <= 50
     }
   },
   mounted () {
     window.addEventListener('scroll', this.handleScroll)
-  },
-  methods: {
-    goAbout () {
-      window.scrollTo({
-        top: 525,
-        behavior: 'smooth' // 平滑效果
-      })
-    },
-    handleScroll () {
-      // 獲取滾動的距離
-      const scrollY = window.scrollY
-      // 設置 isFixedTop 屬性，當滾動距離超過某個值時固定在頂部
-      this.isFixedTop = scrollY > 50
-
-      // 設置 isTransparent 屬性，根據滾動距離來判斷背景色
-      this.isTransparent = scrollY <= 50
-    }
+    window.addEventListener('resize', this.handleResize)
   },
   beforeUnmount () {
     window.removeEventListener('scroll', this.handleScroll)
+    window.removeEventListener('resize', this.handleResize)
   }
 }
 </script>

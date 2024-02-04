@@ -16,9 +16,21 @@
         </tr>
         </tbody>
         <tfoot>
-        <tr>
+        <tr v-show="order.total < 3000">
+          <td colspan="2" class="text-end">運費</td>
+          <td class="text-end">NT$ 120</td>
+        </tr>
+        <tr v-show="order.total >= 3000">
+          <td colspan="2" class="text-end">運費</td>
+          <td class="text-end">NT$ 0</td>
+        </tr>
+        <tr v-show="order.total < 3000">
           <td colspan="2" class="text-end">總計</td>
-          <td class="text-end">{{ $filters.currency(order.total) }} 元</td>
+          <td class="text-end">NT$ {{ $filters.currency(parseInt(order.total)+120) }} </td>
+        </tr>
+        <tr v-show="order.total >= 3000">
+          <td colspan="2" class="text-end">總計</td>
+          <td class="text-end">NT$ {{ $filters.currency(order.total) }} </td>
         </tr>
         </tfoot>
       </table>

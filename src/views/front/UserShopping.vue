@@ -1,9 +1,14 @@
 <template>
   <LoadingComponent :active="isLoading"></LoadingComponent>
-  <div class="container-fluid shop">
+  <div class="banner-product" style="background-image:url('https://i.imgur.com/j36jzzA.jpg')">
+    <div class="mask"></div>
+    <h2>產品列表</h2>
+  </div>
+
+  <div class="container mt-3">
     <div class="row">
-    <!-- 左側選單 -->
-      <div class="col-12 col-md-2 select">
+      <!-- 左側選單 -->
+      <div class="col-md-4 col-lg-3" id="select">
         <ul class="list-group">
           <li class="mt-2 mb-1">
             <input type="search" v-model="search" value="" placeholder=""
@@ -23,9 +28,9 @@
         </ul>
       </div>
       <!-- 右側產品 -->
-      <div class="col-12 col-md-10" id="product">
-        <div class="row">
-          <div class="col-12 col-md-6 col-xl-4 frame" v-for="item in filterProducts" :key="item.id">
+      <div class="col-md-8 col-lg-9" id="product">
+        <div class="row row-cols-sm-2 row-cols-lg-3">
+          <div class="frame" v-for="item in filterProducts" :key="item.id">
             <div class="card">
               <div class="card-top">
                 <button v-if="!item.isFavorite" type="button" class="btn btn-outline-info" @click="addToFavorites(item)">
@@ -34,20 +39,20 @@
                 <button v-else type="button" class="btn btn-outline-info" @click="removeToFavorites(item)">
                   <i class="bi bi-heart-fill"></i>
                 </button>
-                <img :src="item.imageUrl" class="card-img-top" alt="產品圖片">
+                <img :src="item.imageUrl"  alt="產品圖片">
                 <div class="more">
                   <button type="button" class="btn btn-outline-secondary"
                     @click="getProduct(item.id)">More...
                   </button>
                 </div>
               </div>
-              <div class="card-body h-100 w-100">
+              <div class="card-body w-100">
                 <h5 class="title" style="cursor: pointer" @click="getProduct(item.id)">{{ item.title }}</h5>
                 <div class="d-flex justify-content-between">
                   <div class="left">
-                    <div class="h5" v-if="!item.price">{{ item.origin_price }} 元</div>
-                    <del class="h5" v-if="item.price">NT$ {{ item.origin_price }} 元</del>
-                    <div class="h6" v-if="item.price">NT$ {{ item.price }} 元/盒</div>
+                    <div class="h5" v-if="!item.price">NT$ {{ item.origin_price }} </div>
+                    <del class="h5" v-if="item.price">NT$ {{ item.origin_price }} </del>
+                    <div class="h6" v-if="item.price">NT$ {{ item.price }} /盒</div>
                   </div>
                   <div class="right ml-auto">
                     <button type="button add-cart" class="btn btn-outline-danger"
@@ -62,8 +67,8 @@
             </div>
           </div>
           <!-- 渲染全部商品時才顯示頁數 -->
-          <Pagination v-if="selectedCategory === '' && search === '' " :pages="pagination" @emit-pages="getProducts"></Pagination>
         </div>
+        <Pagination v-show="selectedCategory === '' && search === '' " :pages="pagination" @emit-pages="getProducts"></Pagination>
       </div>
     </div>
   </div>

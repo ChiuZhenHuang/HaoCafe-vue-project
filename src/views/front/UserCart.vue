@@ -3,7 +3,7 @@
   <div class="container" style="margin-top:85px">
     <div class="row mt-4">
       <!-- 購物車內商品  -->
-      <div class="col-md-6">
+      <div class="col-md-10 offset-md-2" >
         <div class="sticky-top">
           <table class="table align-middle">
             <thead>
@@ -12,7 +12,7 @@
                 <th>品名</th>
                 <th>數量</th>
                 <th>庫存數</th>
-                <th>單價</th>
+                <th>金額</th>
               </tr>
             </thead>
             <tbody>
@@ -27,7 +27,7 @@
                 <td>
                   {{ item.product.title }}
                   <div class="text-success" v-if="item.coupon">
-                    已套用優惠券
+                    已套用優惠券( {{ item.coupon.title }} )
                   </div>
                 </td>
                 <td>
@@ -37,10 +37,12 @@
                           @change="updateCart(item)">
                   </div>
                 </td>
-                  <td><div class="input-group-text">{{ item.product.unit }} 件</div></td>
+                <td>
+                  <div class="input-group">{{ item.product.unit }} 件</div>
+                </td>
                 <td class="text-end">
                   <!-- v-if="cart.final_total !== cart.total" -->
-                  <small  v-if="item.coupon" class="text-success">折扣價：</small>
+                  <small  v-if="item.coupon" class="text-success">金額：</small>
                   {{ $filters.currency(item.final_total) }}
                 </td>
               </tr>
@@ -60,14 +62,26 @@
               <td colspan="3" class="text-end">已折扣</td>
               <td class="text-end">{{ $filters.currency(cart.total - cart.final_total) }}</td>
             </tr>
-            <tr v-if="cart.final_total !== cart.total">
+            <!-- 如果購物車內有商品才顯示運費資訊 -->
+            <tr v-show="cart.final_total < 3000 && cart.carts.length > 0">
+              <td colspan="3" class="text-end">運費</td>
+              <td class="text-end">+$ 120 (只差NT$ {{ $filters.currency(3000-parseInt(cart.final_total)) }}達成免運！)</td>
+            </tr>
+            <tr v-show="cart.final_total >= 3000">
+              <td colspan="3" class="text-end">恭喜達成免運！</td>
+            </tr>
+            <tr v-show="cart.total < 3000">
+              <td colspan="3" class="text-end text-success">應付金額</td>
+              <td class="text-end text-success">{{ $filters.currency(parseInt(cart.final_total)+120) }}</td>
+            </tr>
+            <tr v-show="cart.total >= 3000">
               <td colspan="3" class="text-end text-success">應付金額</td>
               <td class="text-end text-success">{{ $filters.currency(cart.final_total) }}</td>
             </tr>
             </tfoot>
           </table>
           <div class="input-group mb-3 input-group-sm">
-            <input type="text" class="form-control" v-model="coupon_code" placeholder="請輸入優惠碼">
+            <input  type="text" class="form-control" v-model="coupon_code" placeholder="請輸入優惠碼">
             <div class="input-group-append">
               <button class="btn btn-outline-secondary" type="button" @click="addCouponCode">
                 套用優惠碼
@@ -94,6 +108,26 @@ export default {
   },
   // components: { Pagination },
   inject: ['emitter'],
+  // watch: {
+  //   'cart.carts': {
+  //     handler (newCarts, oldCarts) {
+  //       // 檢查新的購物車數據中的第一個產品是否有 coupon 屬性
+  //       if (newCarts.length > 0 && newCarts[0].coupon) {
+  //         const couponContent = newCarts[0].coupon
+  //         newCarts.forEach(product => {
+  //           if (typeof product.coupon === 'object') {
+  //             product.coupon = couponContent
+  //           } else {
+  //             // 如果 coupon 不是物件，創建一個包含 code 的新物件
+  //             product.coupon = { ...couponContent }
+  //           }
+  //         })
+  //       }
+  //       // this.getCart()
+  //     },
+  //     deep: true
+  //   }
+  // },
   methods: {
     // 取得購物車列表
     getCart () {
@@ -143,9 +177,17 @@ export default {
           console.log(res)
           this.$httpMessageState(res, '套用優惠券')
           this.getCart()
+          localStorage.setItem('coupon_code', this.coupon_code)
           // 優惠碼使用成功後清除優惠碼資料
           this.coupon_code = ''
         })
+    },
+    saved () {
+      const savedCouponCode = localStorage.getItem('coupon_code')
+      // 將讀取的值設置為組件的 coupon_code
+      if (savedCouponCode !== null) {
+        this.coupon_code = savedCouponCode
+      }
     },
     // 前往填寫訂單資料
     pushForm () {

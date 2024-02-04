@@ -1,8 +1,43 @@
-.shop{
-  background-color: rgb(255, 255, 255); // 暫時用一下
+.banner-product{  
+  //不明原因無法靠最上方，先-15px
+  margin-top: -15px;
+  width: 100%;
+  height: 400px;
+  position: relative;
+  // background-size: cover;
+  // background-position: 50%; 
+  // background-repeat: no-repeat; 
+  .mask{
+    content: '';
+    position: absolute;
+    top:0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-image: url('https://i.imgur.com/j36jzzA.jpg');
+    background-size: cover;
+    background-position: 50%; 
+    filter: blur(5px); 
+  }
+  h2{
+    color: white;
+    position: absolute;
+    top:50%;
+    left:50%;
+    transform: translate(-50%,-50%);
+  }
 }
 // 搜尋及篩選欄
-.select{
+#select{
   display: flex;
   align-items: start;
   justify-content: center;
@@ -12,16 +47,17 @@
     display: flex;
     align-items: center;
     flex-direction: column;
-    justify-content: center;    
+    justify-content: center;  
     .active{
-        background-color: rgb(0, 0, 0);
+        background-color: rgb(0, 0, 0,);
         border-color:white
       }
     .list-group-item{
       border-top-width: 1px; // 預設為0會導致上方border消失
       border-radius: 10px;
+      transition: .3s;
       &:hover{
-        background-color: rgb(0, 0, 0);
+        background-color: rgba(0, 0, 0,.7);
         border-color:white;
         color:white;
       }
@@ -38,16 +74,19 @@
         border: none;
         outline: none;
         background-color: white;
+        border: 2px solid black;
       }
       button{
         width: 35px;
         border-radius: 0 200px 200px 0;
         background-color: white;
+        border-left:none;
         i{
           background-color:transparent;
         }
       }
       input{
+        border-right:none;
         border-radius: 200px 0 0 200px;
       }
     
@@ -56,37 +95,39 @@
 
 // 產品
 #product{
-  padding: 20px 100px;
   .frame{
-  padding:25px;
-  display: flex;
-  justify-content: center;
+    padding:25px;
+    display: flex;
+    justify-content: center;
     .card{
       width: 100%;
-      // aspect-ratio: 2/1.2;
+      aspect-ratio: 2/1.8;
       height: 100%;
       position: relative;
       display: flex;
       justify-content: center;
       align-items: center;
-      // 上方圖片欄
+      border-radius: 0;
       .card-top{
         width: 100%;
+        height: 100%;
         text-align: center;
         position: relative;
+        // 產品圖片
         img{
           width: 100%;
-          height: 250px;
+          height: 100%;
           transition: opacity 0.5s ease;
         }
         // 收藏鈕
         .btn-outline-info{
           border: none;
-          border-radius: 50%;
           position:absolute;
           top:0;
           right:0;
           z-index: 10;
+          color: red;
+          background-color: transparent;
         }
         .more{
           display: flex;
@@ -123,18 +164,20 @@
         background-color: antiquewhite;
         .title{
           text-align: center;
-          font-size: 1.2rem;
+          font-size: 1.1em;
         }
         .left, .right{
           display: flex;
           flex-direction: column;
           justify-content: end;
           .h5{
-            font-size: 1rem;
+            font-size: .7em;
+            color: rgb(68, 68, 68);
           }
           .h6{
             font-weight:bolder;
             color: red;
+            font-size: .9em;
           }
           .btn{
             margin: 2px;
@@ -147,16 +190,11 @@
 
 
 
-@media screen and (max-width: 992px){
-  #product{
-    padding: 20px 70px;
-  }
-}
 @media screen and (max-width: 768px){
-  #product{
-    padding: 20px 120px;
+  .banner-product{
+    height: 240px;
   }
-  .select{
+  #select{
     .list-group{
       width: 50%;
     }
@@ -164,6 +202,14 @@
 }
 @media screen and (max-width: 576px){
   #product{
-    padding: 20px 50px;
+    .row{
+      display: flex;
+      justify-content: center;
+    }
+    .frame{
+      width: 70%;
+    }
   }
+
+  
 }

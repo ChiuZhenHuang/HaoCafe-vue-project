@@ -12165,7 +12165,6 @@ textarea.form-control-lg {
 }
 
 .carousel-inner {
-  margin-top: -76px;
   position: relative;
 }
 .carousel-inner .text {
@@ -12183,7 +12182,6 @@ textarea.form-control-lg {
   margin-top: 20px;
   font-size: 1.5rem;
   color: white;
-  text-decoration: none;
   background-color: transparent;
   border-radius: 10px;
   padding: 5px 20px;
@@ -12245,9 +12243,12 @@ textarea.form-control-lg {
   width: 100%;
   margin: 10px;
   border-radius: 0;
-  transition: scale 0.5s ease, opacity 0.5s linear;
+  transition: all 0.5s;
 }
-.home-main .main-item .left .item button {
+.home-main .main-item .left .item .nav-link {
+  color: white;
+  border-radius: 5px;
+  padding: 5px 10px;
   position: absolute;
   top: 50%;
   left: 50%;
@@ -12257,22 +12258,21 @@ textarea.form-control-lg {
   background-color: rgba(99, 99, 99, 0.4);
   color: rgb(255, 255, 255);
 }
-.home-main .main-item .left .item button:hover {
-  background-color: rgb(0, 0, 0);
+.home-main .main-item .left .item .nav-link:hover {
+  background-color: rgba(0, 0, 0, 0.7);
   color: rgb(255, 255, 255);
 }
 .home-main .main-item .left .item:hover img {
   transform: scale(1.1);
-  background-color: rgba(0, 0, 0, 0.2);
 }
-.home-main .main-item .left .item:hover button {
+.home-main .main-item .left .item:hover .nav-link {
   opacity: 1;
 }
 .home-main .main-item .left:has(img:hover) img:not(:hover) {
   scale: 0.8;
   opacity: 0.7;
 }
-.home-main .main-item .left:has(button:hover) img:not(:hover) {
+.home-main .main-item .left:has(.nav-link:hover) img:not(:hover) {
   scale: 0.8;
   opacity: 0.7;
 }
@@ -12298,7 +12298,7 @@ textarea.form-control-lg {
   color: rgba(230, 177, 107, 0.911);
 }
 
-.banner {
+.get-coupon {
   background-image: url("https://i.imgur.com/a1L0U0U.jpg");
   background-attachment: fixed;
   background-size: cover;
@@ -12311,10 +12311,10 @@ textarea.form-control-lg {
   padding: 10px 0;
   letter-spacing: 0.1em;
 }
-.banner strong {
+.get-coupon strong {
   color: white;
 }
-.banner button {
+.get-coupon button {
   color: rgb(255, 255, 255);
   background-color: rgb(0, 0, 0);
   border: 1px solid white;
@@ -12323,7 +12323,7 @@ textarea.form-control-lg {
   transition: 0.7s;
   padding: 5px;
 }
-.banner button:hover {
+.get-coupon button:hover {
   color: rgb(0, 0, 0);
   background-color: rgb(255, 255, 255);
   border: 1px solid rgb(0, 0, 0);
@@ -12364,13 +12364,13 @@ footer {
   .home-main .main-item .left img {
     width: 90%;
   }
-  .banner {
+  .get-coupon {
     font-size: 1.3rem;
   }
 }
 .navbar {
-  transition: background-color 0.3s ease;
-  z-index: 15;
+  transition: 0.5s ease;
+  z-index: 150;
 }
 
 /* 設置初始背景為透明 */
@@ -12380,7 +12380,7 @@ footer {
 
 /* 設置滾動後背景為黑 */
 .bg-black {
-  background-color: black !important;
+  background-color: rgba(0, 0, 0, 0.5) !important;
 }
 
 .navbar-brand {
@@ -12438,8 +12438,8 @@ footer {
     border-bottom: 1px solid #ffffff;
   }
   .navbar-toggler {
-    color: rgb(122, 120, 120);
-    background-color: rgba(98, 97, 97, 0.5);
+    color: rgb(255, 255, 255);
+    border: 1px solid white;
   }
 }
 @media screen and (max-width: 768px) {
@@ -12448,7 +12448,6 @@ footer {
   }
 }
 .main-about {
-  margin-top: -85px;
   background-color: rgb(21, 21, 21);
   position: relative;
 }
@@ -12493,22 +12492,56 @@ footer {
   }
 }
 @media screen and (max-width: 768px) {
+  .main-about .about-item h3, .main-about .about-item .h3 {
+    margin-top: 50px;
+  }
   .main-about .about-item .middle-img {
     width: 200px;
     height: 200px;
     border-radius: 10px;
   }
 }
-.shop {
-  background-color: rgb(255, 255, 255);
+.banner-product {
+  margin-top: -15px;
+  width: 100%;
+  height: 400px;
+  position: relative;
+}
+.banner-product .mask {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+.banner-product::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-image: url("https://i.imgur.com/j36jzzA.jpg");
+  background-size: cover;
+  background-position: 50%;
+  filter: blur(5px);
+}
+.banner-product h2, .banner-product .h2 {
+  color: white;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
-.select {
+#select {
   display: flex;
   align-items: start;
   justify-content: center;
 }
-.select .list-group {
+#select .list-group {
   width: 100%;
   list-style: none;
   display: flex;
@@ -12516,47 +12549,48 @@ footer {
   flex-direction: column;
   justify-content: center;
 }
-.select .list-group .active {
+#select .list-group .active {
   background-color: rgb(0, 0, 0);
   border-color: white;
 }
-.select .list-group .list-group-item {
+#select .list-group .list-group-item {
   border-top-width: 1px;
   border-radius: 10px;
+  transition: 0.3s;
 }
-.select .list-group .list-group-item:hover {
-  background-color: rgb(0, 0, 0);
+#select .list-group .list-group-item:hover {
+  background-color: rgba(0, 0, 0, 0.7);
   border-color: white;
   color: white;
 }
-.select .list-group li {
+#select .list-group li {
   display: flex;
   align-items: center;
   justify-content: center;
   width: 80%;
 }
-.select .list-group input, .select .list-group button {
+#select .list-group input, #select .list-group button {
   padding: 5px 10px;
   width: 80px;
   border: none;
   outline: none;
   background-color: white;
+  border: 2px solid black;
 }
-.select .list-group button {
+#select .list-group button {
   width: 35px;
   border-radius: 0 200px 200px 0;
   background-color: white;
+  border-left: none;
 }
-.select .list-group button i {
+#select .list-group button i {
   background-color: transparent;
 }
-.select .list-group input {
+#select .list-group input {
+  border-right: none;
   border-radius: 200px 0 0 200px;
 }
 
-#product {
-  padding: 20px 100px;
-}
 #product .frame {
   padding: 25px;
   display: flex;
@@ -12564,29 +12598,33 @@ footer {
 }
 #product .frame .card {
   width: 100%;
+  aspect-ratio: 2/1.8;
   height: 100%;
   position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
+  border-radius: 0;
 }
 #product .frame .card .card-top {
   width: 100%;
+  height: 100%;
   text-align: center;
   position: relative;
 }
 #product .frame .card .card-top img {
   width: 100%;
-  height: 250px;
+  height: 100%;
   transition: opacity 0.5s ease;
 }
 #product .frame .card .card-top .btn-outline-info {
   border: none;
-  border-radius: 50%;
   position: absolute;
   top: 0;
   right: 0;
   z-index: 10;
+  color: red;
+  background-color: transparent;
 }
 #product .frame .card .card-top .more {
   display: flex;
@@ -12621,7 +12659,7 @@ footer {
 }
 #product .frame .card .card-body .title {
   text-align: center;
-  font-size: 1.2rem;
+  font-size: 1.1em;
 }
 #product .frame .card .card-body .left, #product .frame .card .card-body .right {
   display: flex;
@@ -12629,31 +12667,32 @@ footer {
   justify-content: end;
 }
 #product .frame .card .card-body .left .h5, #product .frame .card .card-body .right .h5 {
-  font-size: 1rem;
+  font-size: 0.7em;
+  color: rgb(68, 68, 68);
 }
 #product .frame .card .card-body .left .h6, #product .frame .card .card-body .right .h6 {
   font-weight: bolder;
   color: red;
+  font-size: 0.9em;
 }
 #product .frame .card .card-body .left .btn, #product .frame .card .card-body .right .btn {
   margin: 2px;
 }
 
-@media screen and (max-width: 992px) {
-  #product {
-    padding: 20px 70px;
-  }
-}
 @media screen and (max-width: 768px) {
-  #product {
-    padding: 20px 120px;
+  .banner-product {
+    height: 240px;
   }
-  .select .list-group {
+  #select .list-group {
     width: 50%;
   }
 }
 @media screen and (max-width: 576px) {
-  #product {
-    padding: 20px 50px;
+  #product .row {
+    display: flex;
+    justify-content: center;
+  }
+  #product .frame {
+    width: 70%;
   }
 }/*# sourceMappingURL=all.css.map */

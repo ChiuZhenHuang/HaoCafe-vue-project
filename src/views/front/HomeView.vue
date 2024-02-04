@@ -33,35 +33,20 @@
   <div class="container-fluid home-main">
     <div class="row">
       <div class="mask"></div>
-      <!-- <div class="col-12 col-md-5 offset-md-1 mt-3 mb-3">
-        <div class="col-12 col-md-7 main-pic">
-          <div class="main-item">
-            <img src="https://i.pinimg.com/564x/af/ad/86/afad86046f8d420692a612ccef4f05b6.jpg" alt="">
-          </div>
-        </div>
-        <div class="col-12 col-md-7 offset-md-4">
-          <div class="main-item">
-            <div class="text">
-              <p>「表達自己，</p>
-              <p>來一杯濃縮咖啡。」</p>
-            </div>
-          </div>
-        </div>
-      </div> -->
       <div class="col-12 col-md-4 mt-3 mb-3">
         <div class="main-item">
           <div class="left">
             <div class="item">
               <img src="https://i.imgur.com/Ee0Isz0.jpg">
-              <button type="button" class="btn btn-outline-dark">關於我們</button>
+              <router-link class="nav-link" to="/about">關於我們</router-link>
             </div>
             <div class="item">
               <img src="https://i.imgur.com/LqGBzES.jpg">
-              <button type="button" class="btn btn-outline-dark">產品列表</button>
+              <router-link class="nav-link" to="/user/shopping">產品列表</router-link>
             </div>
             <div class="item">
               <img src="https://i.imgur.com/zXIMLuE.jpg">
-              <button type="button" class="btn btn-outline-dark">收藏列表</button>
+              <router-link class="nav-link" to="/user/favorites">收藏列表</router-link>
             </div>
           </div>
         </div>
@@ -73,6 +58,10 @@
             <div class="txt">
               <div>2024 / 01 / 19</div>
               <p>周年慶！輸入優惠碼：9，享有九折</p>
+            </div>
+            <div class="txt">
+              <div>2023 / 11 / 02</div>
+              <p>全館實付金額滿額3,000！即可免運</p>
             </div>
             <div class="txt">
               <div>2023 / 08 / 19</div>
@@ -95,7 +84,7 @@
   <!-- 領取優惠 -->
   <div class="container-fluid">
     <div class="row">
-      <div class="col-12 banner">
+      <div class="col-12 get-coupon">
         <div>
           <strong>還沒領取優惠券？</strong>
           <div>

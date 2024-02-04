@@ -15,7 +15,7 @@
 }
 .carousel-inner{
   // 讓navbar呈現幻燈片在上層
-  margin-top: -76px;
+  // margin-top: -76px;
   position: relative;
   .text {
     position: absolute;
@@ -31,7 +31,6 @@
       margin-top: 20px;
       font-size: 1.5rem;
       color: white; 
-      text-decoration: none;
       background-color: transparent;
       border-radius: 10px;
       padding: 5px 20px;
@@ -45,7 +44,6 @@
 }
 
 // 消息背景
-
 .home-main{
   position: relative;
   background-size: cover;
@@ -96,9 +94,12 @@
           width: 100%;
           margin: 10px;
           border-radius: 0;
-          transition: scale .5s ease, opacity .5s linear;
+          transition: all .5s;
         }
-        button{
+        .nav-link{
+          color: white; 
+          border-radius: 5px;
+          padding: 5px 10px;
           position: absolute;
           top:50%;
           left:50%;
@@ -108,15 +109,14 @@
           background-color: rgba(99, 99, 99, 0.4);
           color: rgb(255, 255, 255);
           &:hover{
-            background-color: rgb(0, 0, 0);
+            background-color: rgba(0, 0, 0, 0.7);
             color: rgb(255, 255, 255);
           }
         }
         &:hover img{
           transform: scale(1.1);
-          background-color: rgba(0, 0, 0, 0.2);
         }
-        &:hover button{
+        &:hover .nav-link{
           opacity: 1;
         }
       }
@@ -124,7 +124,7 @@
         scale: .8;
         opacity: .7;
       }
-      &:has(button:hover) img:not(:hover){
+      &:has(.nav-link:hover) img:not(:hover){
         scale: .8;
         opacity: .7;
       }
@@ -157,7 +157,7 @@
 
 
 // 領取優惠
-.banner {
+.get-coupon {
   background-image: url('https://i.imgur.com/a1L0U0U.jpg');
   background-attachment: fixed;
   background-size: cover;
@@ -235,7 +235,7 @@ footer{
     }
   }
   // 優惠領取
-  .banner{
+  .get-coupon{
     font-size: 1.3rem;
   }
 }

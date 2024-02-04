@@ -1,6 +1,6 @@
 .navbar {
-  transition: background-color 0.3s ease;
-  z-index: 15;
+  transition: .5s ease;
+  z-index: 150;
 }
 /* 設置初始背景為透明 */
 .bg-transparent {
@@ -8,7 +8,7 @@
 }
 /* 設置滾動後背景為黑 */
 .bg-black {
-  background-color: black !important;
+  background-color: rgba(0,0,0,.5)!important;
 }
 
 // 將LOGO置中對齊
@@ -19,10 +19,6 @@
 }
 
 .navbar-nav{
-  // left: 0%;
-  // right: 0%;
-  // margin: auto;
-  // display: flex;
   background-color: transparent;
   .nav-item{
     background-color: transparent;
@@ -84,8 +80,8 @@
     }
   }
   .navbar-toggler{
-    color: rgb(122, 120, 120);
-    background-color: rgba(98, 97, 97, 0.5);
+    color: rgb(255, 255, 255);
+    border: 1px solid white;
   }
 }
 
