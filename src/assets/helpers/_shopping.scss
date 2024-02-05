@@ -1,4 +1,13 @@
-.banner-product{  
+:root{
+  --main-color: rgba(0, 0, 0, 0.5);
+  --text-color: #333; // 暫無用到
+  --product-background-image-1: url('https://i.imgur.com/j36jzzA.jpg');
+}
+body{
+  background-color: var(--main-color);
+}
+
+.banner{  
   //不明原因無法靠最上方，先-15px
   margin-top: -15px;
   width: 100%;
@@ -23,7 +32,7 @@
     left: 0;
     height: 100%;
     width: 100%;
-    background-image: url('https://i.imgur.com/j36jzzA.jpg');
+    // background-image:var(--product-background-image-1) ;
     background-size: cover;
     background-position: 50%; 
     filter: blur(5px); 
@@ -35,6 +44,9 @@
     left:50%;
     transform: translate(-50%,-50%);
   }
+}
+.bg-product::before {
+  background-image:var(--product-background-image-1) ;
 }
 // 搜尋及篩選欄
 #select{
@@ -101,7 +113,7 @@
     justify-content: center;
     .card{
       width: 100%;
-      aspect-ratio: 2/1.8;
+      aspect-ratio: 2/2;
       height: 100%;
       position: relative;
       display: flex;
@@ -118,6 +130,7 @@
           width: 100%;
           height: 100%;
           transition: opacity 0.5s ease;
+          object-fit:contain;
         }
         // 收藏鈕
         .btn-outline-info{
@@ -166,6 +179,18 @@
           text-align: center;
           font-size: 1.1em;
         }
+        .left{
+          width: 70%;
+          .category{
+            background-color: rgba(255, 75, 75, 0.5);
+            font-size: .7em;
+            width: 50%;
+            text-align: center;
+            border-radius: 10px;
+            border: 1px solid black;
+            margin: 5px 0;
+          }
+        }
         .left, .right{
           display: flex;
           flex-direction: column;
@@ -191,7 +216,7 @@
 
 
 @media screen and (max-width: 768px){
-  .banner-product{
+  .banner{
     height: 240px;
   }
   #select{

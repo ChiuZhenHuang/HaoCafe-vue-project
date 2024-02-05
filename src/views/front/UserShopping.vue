@@ -1,8 +1,8 @@
 <template>
   <LoadingComponent :active="isLoading"></LoadingComponent>
-  <div class="banner-product" style="background-image:url('https://i.imgur.com/j36jzzA.jpg')">
+  <div class="banner bg-product">
     <div class="mask"></div>
-    <h2>產品列表</h2>
+    <h2>商品列表</h2>
   </div>
 
   <div class="container mt-3">
@@ -50,9 +50,10 @@
                 <h5 class="title" style="cursor: pointer" @click="getProduct(item.id)">{{ item.title }}</h5>
                 <div class="d-flex justify-content-between">
                   <div class="left">
-                    <div class="h5" v-if="!item.price">NT$ {{ item.origin_price }} </div>
-                    <del class="h5" v-if="item.price">NT$ {{ item.origin_price }} </del>
-                    <div class="h6" v-if="item.price">NT$ {{ item.price }} /盒</div>
+                    <div class="category">{{ item.category }} </div>
+                    <div class="h5" v-if="!item.price">NT$ {{ item.origin_price }}</div>
+                    <del class="h5" v-if="item.price">NT$ {{ item.origin_price }}</del>
+                    <div class="h6" v-if="item.price">NT$ {{ item.price }}</div>
                   </div>
                   <div class="right ml-auto">
                     <button type="button add-cart" class="btn btn-outline-danger"
@@ -66,8 +67,8 @@
               </div>
             </div>
           </div>
-          <!-- 渲染全部商品時才顯示頁數 -->
         </div>
+        <!-- 渲染全部商品時才顯示頁數 -->
         <Pagination v-show="selectedCategory === '' && search === '' " :pages="pagination" @emit-pages="getProducts"></Pagination>
       </div>
     </div>
@@ -80,7 +81,6 @@ import Pagination from '@/components/Pagination.vue'
 export default {
   data () {
     return {
-      visible: true,
       products: [], // 單頁產品
       allProducts: [], // 所有產品
       search: '', // 搜尋內容
@@ -124,6 +124,7 @@ export default {
       this.$http.get(url).then((res) => {
         this.isLoading = false
         this.pagination = res.data.pagination
+        // 新增isFavorite屬性，用於判斷是否已是收藏產品
         this.products = res.data.products.map(item => ({ ...item, isFavorite: this.isProductFavorite(item) }))
       })
     },
@@ -137,17 +138,6 @@ export default {
     // 前往詳細資料頁面
     getProduct (id) {
       this.$router.push(`/user/product/${id}`)
-    },
-    // 取得購物車列表
-    getCart () {
-      const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`
-      this.isLoading = true
-      this.$http.get(url)
-        .then((res) => {
-          this.cart = res.data.data
-          this.isLoading = false
-          console.log('購物車產品', this.cart)
-        })
     },
     // 加到購物車
     addCart (id) {
@@ -164,7 +154,6 @@ export default {
           // 讀取資料完成將disabled取消，讓用戶知道已經完成加入購物車
           this.status.loadingItem = ''
           this.$httpMessageState(res, '加入購物車')
-          this.getCart()
         })
     },
     // 收藏產品比對頁面產品
@@ -174,25 +163,27 @@ export default {
     // 加到收藏
     addToFavorites (item) {
       this.favorites.push(item)
-      this.saveFavoritesToLocalStorage()
       this.emitter.emit('push-message', {
         style: 'success',
         title: '已加入收藏'
       })
       item.isFavorite = true
+      // 先變更isFavorite的值再儲存至localStorage
+      this.saveFavoritesToLocalStorage()
     },
     // 移除收藏
     removeToFavorites (item) {
       const index = this.favorites.findIndex(favProduct => favProduct.id === item.id)
       if (index !== -1) {
         this.favorites.splice(index, 1)
-        this.saveFavoritesToLocalStorage()
         this.emitter.emit('push-message', {
           style: 'warning',
           title: '已移除收藏'
         })
       }
       item.isFavorite = false
+      // 先變更isFavorite的值再儲存至localStorage
+      this.saveFavoritesToLocalStorage()
     },
     // 將收藏資料儲存LocalStorage
     saveFavoritesToLocalStorage () {
@@ -244,7 +235,6 @@ export default {
   },
   created () {
     this.getProducts()
-    this.getCart()
     this.getAllProducts()
     this.loadFavoritesFromLocalStorage()
   }
