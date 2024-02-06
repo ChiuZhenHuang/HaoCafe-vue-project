@@ -97,37 +97,28 @@
     </div>
   </div>
 
-  <footer>
-    <p>&copy; 2024 好咖 | 本網站為學習用途</p>
-  </footer>
+  <!-- 訂閱我們 -->
+  <subscription/>
 
+  <!-- Footer -->
+  <Footer/>
 </template>
 
 <script>
-// @ is an alias to /src
 import userNav from '@/components/UserNavbar.vue'
+import Footer from '@/components/Footer.vue'
+import subscription from '@/components/Subscription.vue'
 
 export default {
   data () {
     return {
-      // couponCode: 9
     }
   },
   name: 'HomeView',
   components: {
-    userNav
+    userNav, Footer, subscription
   },
   methods: {
-    // copyCouponCode () {
-    //   this.$clipboard.writeText(this.couponCode)
-    //     .then(() => {
-    //       console.log('優惠碼已複製到剪貼板')
-    //       // 你可以在這裡添加通知或其他反饋
-    //     })
-    //     .catch((error) => {
-    //       console.error('複製失敗:', error)
-    //     })
-    // }
   },
   created () {
     // console.log(process.env.VUE_APP_API, process.env.VUE_APP_PATH)

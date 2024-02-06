@@ -1,0 +1,48 @@
+// 訂閱我們
+.subscription{
+  height: 250px;
+  background-image: url('https://i.pinimg.com/564x/fe/f8/20/fef82092d33bf6d151505c006447dca1.jpg');
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: 50%; 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  &::before{
+    content:'';
+    position: absolute;
+    top:0;
+    left:0;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.6);
+  }
+  .row{
+    z-index: 10;
+    width: 80%;
+    h2,h5{
+      margin: 20px 0;
+      font-weight: bolder;
+    }
+    Form{
+      height: 40px;
+      display: flex;
+      .form-field{
+        flex: 1;
+      }
+      .form-control{
+        border-radius: 0;
+        height: 100%;
+      }
+      button{
+      margin-left: auto;
+      background-color:var(--main-color);
+      color: white;
+      border: none;
+      text-align: center;
+      width: 55px;
+      }
+    }
+  }
+}

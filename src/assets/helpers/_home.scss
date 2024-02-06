@@ -187,17 +187,6 @@
     border: 1px solid rgb(0, 0, 0);
   }
 }
-
-footer{
-  background-color: rgb(40, 40, 40);
-  color: white;
-  text-align: center;
-  height: 100px;
-  line-height: 100px;
-}
-
-
-
 //手機板
 @media screen and (max-width: 768px) {
   // 幻燈片
@@ -234,7 +223,7 @@ footer{
       }
     }
   }
-  // 優惠領取
+  // 領取優惠
   .get-coupon{
     font-size: 1.3rem;
   }

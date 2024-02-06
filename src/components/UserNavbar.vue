@@ -31,7 +31,7 @@
               <router-link class="nav-link" to="/user/cart"><i class="bi bi-cart"></i></router-link>
             </li>
             <li class="nav-item">
-              <router-link class="nav-link" to="/login"><i class="bi bi-person-gear"></i> 後台管理</router-link>
+              <router-link class="nav-link" to="/login"><i class="bi bi-person-gear"></i></router-link>
             </li>
           </ul>
         </div>
@@ -61,7 +61,7 @@
             <router-link class="nav-link" to="/user/cart"><i class="bi bi-cart"></i></router-link>
           </li>
           <li class="nav-item">
-            <router-link class="nav-link" to="/login"><i class="bi bi-person-gear"></i> 後台管理</router-link>
+            <router-link class="nav-link" to="/login"><i class="bi bi-person-gear"></i></router-link>
           </li>
         </ul>
       </div>

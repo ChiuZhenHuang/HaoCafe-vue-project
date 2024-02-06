@@ -53,7 +53,10 @@ body{
   display: flex;
   align-items: start;
   justify-content: center;
+  
   .list-group{
+    position: sticky;
+    top: 76px;
     width: 100%;
     list-style:none;
     display: flex;
@@ -69,7 +72,7 @@ body{
       border-radius: 10px;
       transition: .3s;
       &:hover{
-        background-color: rgba(0, 0, 0,.7);
+        background-color: rgba(0, 0, 0,.5);
         border-color:white;
         color:white;
       }
@@ -201,7 +204,7 @@ body{
           }
           .h6{
             font-weight:bolder;
-            color: red;
+            color: rgb(0, 0, 0);
             font-size: .9em;
           }
           .btn{
