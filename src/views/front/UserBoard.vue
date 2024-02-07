@@ -1,21 +1,34 @@
 <template>
-  <div class="container-fluid mt-3 position-relative">
-    <userNav></userNav>
-    <ToastMessages></ToastMessages>
-    <router-view/>
-  </div>
+  <userNav></userNav>
+  <ToastMessages></ToastMessages>
+  <router-view/>
+  <Footer></Footer>
+
+  <!-- 滾動按鈕 -->
+  <transition name="fade">
+    <button class="scrollButton animate__animated"
+    :class="{ 'animate__fadeIn': showScrollButton }"
+      v-show="showScrollButton" @click="scrollToTop">
+      <i class="bi bi-arrow-up-short"></i>
+    </button>
+  </transition>
+
 </template>
 
 <script>
 import userNav from '@/components/UserNavbar.vue'
+import Footer from '@/components/Footer.vue'
 import emitter from '@/methods/emitter'
 import ToastMessages from '@/components/ToastMessages.vue'
+import scrollButton from '@/mixins/scrollButton'
 
 export default {
   components: {
     ToastMessages,
-    userNav
+    userNav,
+    Footer
   },
+  mixins: [scrollButton],
   provide () {
     return {
       emitter

@@ -4,7 +4,7 @@
     :class="{ 'bg-transparent': isTransparent, 'bg-black': !isTransparent }" :style="{'height': dynamicHeight + 'px' }">
       <div class="container-fluid bg-transparent" >
         <div>
-          <router-link to="/">
+          <router-link to="/" @click.prevent="scrollToTop">
             <img src="https://i.pinimg.com/564x/e6/e8/69/e6e8691e77bd66ca772d620f22d61d9b.jpg" class="d-block" style="height: 60px;width: 60px;" alt="...">
           </router-link>
         </div>
@@ -16,22 +16,34 @@
         <!-- 桌機導覽列 -->
           <ul  id="navbarNav" class="navbar-nav collapse navbar-collapse bg-transparent">
             <li class="nav-item">
-              <router-link class="nav-link" to="/about">關於我們</router-link>
+              <router-link class="nav-link" to="/about" @click.prevent="scrollToTop">
+                關於我們
+              </router-link>
             </li>
             <li class="nav-item">
-              <router-link class="nav-link" to="/user/shopping">商品列表</router-link>
+              <router-link class="nav-link" to="/user/shopping" @click.prevent="scrollToTop">
+                商品列表
+              </router-link>
             </li>
             <li class="nav-item">
-              <router-link class="nav-link" to="/dashboard/productComponent">管理產品</router-link>
+              <router-link class="nav-link" to="/dashboard/productComponent" @click.prevent="scrollToTop">
+                管理產品
+              </router-link>
             </li>
             <li class="nav-item">
-              <router-link class="nav-link" to="/user/favorites"><i class="bi bi-heart"></i></router-link>
+              <router-link class="nav-link" to="/user/favorites" @click.prevent="scrollToTop">
+                <i class="bi bi-heart"></i>
+              </router-link>
             </li>
             <li class="nav-item">
-              <router-link class="nav-link" to="/user/cart"><i class="bi bi-cart"></i></router-link>
+              <router-link class="nav-link" to="/user/cart" @click.prevent="scrollToTop">
+                <i class="bi bi-cart"></i>
+              </router-link>
             </li>
             <li class="nav-item">
-              <router-link class="nav-link" to="/login"><i class="bi bi-person-gear"></i></router-link>
+              <router-link class="nav-link" to="/login" @click.prevent="scrollToTop">
+                <i class="bi bi-person-gear"></i>
+              </router-link>
             </li>
           </ul>
         </div>
@@ -46,22 +58,34 @@
       <div class="offcanvas-body">
         <ul class="navbar-nav flex-column">
           <li class="nav-item">
-            <router-link class="nav-link" to="/about" >關於我們</router-link>
+            <router-link class="nav-link" to="/about" @click.prevent="scrollToTop">
+              關於我們
+            </router-link>
           </li>
           <li class="nav-item">
-            <router-link class="nav-link" to="/user/shopping">前往購物</router-link>
+            <router-link class="nav-link" to="/user/shopping" @click.prevent="scrollToTop">
+              前往購物
+            </router-link>
           </li>
           <li class="nav-item">
-            <router-link class="nav-link" to="/dashboard/productComponent">管理產品</router-link>
+            <router-link class="nav-link" to="/dashboard/productComponent" @click.prevent="scrollToTop">
+              管理產品
+            </router-link>
           </li>
           <li class="nav-item">
-            <router-link class="nav-link" to="/user/favorites"><i class="bi bi-heart"></i></router-link>
+            <router-link class="nav-link" to="/user/favorites" @click.prevent="scrollToTop">
+              <i class="bi bi-heart"></i>
+            </router-link>
           </li>
           <li class="nav-item">
-            <router-link class="nav-link" to="/user/cart"><i class="bi bi-cart"></i></router-link>
+            <router-link class="nav-link" to="/user/cart" @click.prevent="scrollToTop">
+              <i class="bi bi-cart"></i>
+            </router-link>
           </li>
           <li class="nav-item">
-            <router-link class="nav-link" to="/login"><i class="bi bi-person-gear"></i></router-link>
+            <router-link class="nav-link" to="/login" @click.prevent="scrollToTop">
+              <i class="bi bi-person-gear"></i>
+            </router-link>
           </li>
         </ul>
       </div>
@@ -106,8 +130,14 @@ export default {
     handleScroll () {
       // 獲取滾動的距離
       this.scrollY = window.scrollY
-      // 設置 isTransparent 屬性，根據滾動距離來判斷背景色
       this.isTransparent = this.scrollY <= 50
+    },
+    // 滾動至最上方
+    scrollToTop () {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      })
     }
   },
   mounted () {

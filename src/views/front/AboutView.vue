@@ -24,14 +24,29 @@
     </div>
   </div>
 
+  <!-- Footer -->
+  <Footer/>
+
+  <!-- 滾動按鈕 -->
+  <transition name="fade">
+    <button class="scrollButton animate__animated"
+    :class="{ 'animate__fadeIn': showScrollButton }"
+      v-show="showScrollButton" @click="scrollToTop">
+      <i class="bi bi-arrow-up-short"></i>
+    </button>
+  </transition>
+
 </template>
 
 <script>
 import userNav from '@/components/UserNavbar.vue'
+import Footer from '@/components/Footer.vue'
+import scrollButton from '@/mixins/scrollButton'
 
 export default {
   components: {
-    userNav
-  }
+    userNav, Footer
+  },
+  mixins: [scrollButton]
 }
 </script>

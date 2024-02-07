@@ -103,6 +103,7 @@
           position: absolute;
           top:50%;
           left:50%;
+          text-align: center;
           transform: translate(-50%,-50%);
           opacity: 0;
           transition: .8s;
@@ -155,7 +156,6 @@
     
 }
 
-
 // 領取優惠
 .get-coupon {
   background-image: url('https://i.imgur.com/a1L0U0U.jpg');
@@ -187,6 +187,26 @@
     border: 1px solid rgb(0, 0, 0);
   }
 }
+
+// 滾動按鈕
+.scrollButton {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 500;
+  font-size: 1.5em;
+  border-radius: 50%;
+  box-shadow:0 4px 6px rgba(0, 0, 0, .3);
+  border: none;
+}
+// 淡出效果
+.fade-leave-active {
+  transition: opacity 0.5s;
+}
+.fade-leave-to {
+  opacity: 0;
+} 
+
 //手機板
 @media screen and (max-width: 768px) {
   // 幻燈片
@@ -217,6 +237,12 @@
       .left{
         flex-direction: row;
         justify-content: space-around;
+        .item{
+          .nav-link{
+            width: 70%;
+            font-size:1em;
+          }
+        }
         img{
           width: 90%;
         }

@@ -1,0 +1,23 @@
+.pagination {   
+  .page{
+    text-decoration: none;
+    padding: 10px 15px;
+    margin: 5px;
+    display:flex;
+    justify-content: center;
+    align-content: center;
+    font-size: 1em;
+    border: 1px solid rgba(50, 50, 50, 0.5);
+    color:black;
+    background-color:rgba(255, 255, 255, 0.5);
+    transition: .5s;
+    &:hover{
+      background-color: rgba(70,70,70,.5);;
+    }
+  }
+  .active{
+    color: white;
+    border: 1px solid white;
+    background-color: black;
+  }
+}

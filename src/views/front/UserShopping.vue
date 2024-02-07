@@ -194,6 +194,13 @@ export default {
       const favoritesFromStorage = JSON.parse(localStorage.getItem('favorites')) || []
       this.favorites = favoritesFromStorage
     },
+    // 滾動至最上方
+    scrollToTop () {
+      window.scrollTo({
+        top: 310, // 產品列表最上方
+        behavior: 'smooth' // 平滑滾動效果
+      })
+    },
     // 篩選烘培度
     selectCategory (category) {
       this.selectedCategory = category
@@ -207,6 +214,7 @@ export default {
         // 搜尋或篩選非全部商品狀態時，更新 this.allProducts 內的 isFavorite值，同步收藏按鈕
         this.allProducts = this.allProducts.map(item => ({ ...item, isFavorite: this.isProductFavorite(item) }))
       }
+      this.scrollToTop()
     },
     // 如果搜尋文字並非中文，就觸發 handleSearchChange
     handleInput () {

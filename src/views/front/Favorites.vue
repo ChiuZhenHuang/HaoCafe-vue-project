@@ -4,10 +4,11 @@
     <h2>收藏列表</h2>
   </div>
 
-  <div class="container mt-3">
+  <div class="container favorite-product mt-3">
     <div class="row">
-      <div class="col-12" id="product">
-        <div class="row row-cols-sm-2 row-cols-lg-3 row-cols-xl-4">
+      <div class="col-10" id="product">
+        <button class="clear" @click="clearFavorites"><i class="bi bi-trash"></i> 清空全部</button>
+        <div class="row row-cols-sm-2 row-cols-lg-3 row-cols-xl-4 district">
           <div class="frame" v-for="item in isFavorites" :key="item.id">
             <div class="card">
               <div class="card-top">
@@ -28,7 +29,7 @@
                 <h5 class="title" style="cursor: pointer" @click="getProduct(item.id)">{{ item.title }}</h5>
                 <div class="d-flex justify-content-between">
                   <div class="left">
-                    <div class="category">{{ item.category }} </div>
+                    <div class="category">{{ item.category }}</div>
                     <div class="h5" v-if="!item.price">NT$ {{ item.origin_price }}</div>
                     <del class="h5" v-if="item.price">NT$ {{ item.origin_price }}</del>
                     <div class="h6" v-if="item.price">NT$ {{ item.price }}</div>
@@ -49,9 +50,14 @@
       </div>
     </div>
   </div>
+
+  <subscription/>
+
 </template>
 
 <script>
+import subscription from '@/components/Subscription.vue'
+
 export default {
   data () {
     return {
@@ -61,6 +67,7 @@ export default {
       }
     }
   },
+  components: { subscription },
   inject: ['emitter'],
   methods: {
     // 取得儲存收藏產品資料
@@ -115,6 +122,11 @@ export default {
       }
       item.isFavorite = false
       this.saveFavoritesToLocalStorage()
+    },
+    clearFavorites () {
+      // 清空 isFavorites 及LocalStorage
+      this.isFavorites = []
+      localStorage.removeItem('favorites')
     }
   },
   created () {

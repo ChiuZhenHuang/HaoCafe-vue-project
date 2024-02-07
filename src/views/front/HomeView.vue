@@ -7,7 +7,7 @@
     <div class="carousel-inner ">
       <div class="text bg-transparent">
         <p class="bg-transparent">咖啡是一種藝術，每一杯都是一幅畫，每一口都是一首詩。</p>
-        <router-link class="nav-link" to="/user/shopping">來去逛逛</router-link>
+        <router-link class="nav-link" to="/user/shopping" @click.prevent="scrollToTop">來去逛逛</router-link>
       </div>
       <div class="carousel-item active">
         <img src="../../assets/images/coffee-5.avif"  class="d-block w-100" alt="...">
@@ -38,15 +38,15 @@
           <div class="left">
             <div class="item">
               <img src="https://i.imgur.com/Ee0Isz0.jpg">
-              <router-link class="nav-link" to="/about">關於我們</router-link>
+              <router-link class="nav-link" to="/about" @click.prevent="scrollToTop">關於我們</router-link>
             </div>
             <div class="item">
               <img src="https://i.imgur.com/LqGBzES.jpg">
-              <router-link class="nav-link" to="/user/shopping">產品列表</router-link>
+              <router-link class="nav-link" to="/user/shopping" @click.prevent="scrollToTop">產品列表</router-link>
             </div>
             <div class="item">
               <img src="https://i.imgur.com/zXIMLuE.jpg">
-              <router-link class="nav-link" to="/user/favorites">收藏列表</router-link>
+              <router-link class="nav-link" to="/user/favorites" @click.prevent="scrollToTop">收藏列表</router-link>
             </div>
           </div>
         </div>
@@ -81,6 +81,15 @@
     </div>
   </div>
 
+  <!-- 滾動按鈕 -->
+  <transition name="fade">
+    <button class="scrollButton animate__animated"
+    :class="{ 'animate__fadeIn': showScrollButton }"
+      v-show="showScrollButton" @click="scrollToTop">
+      <i class="bi bi-arrow-up-short"></i>
+    </button>
+  </transition>
+
   <!-- 領取優惠 -->
   <div class="container-fluid">
     <div class="row">
@@ -108,6 +117,7 @@
 import userNav from '@/components/UserNavbar.vue'
 import Footer from '@/components/Footer.vue'
 import subscription from '@/components/Subscription.vue'
+import scrollButton from '@/mixins/scrollButton'
 
 export default {
   data () {
@@ -118,7 +128,10 @@ export default {
   components: {
     userNav, Footer, subscription
   },
+  mixins: [scrollButton],
   methods: {
+  },
+  mounted () {
   },
   created () {
     // console.log(process.env.VUE_APP_API, process.env.VUE_APP_PATH)
