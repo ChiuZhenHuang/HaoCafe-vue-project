@@ -12246,7 +12246,7 @@ textarea.form-control-lg {
   transition: all 0.5s;
 }
 .home-main .main-item .left .item .nav-link {
-  color: white;
+  color: rgb(255, 255, 255);
   border-radius: 5px;
   padding: 5px 10px;
   position: absolute;
@@ -12256,8 +12256,7 @@ textarea.form-control-lg {
   transform: translate(-50%, -50%);
   opacity: 0;
   transition: 0.8s;
-  background-color: rgba(99, 99, 99, 0.4);
-  color: rgb(255, 255, 255);
+  background-color: rgba(99, 99, 99, 0.9);
 }
 .home-main .main-item .left .item .nav-link:hover {
   background-color: rgba(0, 0, 0, 0.7);
@@ -12374,7 +12373,7 @@ textarea.form-control-lg {
     justify-content: space-around;
   }
   .home-main .main-item .left .item .nav-link {
-    width: 70%;
+    width: 80%;
     font-size: 1em;
   }
   .home-main .main-item .left img {
@@ -12397,12 +12396,6 @@ textarea.form-control-lg {
 /* 設置滾動後背景為黑 */
 .bg-black {
   background-color: rgba(0, 0, 0, 0.5) !important;
-}
-
-.navbar-brand {
-  display: flex;
-  justify-content: center;
-  align-content: center;
 }
 
 .navbar-nav {
@@ -12934,4 +12927,84 @@ footer .footer p {
   color: white;
   border: 1px solid white;
   background-color: black;
+}
+
+#login {
+  height: 100vh;
+  position: relative;
+  background-image: url("https://i.imgur.com/8JGAWtm.jpg");
+  background-size: cover;
+  background-position: 50%;
+}
+#login .mask {
+  width: 45%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -webkit-backdrop-filter: blur(10px);
+          backdrop-filter: blur(10px);
+  background-color: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+#login .mask .go-home {
+  position: absolute;
+  top: 0;
+  left: 0;
+  color: white;
+  font-size: 0.9em;
+  transition: 0.5s;
+  border-radius: 0;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  background-color: rgba(255, 255, 255, 0.1);
+}
+#login .mask .go-home:hover {
+  background-color: rgba(0, 0, 0, 0.3);
+}
+#login .mask .frame {
+  background-color: transparent;
+}
+#login .mask .frame h1, #login .mask .frame .h1 {
+  font-family: "Dancing Script", cursive;
+  font-size: 2.5em;
+}
+#login .mask .frame label {
+  background-color: transparent;
+  color: white;
+  margin-top: 10px;
+}
+#login .mask .frame input {
+  border-radius: 0;
+  background-color: transparent;
+  border: none;
+  border-bottom: 1px solid white;
+}
+#login .mask .frame input:focus {
+  outline: none;
+}
+#login .mask .frame .login-button {
+  font-size: 1.1em;
+  border-radius: 0;
+  transition: 0.5s;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  background-color: rgba(255, 255, 255, 0.9);
+}
+#login .mask .frame .login-button:hover {
+  color: white;
+  background-color: rgba(0, 0, 0, 0.6);
+}
+#login h1, #login .h1 {
+  text-align: center;
+  color: white;
+}
+
+@media screen and (max-width: 768px) {
+  #login .mask {
+    width: 65%;
+  }
+}
+@media screen and (max-width: 576px) {
+  #login .mask {
+    width: 80%;
+  }
 }/*# sourceMappingURL=all.css.map */

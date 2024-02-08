@@ -1,0 +1,83 @@
+#login{
+  height: 100vh;
+  position: relative;
+  background-image: url('https://i.imgur.com/8JGAWtm.jpg');
+  background-size: cover;
+  background-position: 50%; 
+  .mask{
+    width: 45%;
+    position: absolute;
+    top:50%;
+    left:50%;
+    transform: translate(-50%,-50%);
+    backdrop-filter: blur(10px);
+    background-color: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); 
+    .go-home{
+      position: absolute;
+      top:0;
+      left:0;
+      color: white;
+      font-size: .9em;
+      transition: .5s;
+      border-radius: 0;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); 
+      background-color: rgba(255, 255, 255, 0.1);
+      &:hover{
+        background-color: rgba(0, 0, 0,.3);
+      }
+    }
+    .frame{
+      background-color: transparent;
+      h1{
+        font-family: 'Dancing Script', cursive;
+        font-size: 2.5em;
+      }
+      label{
+        background-color: transparent;
+        color: white;
+        margin-top: 10px;
+      }
+      input{
+        border-radius: 0;
+        background-color: transparent;
+        border: none;
+        border-bottom: 1px solid white;
+        &:focus{
+          outline: none;
+        }
+      }
+      .login-button{
+        font-size: 1.1em;
+        border-radius: 0;
+        transition: .5s;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); 
+        background-color: rgba(255, 255, 255, 0.9);
+        &:hover{
+          color: white;
+          background-color: rgba(0, 0, 0,.6);
+        }
+      }
+    }
+  }
+  h1{
+    text-align: center;
+    color: white;
+  }
+}
+
+@media screen and (max-width: 768px){
+  #login{
+    .mask{
+      width: 65%;
+    }
+  }
+}
+
+@media screen and (max-width: 576px){
+  #login{
+    .mask{
+      width: 80%;
+    }
+  }
+}

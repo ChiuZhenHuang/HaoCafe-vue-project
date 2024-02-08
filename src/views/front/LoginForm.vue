@@ -1,44 +1,42 @@
 <template>
-  <div class="container mt-5">
-    <userNav></userNav>
-    <form class="row justify-content-center"
-      @submit.prevent="signIn">
-      <div class="col-md-6">
-        <h1 class="h3 mb-3 font-weight-normal">請先登入</h1>
+  <div class="container-fluid"  id="login">
+    <form class="row h-100 justify-content-center align-items-center"
+    @submit.prevent="signIn">
+    <div class="mask d-flex justify-content-center align-items-center">
+      <div class="col-9 mt-5 mb-5 frame">
+        <h1 class="h3 mb-3 font-weight-normal">Login</h1>
+        <router-link to="/" class="btn go-home"><i class="bi bi-arrow-90deg-up"></i> 回首頁</router-link>
         <div class="mb-2">
-          <label for="inputEmail" class="sr-only">Email address</label>
+          <label for="inputEmail">Email address</label>
           <input
             type="email"
             id="inputEmail"
             class="form-control"
-            placeholder="Email address"
             required
             autofocus
             v-model="user.username"
           />
         </div>
         <div class="mb-2">
-          <label for="inputPassword" class="sr-only">Password</label>
+          <label for="inputPassword">Password</label>
           <input
             type="password"
             id="inputPassword"
             class="form-control"
-            placeholder="Password"
             required
             v-model="user.password"
           />
         </div>
-
-        <div class="text-end mt-4">
-          <button class="btn btn-lg btn-primary btn-block " type="submit">登入</button>
+        <div class="mt-4 w-100 d-flex justify-content-end">
+          <button class="btn login-button" type="submit">登入</button>
         </div>
       </div>
+    </div>
     </form>
   </div>
 </template>
 
 <script>
-import userNav from '@/components/UserNavbar.vue'
 
 export default {
   data () {
@@ -49,7 +47,6 @@ export default {
       }
     }
   },
-  components: { userNav },
   methods: {
     signIn () {
       const api = `${process.env.VUE_APP_API}admin/signin`

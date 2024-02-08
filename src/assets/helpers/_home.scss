@@ -97,7 +97,7 @@
           transition: all .5s;
         }
         .nav-link{
-          color: white; 
+          color:rgb(255, 255, 255); 
           border-radius: 5px;
           padding: 5px 10px;
           position: absolute;
@@ -107,8 +107,7 @@
           transform: translate(-50%,-50%);
           opacity: 0;
           transition: .8s;
-          background-color: rgba(99, 99, 99, 0.4);
-          color: rgb(255, 255, 255);
+          background-color: rgba(99, 99, 99, 0.9);
           &:hover{
             background-color: rgba(0, 0, 0, 0.7);
             color: rgb(255, 255, 255);
@@ -239,7 +238,7 @@
         justify-content: space-around;
         .item{
           .nav-link{
-            width: 70%;
+            width: 80%;
             font-size:1em;
           }
         }
