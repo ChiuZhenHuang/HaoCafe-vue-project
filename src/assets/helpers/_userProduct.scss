@@ -1,0 +1,38 @@
+.breadcrumb{
+  .breadcrumb-item{
+    a{
+      color: inherit; /* 使用繼承的文字顏色 */
+      text-decoration: none;
+    }
+  }
+}
+
+#product{
+  .row{
+    .card{
+      .card-top{
+        .main-image{
+          transition: .5s;
+        }
+      }
+      .images{
+        display: flex;
+        gap: 10px; 
+        // background-color: transparent;
+        width: 100%;
+        flex: 0 0 auto; 
+        white-space: nowrap;   
+        .img-fluid {
+          flex: 1; 
+          max-width: 100%;
+          height:auto;
+          aspect-ratio: 1/1;
+          object-fit: cover;
+          overflow: hidden;
+          cursor: pointer;
+          background-color: white;
+        }
+      }
+    }
+  }
+}

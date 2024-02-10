@@ -5,6 +5,9 @@
 }
 body{
   background-color: var(--main-color);
+  // background-image: url('https://i.pinimg.com/736x/7f/a3/42/7fa342abcaa90aabe3bfdbf12778b621.jpg');
+  // background-position: 50%;
+  // background-size: cover;
 }
 
 .banner{  
@@ -32,7 +35,6 @@ body{
     left: 0;
     height: 100%;
     width: 100%;
-    // background-image:var(--product-background-image-1) ;
     background-size: cover;
     background-position: 50%; 
     filter: blur(5px); 
@@ -86,7 +88,6 @@ body{
       input, button {
         padding: 5px 10px;
         width: 80px;
-        border: none;
         outline: none;
         background-color: white;
         border: 2px solid black;
@@ -214,6 +215,19 @@ body{
       }
     }
   }
+  .not-found{
+    width: 100%;
+    font-size: 1.2em;
+    text-align: center;
+    color: rgb(56, 56, 56);
+    margin: 80px 0;
+    i{
+      font-size: 3em;
+    }
+    p{
+      height: 15px;
+    }
+  }
 }
 
 
@@ -235,7 +249,7 @@ body{
       justify-content: center;
     }
     .frame{
-      width: 70%;
+      max-width: 350px;
     }
   }
 

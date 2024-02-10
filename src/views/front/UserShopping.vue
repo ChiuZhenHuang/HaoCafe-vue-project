@@ -67,6 +67,11 @@
               </div>
             </div>
           </div>
+          <div v-show="filterProducts.length === 0" class="not-found">
+            <i class="bi bi-chat-square-dots"></i>
+            <p>找不到相關的產品</p>
+            <p>請嘗試輸入其他關鍵字</p>
+          </div>
         </div>
         <!-- 渲染全部商品時才顯示頁數 -->
         <Pagination v-show="selectedCategory === '' && search === '' " :pages="pagination" @emit-pages="getProducts"></Pagination>

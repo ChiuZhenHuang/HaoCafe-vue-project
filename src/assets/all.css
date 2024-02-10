@@ -12398,6 +12398,10 @@ textarea.form-control-lg {
   background-color: rgba(0, 0, 0, 0.5) !important;
 }
 
+.logo {
+  border-radius: 50%;
+}
+
 .navbar-nav {
   background-color: transparent;
 }
@@ -12596,7 +12600,6 @@ body {
 #select .list-group input, #select .list-group button {
   padding: 5px 10px;
   width: 80px;
-  border: none;
   outline: none;
   background-color: white;
   border: 2px solid black;
@@ -12716,6 +12719,19 @@ body {
 #product .frame .card .card-body .left .btn, #product .frame .card .card-body .right .btn {
   margin: 2px;
 }
+#product .not-found {
+  width: 100%;
+  font-size: 1.2em;
+  text-align: center;
+  color: rgb(56, 56, 56);
+  margin: 80px 0;
+}
+#product .not-found i {
+  font-size: 3em;
+}
+#product .not-found p {
+  height: 15px;
+}
 
 @media screen and (max-width: 768px) {
   .banner {
@@ -12731,7 +12747,7 @@ body {
     justify-content: center;
   }
   #product .frame {
-    width: 70%;
+    max-width: 350px;
   }
 }
 :root {
@@ -12974,6 +12990,7 @@ footer .footer p {
   margin-top: 10px;
 }
 #login .mask .frame input {
+  color: white;
   border-radius: 0;
   background-color: transparent;
   border: none;
@@ -13007,4 +13024,30 @@ footer .footer p {
   #login .mask {
     width: 80%;
   }
+}
+.breadcrumb .breadcrumb-item a {
+  color: inherit; /* 使用繼承的文字顏色 */
+  text-decoration: none;
+}
+
+#product .row .card .card-top .main-image {
+  transition: 0.5s;
+}
+#product .row .card .images {
+  display: flex;
+  gap: 10px;
+  width: 100%;
+  flex: 0 0 auto;
+  white-space: nowrap;
+}
+#product .row .card .images .img-fluid {
+  flex: 1;
+  max-width: 100%;
+  height: auto;
+  aspect-ratio: 1/1;
+  -o-object-fit: cover;
+     object-fit: cover;
+  overflow: hidden;
+  cursor: pointer;
+  background-color: white;
 }/*# sourceMappingURL=all.css.map */

@@ -5,7 +5,7 @@
       <div class="container-fluid bg-transparent" >
         <div>
           <router-link to="/" @click.prevent="scrollToTop">
-            <img src="https://i.imgur.com/qToNLW6.jpg" class="d-block" style="height: 60px;width: 60px;" alt="LOGO">
+            <img src="https://i.imgur.com/qToNLW6.jpg" class="d-block logo" style="height: 60px;width: 60px;" alt="LOGO">
           </router-link>
         </div>
         <div>
