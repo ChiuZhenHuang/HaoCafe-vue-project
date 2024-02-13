@@ -37,11 +37,16 @@
       }
       button{
       margin-left: auto;
-      background-color:var(--main-color);
+      background-color: rgb(63, 63, 63);
       color: white;
       border: none;
       text-align: center;
+      transition: .7s;
       width: 55px;
+        &:hover{
+          color: rgb(0, 0, 0);
+          background-color: rgba(255, 255, 255, 0.5);
+        }
       }
     }
   }

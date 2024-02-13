@@ -1,5 +1,5 @@
 :root{
-  --main-color: rgba(0, 0, 0, 0.5);
+  --main-color: rgba(159, 159, 159, 0.3);
   --text-color: #333; // 暫無用到
   --product-background-image-1: url('https://i.imgur.com/j36jzzA.jpg');
 }
@@ -116,6 +116,7 @@ body{
     display: flex;
     justify-content: center;
     .card{
+      box-shadow: 5px 5px 10px #888888;
       width: 100%;
       aspect-ratio: 2/2;
       height: 100%;
@@ -178,7 +179,7 @@ body{
       }
       .card-body{
         padding: 10px;
-        background-color: antiquewhite;
+        background-color: rgba(228, 228, 228, 0.5);
         .title{
           text-align: center;
           font-size: 1.1em;
@@ -186,7 +187,8 @@ body{
         .left{
           width: 70%;
           .category{
-            background-color: rgba(255, 75, 75, 0.5);
+            color: white;
+            background-color: rgba(78, 78, 78, 0.5);
             font-size: .7em;
             width: 50%;
             text-align: center;

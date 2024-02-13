@@ -51,9 +51,9 @@
                 <div class="d-flex justify-content-between">
                   <div class="left">
                     <div class="category">{{ item.category }} </div>
-                    <div class="h5" v-if="!item.price">NT$ {{ item.origin_price }}</div>
-                    <del class="h5" v-if="item.price">NT$ {{ item.origin_price }}</del>
-                    <div class="h6" v-if="item.price">NT$ {{ item.price }}</div>
+                    <div class="h5" v-if="!item.price">NT$ {{ $filters.currency(item.origin_price) }}</div>
+                    <del class="h5" v-if="item.price">NT$ {{ $filters.currency(item.origin_price) }}</del>
+                    <div class="h6" v-if="item.price">NT$ {{ $filters.currency(item.price) }}</div>
                   </div>
                   <div class="right ml-auto">
                     <button type="button add-cart" class="btn btn-outline-danger"
