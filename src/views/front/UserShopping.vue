@@ -56,7 +56,7 @@
                     <div class="h6" v-if="item.price">NT$ {{ $filters.currency(item.price) }}</div>
                   </div>
                   <div class="right ml-auto">
-                    <button type="button add-cart" class="btn btn-outline-danger"
+                    <button type="button add-cart" class="btn btn-outline-dark"
                       :disabled="this.status.loadingItem === item.id"
                       @click="addCart(item.id)">
                       <span v-if="this.status.loadingItem === item.id" class="spinner-border spinner-border-sm" aria-hidden="true"></span>

@@ -36,23 +36,26 @@
           </div>
         </div>
       </div>
-      <div class="col-12 col-lg-7 description">
+      <div class="col-12 col-lg-7 description" style="display: flex; flex-direction: column;">
         <h5 class="title">{{ product.title }}</h5>
         <div class="category mb-5">{{ product.category }}</div>
         <p class="mb-5" style="white-space: pre-line">{{ product.description }}</p>
-        <div class="h5" v-if="!product.price">NT$ {{ $filters.currency(product.origin_price) }}</div>
-        <del class="h5" v-if="product.price">NT$ {{ $filters.currency(product.origin_price) }}</del>
-        <div class="h6" v-if="product.price">NT$ {{ $filters.currency(product.price) }}</div>
-        <div class="d-flex">
-          <button type="button" class="btn qty-handler" @click="decrementQuantity(quantity)">-</button>
-          <input type="number" v-model="quantity"  readonly  min="1" :max="product.unit"/>
-          <button type="button" class="btn qty-handler" @click="incrementQuantity(quantity)">+</button>
-          <button type="button add-cart" class="btn btn-outline-danger"
-          :disabled="this.status.loadingItem === product.id"
-          @click="addToCart (product.id)">
-          <span v-if="this.status.loadingItem === product.id" class="spinner-border spinner-border-sm" aria-hidden="true"></span>
-          加入購物車
-          </button>
+        <div class="d-flex" style="margin-top: auto;align-items: end;">
+          <div>
+            <div class="h5" v-if="!product.price">NT$ {{ $filters.currency(product.origin_price) }}</div>
+            <del class="h5" v-if="product.price">NT$ {{ $filters.currency(product.origin_price) }}</del>
+            <div class="h6" v-if="product.price">NT$ {{ $filters.currency(product.price) }}</div>
+          </div>
+          <div class="add-cart">
+            <button type="button" class="btn qty-handler" @click="decrementQuantity(quantity)">-</button>
+            <input type="number" v-model="quantity"  readonly  min="1" :max="product.unit"/>
+            <button type="button" class="btn qty-handler" @click="incrementQuantity(quantity)">+</button>
+            <button type="button add-cart" class="btn  btn-outline-dark"
+              :disabled="this.status.loadingItem === product.id" @click="addToCart (product.id)">
+              <span v-if="this.status.loadingItem === product.id" class="spinner-border spinner-border-sm" aria-hidden="true"></span>
+              加入購物車
+            </button>
+          </div>
         </div>
       </div>
     </div>
@@ -103,7 +106,7 @@
 
     <!-- 相關產品 -->
     <div class="row other-product">
-      <h2>相關產品</h2>
+      <div class="title"><h2>相關產品</h2></div>
       <div class="col-12">
         <div class="col-md-8 col-lg-9" id="product">
           <div class="row row-cols-sm-2 row-cols-lg-3">

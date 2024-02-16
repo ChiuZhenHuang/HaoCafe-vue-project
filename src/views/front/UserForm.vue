@@ -1,9 +1,9 @@
 <template>
   <LoadingComponent :active="isLoading"></LoadingComponent>
-    <div class="container" style="margin-top:85px">
+    <div class="container">
       <div class="row mt-4">
         <!-- 填寫資料表格 -->
-      <div class="col">
+      <div class="col-12 col-md-6">
         <div class="my-5 row justify-content-center">
         <Form class="col-md-6" v-slot="{ errors }"
               @submit="createOrder">
