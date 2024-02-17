@@ -12763,6 +12763,8 @@ body {
   align-items: center;
 }
 .favorite-product .row #product {
+  position: relative;
+  min-height: 300px;
   text-align: end;
 }
 .favorite-product .row #product .clear {
@@ -12776,6 +12778,16 @@ body {
 }
 .favorite-product .row #product .district {
   justify-content: left;
+}
+.favorite-product .row #product .district .not-buy {
+  text-align: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.favorite-product .row #product .district .not-buy h5, .favorite-product .row #product .district .not-buy .h5 {
+  font-weight: bolder;
 }
 .favorite-product .row #product .district .card .title {
   font-size: 1em;
@@ -13209,10 +13221,8 @@ footer .footer p {
   background: var(--main-color);
 }
 
-.cart-product {
-  box-sizing: border-box;
-}
 .cart-product .list {
+  min-height: 300px;
   background-color: var(--main-color);
   padding: 30px;
   position: relative;
@@ -13234,7 +13244,11 @@ footer .footer p {
   color: white;
 }
 .cart-product .list .frame .item {
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
   background-color: rgba(255, 255, 255, 0.5);
+}
+.cart-product .list .frame .item:not(:last-child) {
+  margin-bottom: 10px;
 }
 .cart-product .list .frame .item .product-image-container {
   width: 40%;
@@ -13306,9 +13320,10 @@ footer .footer p {
   display: flex;
   flex-direction: column;
   align-items: end;
+  margin-top: 30px;
 }
 .cart-product .list .frame .total h6, .cart-product .list .frame .total .h6 {
-  color: rgb(68, 68, 68);
+  color: rgb(96, 96, 96);
   font-size: 0.9em;
 }
 .cart-product .list .frame .total h5, .cart-product .list .frame .total .h5 {
@@ -13362,4 +13377,108 @@ footer .footer p {
 .cart-product .route .next:hover {
   background-color: black;
   color: white;
+}
+.cart-product .route .next:disabled {
+  color: gray;
+}
+.cart-product .route .next:disabled:hover {
+  background-color: transparent;
+}
+
+:root {
+  --userForm-background-image-1: url("https://i.pinimg.com/564x/26/02/41/2602412367eb7a7dc088f1694f3f97c4.jpg");
+}
+
+.bg-user-form::before {
+  background-image: var(--userForm-background-image-1);
+}
+
+.cart-product .list {
+  background-color: var(--main-color);
+  padding: 30px;
+  position: relative;
+}
+.cart-product .list .frame {
+  text-align: center;
+}
+.cart-product .list .frame h3, .cart-product .list .frame .h3 {
+  font-weight: bolder;
+}
+.cart-product .list .frame .clear {
+  font-size: 0.85em;
+  background-color: transparent;
+  padding: 5px 10px;
+  transition: 0.5s;
+}
+.cart-product .list .frame .clear:hover {
+  background-color: black;
+  color: white;
+}
+.cart-product .list .frame .item {
+  background-color: rgba(255, 255, 255, 0.5);
+}
+.cart-product .list .frame .item .product-image-container {
+  width: 40%;
+  aspect-ratio: 1/1;
+  overflow: hidden;
+}
+.cart-product .list .frame .item .product-image-container img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+.cart-product .list .frame .total {
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+}
+.cart-product .list .frame .total h3, .cart-product .list .frame .total .h3 {
+  font-weight: bolder;
+  font-size: 0.9em;
+}
+.cart-product .list .frame .total h4, .cart-product .list .frame .total .h4 {
+  font-size: 0.9em;
+  font-weight: bolder;
+  color: rgb(187, 1, 1);
+}
+.cart-product .list .frame .total h5, .cart-product .list .frame .total .h5 {
+  font-weight: bolder;
+}
+.cart-product .list .frame .total h6, .cart-product .list .frame .total .h6 {
+  font-weight: bolder;
+  color: rgb(96, 96, 96);
+  font-size: 0.9em;
+}
+.cart-product .list .frame .total h6 span, .cart-product .list .frame .total .h6 span {
+  color: rgb(187, 1, 1);
+}
+.cart-product .list .frame .total .input-group {
+  margin: 20px 0;
+}
+.cart-product .list .frame .total .input-group input:focus {
+  outline: none;
+  border: none;
+  box-shadow: none;
+}
+.cart-product .list .frame .total .input-group button {
+  border: none;
+  color: white;
+  background-color: var(--second-color);
+  padding: 5px 10px;
+  transition: 0.5s;
+}
+.cart-product .list .frame .total .input-group button:hover {
+  background-color: gray;
+}
+
+Form .next {
+  color: white;
+  background-color: var(--main-color);
+  padding: 5px 10px;
+  transition: 0.5s;
+}
+Form .next:hover {
+  background-color: rgba(255, 255, 255, 0.9);
+  color: black;
 }/*# sourceMappingURL=all.css.map */

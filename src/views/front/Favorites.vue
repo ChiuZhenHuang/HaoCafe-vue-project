@@ -9,6 +9,12 @@
       <div class="col-10" id="product">
         <button class="clear" @click="clearFavorites"><i class="bi bi-trash"></i> 清空全部</button>
         <div class="row row-cols-sm-2 row-cols-lg-3 row-cols-xl-4 district">
+          <div v-if="isFavorites.length === 0" class="not-buy">
+            <h5>您尚未收藏產品</h5>
+            <router-link class="nav-link" to="/user/shopping" @click.prevent="scrollToTop">
+              <button type="button" class="btn btn-dark">立即前往選購</button>
+            </router-link>
+          </div>
           <div class="frame" v-for="item in isFavorites" :key="item.id">
             <div class="card">
               <div class="card-top">
@@ -57,6 +63,7 @@
 
 <script>
 import subscription from '@/components/Subscription.vue'
+import scrollButton from '@/mixins/scrollButton'
 
 export default {
   data () {
@@ -69,6 +76,7 @@ export default {
   },
   components: { subscription },
   inject: ['emitter'],
+  mixins: [scrollButton],
   methods: {
     // 取得儲存收藏產品資料
     loadFavoritesFromLocalStorage () {

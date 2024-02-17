@@ -1,15 +1,16 @@
 <template>
 <LoadingComponent :active="isLoading"></LoadingComponent>
+
   <div class="banner bg-user-cart">
     <div class="mask"></div>
-    <h2>結帳頁面</h2>
+    <h2>訂單結帳</h2>
   </div>
 
   <div class="order-progress mt-5">
     <ul>
-        <li class="active"><i class="fa-solid fa-list-check"></i>確認訂單</li>
-        <li><i class="fa-regular fa-pen-to-square"></i>資料填寫</li>
-        <li><i class="fa-solid fa-money-check-dollar"></i>付款完成</li>
+      <li class="active"><i class="fa-solid fa-list-check"></i>確認訂單</li>
+      <li><i class="fa-regular fa-pen-to-square"></i>資料填寫</li>
+      <li><i class="fa-solid fa-money-check-dollar"></i>付款完成</li>
     </ul>
   </div>
   <!-- <div class="container">
@@ -108,7 +109,7 @@
             <button type="button" v-if="cart.carts.length !==0" class="clear" @click="clearCart"><i class="bi bi-trash"></i>清空購物車</button>
           </div>
           <div class="overflow-auto mt-2 mb-2" style="max-height: 500px;">
-          <div class="item d-flex justify-content-center mt-2 mb-2" v-for="item in cart.carts" :key="item.id">
+          <div class="item d-flex justify-content-center" v-for="item in cart.carts" :key="item.id">
             <div class="product-image-container">
               <img :src="item.product.imageUrl" alt="產品圖片">
             </div>
@@ -134,10 +135,26 @@
           </div>
           </div>
           <div class="total">
-            <h6 v-show="cart.total < 3000 && cart.carts.length !== 0">運費 +$120</h6>
-            <h6 v-show="cart.total >= 3000">運費 +$0</h6>
-            <h5 v-show="cart.total < 3000 && cart.carts.length !== 0">總計 NT$ {{ $filters.currency(parseInt(cart.total)+120) }}</h5>
-            <h5 v-show="cart.total >= 3000">總計 NT$ {{ $filters.currency(cart.total) }}</h5>
+            <div class="d-flex w-100 justify-content-between" v-if="cart.carts.length !== 0">
+              <h6>小計</h6>
+              <h6>NT$ {{ $filters.currency(cart.total) }}</h6>
+            </div>
+            <div class="d-flex w-100 justify-content-between" v-if="cart.total < 3000 && cart.carts.length !== 0">
+              <h6>運費</h6>
+              <h6> +$120</h6>
+            </div>
+            <div class="d-flex w-100 justify-content-between" v-if="cart.total >= 3000 && cart.carts.length !== 0">
+              <h6>運費</h6>
+              <h6> +$0</h6>
+            </div>
+            <div class="d-flex w-100 justify-content-between" v-if="cart.total < 3000 && cart.carts.length !== 0">
+              <h5>總計</h5>
+              <h5>NT$ {{ $filters.currency(parseInt(cart.total)+120) }}</h5>
+            </div>
+            <div class="d-flex w-100 justify-content-between" v-if="cart.total >= 3000">
+              <h5>總計</h5>
+              <h5>NT$ {{ $filters.currency(cart.total) }}</h5>
+            </div>
           </div>
         </div>
       </div>
@@ -197,7 +214,7 @@
           <button type="button" class="previous">繼續購物</button>
         </router-link>
         <router-link class="nav-link" to="/user/form" @click.prevent="scrollToTop">
-          <button type="button" class="next">確認訂單</button>
+          <button type="button" class="next" :disabled="cart.total===0" >確認訂單</button>
         </router-link>
       </div>
     </div>
@@ -211,7 +228,6 @@ export default {
   data () {
     return {
       cart: {}, // 存放目前已加至購物車內產品
-      coupon_code: '', // 用戶輸入優惠券號碼
       isLoading: false
     }
   },
@@ -264,26 +280,10 @@ export default {
         })
       })
     },
-    // 套用優惠券
-    addCouponCode () {
-      const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/coupon`
-      const coupon = {
-        code: this.coupon_code
-      }
-      this.$http.post(url, { data: coupon })
-        .then((res) => {
-          console.log(res)
-          this.$httpMessageState(res, '套用優惠券')
-          this.getCart()
-          localStorage.setItem('coupon_code', this.coupon_code)
-          // 優惠碼使用成功後清除優惠碼資料
-          this.coupon_code = ''
-        })
-    },
     // 前往填寫訂單資料
-    pushForm () {
-      this.$router.push('/user/form')
-    },
+    // pushForm () {
+    //   this.$router.push('/user/form')
+    // },
     // 減少數量
     decrementQuantity (item, qty) {
       if (qty > 1) {

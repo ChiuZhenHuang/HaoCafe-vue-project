@@ -1,5 +1,19 @@
 <template>
   <LoadingComponent :active="isLoading"></LoadingComponent>
+
+  <div class="banner bg-user-cart">
+    <div class="mask"></div>
+    <h2>訂單結帳</h2>
+  </div>
+
+  <div class="order-progress mt-5">
+    <ul>
+      <li><i class="fa-solid fa-list-check"></i>確認訂單</li>
+      <li><i class="fa-regular fa-pen-to-square"></i>資料填寫</li>
+      <li class="active"><i class="fa-solid fa-money-check-dollar"></i>付款完成</li>
+    </ul>
+  </div>
+
   <div class="my-5 row justify-content-center" >
     <form class="col-md-6" @submit.prevent="payOrder" style="margin-top:85px">
       <table class="table align-middle">
