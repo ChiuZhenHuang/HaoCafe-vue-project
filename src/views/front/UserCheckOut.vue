@@ -3,7 +3,7 @@
 
   <div class="banner bg-user-cart">
     <div class="mask"></div>
-    <h2>訂單結帳</h2>
+    <h2>付款確認</h2>
   </div>
 
   <div class="order-progress mt-5">
@@ -14,80 +14,114 @@
     </ul>
   </div>
 
-  <div class="my-5 row justify-content-center" >
-    <form class="col-md-6" @submit.prevent="payOrder" style="margin-top:85px">
-      <table class="table align-middle">
-        <thead>
-        <th>品名</th>
-        <th>數量</th>
-        <th>單價</th>
-        </thead>
-        <tbody>
-        <tr v-for="item in order.products" :key="item.id">
-          <td>{{ item.product.title }}</td>
-          <td>{{ item.qty }}/{{ item.product.unit }}</td>
-          <td class="text-end">{{ $filters.currency(item.final_total) }}</td>
-        </tr>
-        </tbody>
-        <tfoot>
-        <tr v-show="order.total < 3000">
-          <td colspan="2" class="text-end">運費</td>
-          <td class="text-end">NT$ 120</td>
-        </tr>
-        <tr v-show="order.total >= 3000">
-          <td colspan="2" class="text-end">運費</td>
-          <td class="text-end">NT$ 0</td>
-        </tr>
-        <tr v-show="order.total < 3000">
-          <td colspan="2" class="text-end">總計</td>
-          <td class="text-end">NT$ {{ $filters.currency(parseInt(order.total)+120) }} </td>
-        </tr>
-        <tr v-show="order.total >= 3000">
-          <td colspan="2" class="text-end">總計</td>
-          <td class="text-end">NT$ {{ $filters.currency(order.total) }} </td>
-        </tr>
-        </tfoot>
-      </table>
-
-      <table class="table">
-        <tbody>
-        <tr>
-          <th width="100">Email</th>
-          <td>{{ order.user.email }}</td>
-        </tr>
-        <tr>
-          <th>姓名</th>
-          <td>{{ order.user.name }}</td>
-        </tr>
-        <tr>
-          <th>收件人電話</th>
-          <td>{{ order.user.tel }}</td>
-        </tr>
-        <tr>
-          <th>收件人地址</th>
-          <td>{{ order.user.address }}</td>
-        </tr>
-        <tr>
-          <th>留言</th>
-          <td>{{ order.message }}</td>
-        </tr>
-        <tr>
-          <th>付款狀態</th>
-          <td>
-            <span v-if="!order.is_paid">尚未付款</span>
-            <span v-else class="text-success">付款完成</span>
-          </td>
-        </tr>
-        </tbody>
-      </table>
-      <div class="text-end" v-if="order.is_paid === false">
-        <button class="btn btn-danger">確認付款去</button>
+  <div class="container">
+    <div class="my-5 row justify-content-center">
+      <div class="col-12 col-md-8 col-xl-7 check-out">
+        <div class="card-header">
+          <h2 class="text-center py-3">訂單資訊</h2>
+        </div>
+        <div class="frame">
+          <div v-if="order.is_paid === true" class="d-flex flex-column text-center pay-success">
+            <i class="fa-solid fa-check mb-2"></i>
+            <h5>付款成功</h5>
+            <div class="mt-2 mb-2">訂單編號：{{ order.id }}  <i class="fa-regular fa-copy"></i></div>
+            <router-link to="/user/shopping" @click.prevent="scrollToTop">
+              <button type="button" class="button w-100">繼續購物</button>
+            </router-link>
+          </div>
+          <div v-else>
+            <div class="text-end create">
+              <h5>訂單成立時間：{{ $filters.date(order.create_at) }}</h5>
+            </div>
+            <div class="accordion" id="accordionExample">
+              <div class="accordion-item">
+                <h2 class="accordion-header" id="headingOne">
+                  <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                    商品資訊
+                  </button>
+                </h2>
+                <div id="collapseOne"  v-for="item in order.products" :key="item.id"
+                  class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                  <div class="accordion-body">
+                    <div class="d-flex align-items-center product">
+                      <div>
+                        <img :src="item.product.imageUrl" alt="產品圖片" style="width: 100px; height: 100px;">
+                      </div>
+                      <div class="d-flex flex-column">
+                        <h5>{{ item.product.title }}</h5>
+                        <p>數量：{{ item.qty }}</p>
+                      </div>
+                      <div class="ms-auto">
+                        <div v-if="item.final_total">NT$ {{ $filters.currency(item.final_total) }}</div>
+                        <div v-else>>NT$ {{ $filters.currency(item.product.price) }}</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="card-body">
+              <table>
+                <tbody>
+                  <tr>
+                    <td>訂單編號</td>
+                    <td>{{ order.id }} <i class="fa-regular fa-copy"></i></td>
+                  </tr>
+                  <tr>
+                    <td>付款方式</td>
+                    <td>{{ order.user.pay }}</td>
+                  </tr>
+                  <tr>
+                    <td>姓名</td>
+                    <td>{{ order.user.name }}</td>
+                  </tr>
+                  <tr>
+                    <td>手機</td>
+                    <td>{{ order.user.tel }}</td>
+                  </tr>
+                  <tr>
+                    <td>E-mail</td>
+                    <td>{{ order.user.email }}</td>
+                  </tr>
+                  <tr>
+                    <td>收件地址</td>
+                    <td>{{ order.user.address }}</td>
+                  </tr>
+                  <tr>
+                    <td>備註</td>
+                    <td v-if="!order.message">無</td>
+                    <td v-else>{{ order.message }}</td>
+                  </tr>
+                  <!-- <tr>
+                    <td>小計</td>
+                    <td>NT$ {{ $filters.currency(order.total) }}</td>
+                  </tr>
+                  <tr>
+                    <td>運費</td>
+                    <td v-if="order.total < 3000">+ $120</td>
+                    <td v-else>+ $0</td>
+                  </tr> -->
+                  <tr>
+                    <td>金額總計</td>
+                    <td v-if="order.total < 3000">NT$ {{ $filters.currency(parseInt(order.total)+120) }}</td>
+                    <td v-else>NT$ {{ $filters.currency(order.total) }}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="text-center">
+              <button type="button" class="button" @click.prevent="payOrder">確認付款</button>
+            </div>
+          </div>
+        </div>
       </div>
-    </form>
+    </div>
   </div>
 </template>
 
 <script>
+import scrollButton from '@/mixins/scrollButton'
+
 export default {
   data () {
     return {
@@ -100,6 +134,7 @@ export default {
       orderId: ''
     }
   },
+  mixins: [scrollButton],
   methods: {
     getOrder () {
       const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/order/${this.orderId}`

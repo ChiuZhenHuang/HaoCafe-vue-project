@@ -12515,7 +12515,7 @@ textarea.form-control-lg {
   }
 }
 :root {
-  --main-color: rgba(159, 159, 159, 0.3);
+  --main-color: rgba(205, 205, 205, 0.8);
   --second-color:rgb(63, 63, 63);
   --product-background-image-1: url("https://i.imgur.com/j36jzzA.jpg");
 }
@@ -12786,6 +12786,9 @@ body {
   left: 50%;
   transform: translate(-50%, -50%);
 }
+.favorite-product .row #product .district .not-buy i {
+  font-size: 3em;
+}
 .favorite-product .row #product .district .not-buy h5, .favorite-product .row #product .district .not-buy .h5 {
   font-weight: bolder;
 }
@@ -12810,7 +12813,7 @@ footer {
   align-items: center;
   justify-content: center;
   font-size: 0.85em;
-  background-color: rgba(0, 0, 0, 0.7);
+  background-color: rgba(0, 0, 0, 0.6);
   color: white;
   text-align: center;
 }
@@ -13335,6 +13338,9 @@ footer .footer p {
   left: 50%;
   transform: translate(-50%, -50%);
 }
+.cart-product .list .frame .not-buy i {
+  font-size: 3em;
+}
 .cart-product .list .frame .not-buy h5, .cart-product .list .frame .not-buy .h5 {
   font-weight: bolder;
 }
@@ -13481,4 +13487,32 @@ Form .next {
 Form .next:hover {
   background-color: rgba(255, 255, 255, 0.9);
   color: black;
+}
+Form .form-control {
+  border-radius: 0;
+}
+
+.check-out {
+  background-color: rgba(255, 255, 255, 0.9);
+  padding: 0;
+}
+.check-out .card-header {
+  background-color: var(--second-color);
+  color: white;
+}
+.check-out .frame {
+  padding: 20px;
+  min-height: 300px;
+}
+.check-out .frame .create {
+  color: gray;
+}
+.check-out .frame .card-body table {
+  width: 100%;
+}
+.check-out .frame .card-body table tbody tr td:first-child {
+  width: 30%;
+}
+.check-out .frame tr th, .check-out .frame tr td {
+  background-color: transparent;
 }/*# sourceMappingURL=all.css.map */

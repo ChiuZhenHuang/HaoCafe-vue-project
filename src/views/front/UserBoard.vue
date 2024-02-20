@@ -3,7 +3,6 @@
   <ToastMessages></ToastMessages>
   <router-view/>
   <Footer></Footer>
-
   <!-- 滾動按鈕 -->
   <transition name="fade">
     <button class="scrollButton animate__animated"
@@ -38,9 +37,3 @@ export default {
   }
 }
 </script>
-
-<!-- <style>
-*{
-  background-color: rgba(42, 42, 42, 0.5);
-}
-</style> -->

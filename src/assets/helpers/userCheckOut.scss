@@ -1,0 +1,95 @@
+.check-out{
+  background-color:rgb(255, 255, 255,.9);
+  padding: 0;
+  .card-header{
+    background-color: var(--second-color);
+    color: white;
+  }
+  .frame{
+    padding:20px;
+    min-height: 300px;
+    position: relative;
+    .pay-success{
+      position: absolute;
+      top:50%;
+      left:50%;
+      transform: translate(-50%,-50%);
+      font-weight: bolder;
+      .fa-check{
+        font-size: 2em;
+      }
+      h5{
+        font-weight: bolder;
+      }
+      div{
+        i{
+          cursor: pointer;
+          color: gray;
+        }
+      }
+    }
+    .create{
+      color: gray;
+      font-weight: bolder;
+      h5{
+        font-size: .9em;
+      }
+    }
+    .accordion-item{
+      margin: 20px 0;
+      .accordion-body{
+        .product{
+          border-bottom: 1px solid var(--main-color);
+          h5,p{
+          margin: 0;
+          } 
+          h5{
+            font-size: 1.1em;
+            font-weight: bolder;
+            margin-bottom: 10px;
+          }
+        }
+      }
+      .accordion-button{
+        &:focus{
+          box-shadow: none;
+        }
+        &:not(.collapsed) {
+          background-color:var(--main-color)
+        }
+      }
+    }
+    .card-body{
+      table{
+        border-spacing: 0 20px; 
+        border-collapse: separate;
+        width: 100%;
+        font-weight: bolder;
+        tbody{
+          tr{
+            th, td{
+              border-bottom: 1px solid var(--main-color);
+              background-color: transparent;
+            }
+            td{
+              i{
+                cursor: pointer;
+                color: gray;
+              }
+            }
+          }
+        }
+      }
+    }
+    .button{
+      color: white;
+      background-color: var(--second-color);
+      padding:5px 10px;
+      transition: .5s;
+      &:hover{
+        background-color: white;
+        color:black;
+      }
+    }
+  }
+}

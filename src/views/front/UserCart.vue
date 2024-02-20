@@ -100,6 +100,7 @@
         <div class="frame" v-if="cart.carts">
           <h3>購物清單</h3>
           <div v-if="cart.carts.length === 0" class="not-buy">
+            <i class="bi bi-cart-x"></i>
             <h5>您尚未選購產品</h5>
             <router-link class="nav-link" to="/user/shopping" @click.prevent="scrollToTop">
               <button type="button" class="btn btn-dark">立即前往選購</button>

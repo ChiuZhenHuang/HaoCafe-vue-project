@@ -59,7 +59,7 @@
                 </button>
               </div>
             </div>
-            <div class="d-flex w-100 justify-content-between" v-if="cart.total < 3000">
+            <div class="d-flex w-100 justify-content-between" v-if="cart.final_total < 3000">
               <h6>運費</h6>
               <h6>+$120</h6>
             </div>
@@ -70,13 +70,13 @@
             <!-- 沒使用優惠券 -->
             <div class="d-flex w-100 justify-content-between" v-if="!hasCoupons">
               <h5>總計</h5>
-              <h5 v-if="cart.total < 3000">NT$ {{ $filters.currency(parseInt(cart.total) + 120) }}</h5>
+              <h5 v-if="cart.final_total < 3000">NT$ {{ $filters.currency(parseInt(cart.total) + 120) }}</h5>
               <h5 v-else>NT$ {{ $filters.currency(parseInt(cart.total)) }}</h5>
             </div>
             <!-- 有使用優惠券 -->
             <div class="d-flex w-100 justify-content-between" v-else>
               <h5>總計</h5>
-              <h5 v-if="cart.total < 3000">NT$ {{ $filters.currency(parseInt(cart.final_total) + 120) }}</h5>
+              <h5 v-if="cart.final_total < 3000">NT$ {{ $filters.currency(parseInt(cart.final_total) + 120) }}</h5>
               <h5 v-else>NT$ {{ $filters.currency(cart.final_total) }}</h5>
             </div>
           </div>
@@ -114,6 +114,18 @@
                     placeholder="請輸入電話" :rules="isPhone"
                     v-model="form.user.tel"></Field>
                   <ErrorMessage name="電話" class="invalid-feedback"></ErrorMessage>
+                </div>
+                <div class="mb-3">
+                  <label for="paymentMethod" class="form-label">付款方式</label>
+                  <Field id="paymentMethod" name="付款方式" as="select" class="form-control"
+                    :class="{ 'is-invalid': errors['付款方式'] }" rules="required" v-model="form.user.pay">
+                    <option value="" disabled selected>請選擇付款方式</option>
+                    <option value="貨到付款">貨到付款</option>
+                    <option value="ATM銀行轉帳">ATM銀行轉帳</option>
+                    <option value="信用卡">信用卡</option>
+                    <option value="Apple Pay">Apple Pay</option>
+                  </Field>
+                  <ErrorMessage name="付款方式" class="invalid-feedback"></ErrorMessage>
                 </div>
                 <div class="mb-3">
                   <label for="address" class="form-label">收件人地址</label>
@@ -162,13 +174,15 @@ export default {
           name: '',
           email: '',
           tel: '',
+          pay: '',
           address: ''
         },
         message: ''
       },
       coupon_code: '',
       cart: {}, // 存放目前已加至購物車內產品
-      isLoading: false
+      isLoading: false,
+      total: ''
     }
   },
   inject: ['emitter'],
@@ -192,6 +206,7 @@ export default {
       this.$http.get(url)
         .then((res) => {
           this.cart = res.data.data
+          this.total = res.data.data.total
           this.isLoading = false
           console.log('購物車產品', this.cart)
         })

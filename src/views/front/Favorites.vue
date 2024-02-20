@@ -10,6 +10,7 @@
         <button class="clear" @click="clearFavorites"><i class="bi bi-trash"></i> 清空全部</button>
         <div class="row row-cols-sm-2 row-cols-lg-3 row-cols-xl-4 district">
           <div v-if="isFavorites.length === 0" class="not-buy">
+            <i class="bi bi-emoji-dizzy"></i>
             <h5>您尚未收藏產品</h5>
             <router-link class="nav-link" to="/user/shopping" @click.prevent="scrollToTop">
               <button type="button" class="btn btn-dark">立即前往選購</button>
