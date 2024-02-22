@@ -2,19 +2,12 @@
   <div>
     <nav class="navbar navbar-expand-lg fixed-top"
     :class="{ 'bg-transparent': isTransparent, 'bg-black': !isTransparent }" :style="{'height': dynamicHeight + 'px' }">
-      <div class="container-fluid bg-transparent" >
-        <div>
+      <div class="container-fluid bg-transparent">
+        <div class="d-flex">
           <router-link to="/" @click.prevent="scrollToTop">
-            <img src="https://i.imgur.com/qToNLW6.jpg" class="d-block logo" style="height: 60px;width: 60px;" alt="LOGO">
+            <img src="https://i.imgur.com/qToNLW6.jpg" class="d-block logo" style="height: 60px;width: 60px;margin-right: 20px;" alt="LOGO">
           </router-link>
-        </div>
-        <div>
-        <!-- 手機漢堡鈕 -->
-          <button class="navbar-toggler ml-auto bg-transparent" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebar" aria-controls="sidebar">
-            <i class="bi bi-border-width"></i>
-          </button>
-        <!-- 桌機導覽列 -->
-          <ul  id="navbarNav" class="navbar-nav collapse navbar-collapse bg-transparent">
+          <ul id="navbarNav" class="navbar-nav collapse navbar-collapse bg-transparent">
             <li class="nav-item">
               <router-link class="nav-link" to="/about" @click.prevent="scrollToTop">
                 關於我們
@@ -30,6 +23,39 @@
                 管理產品
               </router-link>
             </li>
+          </ul>
+        </div>
+
+        <div>
+        <!-- 手機漢堡鈕 -->
+          <div class="ml-auto bg-transparent d-flex navbar-nav">
+            <router-link class=" nav-item d-lg-none" to="/user/favorites" @click.prevent="scrollToTop">
+              <i class="bi bi-heart"></i>
+            </router-link>
+            <router-link class=" nav-item d-lg-none" to="/user/cart" @click.prevent="scrollToTop">
+              <i class="bi bi-cart"></i>
+            </router-link>
+            <button class="navbar-toggler ml-auto bg-transparent" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebar" aria-controls="sidebar">
+              <i class="bi bi-border-width"></i>
+            </button>
+          </div>
+        <!-- 桌機導覽列 -->
+          <ul id="navbarNav" class="navbar-nav collapse navbar-collapse bg-transparent">
+            <!-- <li class="nav-item">
+              <router-link class="nav-link" to="/about" @click.prevent="scrollToTop">
+                關於我們
+              </router-link>
+            </li>
+            <li class="nav-item">
+              <router-link class="nav-link" to="/user/shopping" @click.prevent="scrollToTop">
+                商品列表
+              </router-link>
+            </li>
+            <li class="nav-item">
+              <router-link class="nav-link" to="/dashboard/productComponent" @click.prevent="scrollToTop">
+                管理產品
+              </router-link>
+            </li> -->
             <li class="nav-item">
               <router-link class="nav-link" to="/user/favorites" @click.prevent="scrollToTop">
                 <i class="bi bi-heart"></i>

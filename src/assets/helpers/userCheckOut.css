@@ -1,3 +1,11 @@
+:root {
+  --user-checkout-background-image-1: url("https://i.pinimg.com/564x/a8/72/e2/a872e20275a8df7ad12e2b251240eba1.jpg");
+}
+
+.bg-user-checkout::before {
+  background-image: var(--user-checkout-background-image-1);
+}
+
 .check-out {
   background-color: rgba(255, 255, 255, 0.9);
   padding: 0;

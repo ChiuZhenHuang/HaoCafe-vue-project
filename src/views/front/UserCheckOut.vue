@@ -1,7 +1,7 @@
 <template>
   <LoadingComponent :active="isLoading"></LoadingComponent>
 
-  <div class="banner bg-user-cart">
+  <div class="banner bg-user-checkout">
     <div class="mask"></div>
     <h2>付款確認</h2>
   </div>
@@ -24,7 +24,7 @@
           <div v-if="order.is_paid === true" class="d-flex flex-column text-center pay-success">
             <i class="fa-solid fa-check mb-2"></i>
             <h5>付款成功</h5>
-            <div class="mt-2 mb-2">訂單編號：{{ order.id }}  <i class="fa-regular fa-copy"></i></div>
+            <div class="mt-2 mb-2">訂單編號：{{ order.id }}  <i @click="copyText" class="fa-regular fa-copy"></i></div>
             <router-link to="/user/shopping" @click.prevent="scrollToTop">
               <button type="button" class="button w-100">繼續購物</button>
             </router-link>
@@ -65,7 +65,7 @@
                 <tbody>
                   <tr>
                     <td>訂單編號</td>
-                    <td>{{ order.id }} <i class="fa-regular fa-copy"></i></td>
+                    <td>{{ order.id }} <i @click="copyText" class="fa-regular fa-copy"></i></td>
                   </tr>
                   <tr>
                     <td>付款方式</td>
@@ -92,18 +92,18 @@
                     <td v-if="!order.message">無</td>
                     <td v-else>{{ order.message }}</td>
                   </tr>
-                  <!-- <tr>
+                  <tr v-if="calcTotal < 3000">
                     <td>小計</td>
                     <td>NT$ {{ $filters.currency(order.total) }}</td>
                   </tr>
                   <tr>
                     <td>運費</td>
-                    <td v-if="order.total < 3000">+ $120</td>
-                    <td v-else>+ $0</td>
-                  </tr> -->
+                    <td v-if="calcTotal < 3000">+ $120</td>
+                    <td v-else>恭喜達成免運！</td>
+                  </tr>
                   <tr>
                     <td>金額總計</td>
-                    <td v-if="order.total < 3000">NT$ {{ $filters.currency(parseInt(order.total)+120) }}</td>
+                    <td v-if="calcTotal < 3000">NT$ {{ $filters.currency(parseInt(order.total)+120) }}</td>
                     <td v-else>NT$ {{ $filters.currency(order.total) }}</td>
                   </tr>
                 </tbody>
@@ -135,6 +135,20 @@ export default {
     }
   },
   mixins: [scrollButton],
+  inject: ['emitter'],
+  computed: {
+    // 每筆訂單原始金額加總
+    calcTotal () {
+      if (!this.order?.products) {
+        return 0
+      }
+      const orderArray = Object.values(this.order?.products)
+      // 使用 reduce 將每個訂單的 total 屬性加總
+      return orderArray.reduce((accumulator, order) => {
+        return accumulator + order.total
+      }, 0)
+    }
+  },
   methods: {
     getOrder () {
       const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/order/${this.orderId}`
@@ -157,6 +171,19 @@ export default {
             this.getOrder()
           }
         })
+    },
+    copyText () {
+      const textToCopy = this.order.id
+      const textarea = document.createElement('textarea')
+      textarea.value = textToCopy
+      document.body.appendChild(textarea)
+      textarea.select()
+      document.execCommand('copy')
+      document.body.removeChild(textarea)
+      this.emitter.emit('push-message', {
+        style: 'success',
+        title: '已複製訂單編號'
+      })
     }
   },
   created () {

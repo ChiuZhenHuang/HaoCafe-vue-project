@@ -65,6 +65,8 @@
 <script>
 import subscription from '@/components/Subscription.vue'
 import scrollButton from '@/mixins/scrollButton'
+// import { mapState, mapActions } from 'pinia'
+// import favorites from '@/stores/favorites'
 
 export default {
   data () {
@@ -91,6 +93,7 @@ export default {
     // 前往詳細資料頁面
     getProduct (id) {
       this.$router.push(`/user/product/${id}`)
+      this.scrollToTop()
     },
     // 加到購物車
     addCart (id) {

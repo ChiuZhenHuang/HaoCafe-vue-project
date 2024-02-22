@@ -82,6 +82,7 @@
 
 <script>
 import Pagination from '@/components/Pagination.vue'
+import scrollButton from '@/mixins/scrollButton'
 
 export default {
   data () {
@@ -102,6 +103,7 @@ export default {
   },
   components: { Pagination },
   inject: ['emitter'],
+  mixins: [scrollButton],
   computed: {
     // 搜尋及篩選
     filterProducts () {
@@ -142,6 +144,7 @@ export default {
     },
     // 前往詳細資料頁面
     getProduct (id) {
+      this.scrollToTop()
       this.$router.push(`/user/product/${id}`)
     },
     // 加到購物車

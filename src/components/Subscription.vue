@@ -12,7 +12,7 @@
             </Field>
             <ErrorMessage name="email" class="invalid-feedback"></ErrorMessage>
           </div>
-            <button type="submit">訂閱</button>
+            <button type="submit" :disabled="errors['email'] || userEmail === ''">訂閱</button>
         </Form>
       </div>
     </div>
@@ -26,10 +26,15 @@ export default {
       userEmail: ''
     }
   },
+  inject: ['emitter'],
   methods: {
     subscription () {
       this.userEmail = ''
       console.log('訂閱成功')
+      this.emitter.emit('push-message', {
+        style: 'success',
+        title: '訂閱成功，感謝您的訂閱'
+      })
     }
   }
 }

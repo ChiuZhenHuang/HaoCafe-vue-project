@@ -224,6 +224,8 @@
 
 <script>
 import scrollButton from '@/mixins/scrollButton'
+// import { mapState, mapActions } from 'pinia'
+// import productStore from '@/stores/productStore'
 
 export default {
   data () {
@@ -234,7 +236,11 @@ export default {
   },
   inject: ['emitter'],
   mixins: [scrollButton],
+  computed: {
+    // ...mapState(productStore, ['cart'])
+  },
   methods: {
+    // ...mapActions(productStore, ['getCart']),
     // 取得購物車列表
     getCart () {
       const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`
@@ -255,7 +261,8 @@ export default {
       }
       this.$http.put(url, { data: cart }).then((res) => {
         this.getCart()
-        // this.$httpMessageState(res, '更新數量')
+        this.isLoading = false
+        this.$httpMessageState(res, '更新數量')
       })
     },
     // 清空購物車
@@ -281,10 +288,6 @@ export default {
         })
       })
     },
-    // 前往填寫訂單資料
-    // pushForm () {
-    //   this.$router.push('/user/form')
-    // },
     // 減少數量
     decrementQuantity (item, qty) {
       if (qty > 1) {

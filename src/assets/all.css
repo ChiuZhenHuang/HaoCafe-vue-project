@@ -12298,37 +12298,6 @@ textarea.form-control-lg {
   color: rgba(230, 177, 107, 0.911);
 }
 
-.get-coupon {
-  background-image: url("https://i.imgur.com/a1L0U0U.jpg");
-  background-attachment: fixed;
-  background-size: cover;
-  position: relative;
-  color: black;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  font-size: 2rem;
-  padding: 10px 0;
-  letter-spacing: 0.1em;
-}
-.get-coupon strong {
-  color: white;
-}
-.get-coupon button {
-  color: rgb(255, 255, 255);
-  background-color: rgb(0, 0, 0);
-  border: 1px solid white;
-  font-size: 1.5rem;
-  border-radius: 10px;
-  transition: 0.7s;
-  padding: 5px;
-}
-.get-coupon button:hover {
-  color: rgb(0, 0, 0);
-  background-color: rgb(255, 255, 255);
-  border: 1px solid rgb(0, 0, 0);
-}
-
 .scrollButton {
   position: fixed;
   bottom: 20px;
@@ -12386,6 +12355,7 @@ textarea.form-control-lg {
 .navbar {
   transition: 0.5s ease;
   z-index: 150;
+  padding: 0 15px;
 }
 
 /* 設置初始背景為透明 */
@@ -12406,6 +12376,7 @@ textarea.form-control-lg {
   background-color: transparent;
 }
 .navbar-nav .nav-item {
+  font-weight: bolder;
   background-color: transparent;
   position: relative;
   transform: translateY(0px);
@@ -12435,20 +12406,28 @@ textarea.form-control-lg {
 }
 
 @media screen and (max-width: 992px) {
+  .navbar {
+    padding: 0;
+  }
   .offcanvas {
     background-color: rgb(98, 97, 97);
   }
   .navbar-nav {
     display: flex;
+    flex-direction: row;
     align-items: center;
     justify-content: center;
+    gap: 15px;
   }
   .navbar-nav .nav-item {
     font-size: 1.25rem;
     margin: 20px 0;
   }
+  .navbar-nav .nav-item:hover {
+    color: white;
+  }
   .navbar-nav .nav-item::after {
-    border-bottom: 1px solid #ffffff;
+    bottom: 0;
   }
   .navbar-toggler {
     color: rgb(255, 255, 255);
@@ -12460,6 +12439,11 @@ textarea.form-control-lg {
     margin-top: 0px;
   }
 }
+.nav-item {
+  font-size: 1.25em;
+  color: white;
+}
+
 .main-about {
   background-color: rgb(21, 21, 21);
   position: relative;
@@ -12687,6 +12671,7 @@ body {
 #product .frame .card .card-body .title {
   text-align: center;
   font-size: 1.1em;
+  font-weight: bolder;
 }
 #product .frame .card .card-body .left {
   width: 70%;
@@ -12889,6 +12874,106 @@ footer .footer p {
     text-align: start;
   }
 }
+.get-coupon {
+  background-color: var(--second-color);
+  position: relative;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  font-size: 2rem;
+  padding: 40px 0;
+  letter-spacing: 0.1em;
+  color: rgb(255, 255, 255);
+}
+.get-coupon .coupon {
+  background-color: var(--main-color);
+  color: black;
+  padding: 0 20px;
+  position: relative;
+  margin-bottom: 20px;
+}
+.get-coupon .coupon::before {
+  content: "";
+  position: absolute;
+  left: -10px;
+  top: 50%;
+  height: 20px;
+  width: 20px;
+  transform: translate(0px, -50%);
+  border-radius: 50%;
+  background-color: var(--second-color);
+}
+.get-coupon .coupon::after {
+  content: "";
+  position: absolute;
+  right: -10px;
+  top: 50%;
+  height: 20px;
+  width: 20px;
+  transform: translate(0px, -50%);
+  border-radius: 50%;
+  background-color: var(--second-color);
+}
+.get-coupon .coupon p, .get-coupon .coupon span {
+  font-weight: bolder;
+  aspect-ratio: 2/1;
+  font-size: 0.5em;
+  margin: 0;
+  margin-right: 10px;
+  display: block;
+  background-color: rgba(255, 255, 255, 0.5);
+}
+.get-coupon .coupon p {
+  padding: 10px;
+  padding-bottom: 0;
+}
+.get-coupon .coupon span {
+  padding: 10px;
+  padding-top: 0;
+}
+.get-coupon .coupon h5, .get-coupon .coupon .h5 {
+  font-weight: bolder;
+  display: flex;
+  align-items: center;
+  padding: 0 5px;
+  margin-left: 21px;
+  margin-bottom: 0;
+  position: relative;
+  font-size: 0.4em;
+}
+.get-coupon .coupon h5::before, .get-coupon .coupon .h5::before {
+  content: "";
+  position: absolute;
+  height: 100%;
+  width: 20px;
+  top: 0%;
+  left: -10px;
+  border-left: 1px dashed black;
+}
+.get-coupon button {
+  width: 50%;
+  color: rgb(255, 255, 255);
+  background-color: rgb(0, 0, 0);
+  border: 1px solid white;
+  font-size: 1.5rem;
+  border-radius: 10px;
+  transition: 0.7s;
+  padding: 5px;
+}
+.get-coupon button:hover {
+  color: rgb(0, 0, 0);
+  background-color: var(--main-color);
+  border: 1px solid rgb(0, 0, 0);
+}
+
+@media screen and (max-width: 768px) {
+  .get-coupon {
+    flex-direction: column;
+  }
+  .get-coupon .coupon {
+    margin-top: 20px;
+  }
+}
 .subscription {
   height: 250px;
   background-image: url("https://i.pinimg.com/564x/e2/cb/f7/e2cbf70f8800f1cc38f37d6446685cbd.jpg");
@@ -12940,6 +13025,9 @@ footer .footer p {
 .subscription .row Form button:hover {
   color: rgb(0, 0, 0);
   background-color: rgba(255, 255, 255, 0.5);
+}
+.subscription .row Form button[disabled] {
+  pointer-events: none;
 }
 
 .pagination .page {
@@ -13051,6 +13139,7 @@ footer .footer p {
 
 #product .frame .card .card-top .main-image {
   transition: 0.5s;
+  aspect-ratio: 2/2;
 }
 #product .frame .card .images {
   display: flex;
@@ -13492,6 +13581,14 @@ Form .form-control {
   border-radius: 0;
 }
 
+:root {
+  --user-checkout-background-image-1: url("https://i.pinimg.com/564x/a8/72/e2/a872e20275a8df7ad12e2b251240eba1.jpg");
+}
+
+.bg-user-checkout::before {
+  background-image: var(--user-checkout-background-image-1);
+}
+
 .check-out {
   background-color: rgba(255, 255, 255, 0.9);
   padding: 0;
@@ -13503,16 +13600,73 @@ Form .form-control {
 .check-out .frame {
   padding: 20px;
   min-height: 300px;
+  position: relative;
+}
+.check-out .frame .pay-success {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-weight: bolder;
+}
+.check-out .frame .pay-success .fa-check {
+  font-size: 2em;
+}
+.check-out .frame .pay-success h5, .check-out .frame .pay-success .h5 {
+  font-weight: bolder;
+}
+.check-out .frame .pay-success div i {
+  cursor: pointer;
+  color: gray;
 }
 .check-out .frame .create {
   color: gray;
+  font-weight: bolder;
+}
+.check-out .frame .create h5, .check-out .frame .create .h5 {
+  font-size: 0.9em;
+}
+.check-out .frame .accordion-item {
+  margin: 20px 0;
+}
+.check-out .frame .accordion-item .accordion-body .product {
+  border-bottom: 1px solid var(--main-color);
+}
+.check-out .frame .accordion-item .accordion-body .product h5, .check-out .frame .accordion-item .accordion-body .product .h5, .check-out .frame .accordion-item .accordion-body .product p {
+  margin: 0;
+}
+.check-out .frame .accordion-item .accordion-body .product h5, .check-out .frame .accordion-item .accordion-body .product .h5 {
+  font-size: 1.1em;
+  font-weight: bolder;
+  margin-bottom: 10px;
+}
+.check-out .frame .accordion-item .accordion-button:focus {
+  box-shadow: none;
+}
+.check-out .frame .accordion-item .accordion-button:not(.collapsed) {
+  background-color: var(--main-color);
 }
 .check-out .frame .card-body table {
+  border-spacing: 0 20px;
+  border-collapse: separate;
   width: 100%;
+  font-weight: bolder;
 }
-.check-out .frame .card-body table tbody tr td:first-child {
-  width: 30%;
-}
-.check-out .frame tr th, .check-out .frame tr td {
+.check-out .frame .card-body table tbody tr th, .check-out .frame .card-body table tbody tr td {
+  border-bottom: 1px solid var(--main-color);
   background-color: transparent;
+}
+.check-out .frame .card-body table tbody tr td i {
+  cursor: pointer;
+  color: gray;
+}
+.check-out .frame .button {
+  color: white;
+  background-color: var(--second-color);
+  padding: 5px 10px;
+  transition: 0.5s;
+}
+.check-out .frame .button:hover {
+  background-color: white;
+  color: black;
 }/*# sourceMappingURL=all.css.map */

@@ -1,7 +1,10 @@
 <template>
   <div class="toast" role="alert" aria-live="assertive" aria-atomic="true" ref="toast">
     <div class="toast-header">
-      <span :class="`bg-${msg.style}`" class="p-2 rounded me-2 d-inline-block"></span>
+      <span :class="`bg-${msg.style}`" class="p-2 rounded me-2 d-inline-block">
+        <i class="bi bi-check" style="color: white;"></i>
+        <!-- <i class="bi bi-check-circle" style="color: white;"></i> -->
+      </span>
       <strong class="me-auto">{{ msg.title }}</strong>
       <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
     </div>

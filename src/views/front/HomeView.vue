@@ -1,10 +1,11 @@
 <template>
   <div class="home">
+    <ToastMessages/>
     <userNav/>
   </div>
   <!-- 幻燈片 -->
-  <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
-    <div class="carousel-inner ">
+  <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel" ref="carousel">
+    <div class="carousel-inner">
       <div class="text bg-transparent">
         <p class="bg-transparent">咖啡是一種藝術，每一杯都是一幅畫，每一口都是一首詩。</p>
         <router-link class="nav-link" to="/user/shopping" @click.prevent="scrollToTop">來去逛逛</router-link>
@@ -61,7 +62,7 @@
             </div>
             <div class="txt">
               <div>2023 / 11 / 02</div>
-              <p>全館實付金額滿額3,000！即可免運</p>
+              <p>全館消費滿額3,000！即可免運</p>
             </div>
             <div class="txt">
               <div>2023 / 08 / 19</div>
@@ -91,47 +92,47 @@
   </transition>
 
   <!-- 領取優惠 -->
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col-12 get-coupon">
-        <div>
-          <strong>還沒領取優惠券？</strong>
-          <div>
-            <strong>速速領取專屬優惠券！</strong>
-            <!-- @click="copyCouponCode" -->
-            <button type="button">GO</button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+  <getCoupon/>
 
   <!-- 訂閱我們 -->
   <subscription/>
 
   <!-- Footer -->
   <Footer/>
+
 </template>
 
 <script>
+import ToastMessages from '@/components/ToastMessages.vue'
 import userNav from '@/components/UserNavbar.vue'
-import Footer from '@/components/Footer.vue'
+import getCoupon from '@/components/getCoupon.vue'
 import subscription from '@/components/Subscription.vue'
+import Footer from '@/components/Footer.vue'
 import scrollButton from '@/mixins/scrollButton'
+import { Carousel } from 'bootstrap/dist/js/bootstrap.bundle'
 
 export default {
   data () {
     return {
+      initCarousel: {}
     }
   },
   name: 'HomeView',
   components: {
-    userNav, Footer, subscription
+    userNav, Footer, getCoupon, subscription, ToastMessages
   },
   mixins: [scrollButton],
+  inject: ['emitter'],
   methods: {
+    initializeCarousel () {
+      this.initCarousel = new Carousel(this.$refs.carousel, {
+        interval: 3000,
+        wrap: false
+      })
+    }
   },
   mounted () {
+    this.initializeCarousel()
   },
   created () {
     // console.log(process.env.VUE_APP_API, process.env.VUE_APP_PATH)

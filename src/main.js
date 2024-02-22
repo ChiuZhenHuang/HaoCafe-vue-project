@@ -1,4 +1,5 @@
 import { createApp } from 'vue'
+import { createPinia } from 'pinia'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
 import Loading from 'vue-loading-overlay'
@@ -24,8 +25,7 @@ import router from './router'
 
 import { currency, date } from './methods/filters'
 import $httpMessageState from './methods/pushMessageState'
-
-// import VueClipboard from 'vue-clipboard2'
+import emitter from './methods/emitter'
 
 Object.keys(rules).forEach((rule) => {
   defineRule(rule, rules[rule])
@@ -38,16 +38,21 @@ configure({
 setLocale('zh_TW')
 
 const app = createApp(App)
+const pinia = createPinia()
+
 // 將currency方法帶入全域屬性，讓各個頁面都能直接使用
 app.config.globalProperties.$filters = { currency, date }
 // 此函式的用途是整合 Ajax 的錯誤事件，統一整理發送給予 Toast 處理
 // 正常來說不建議太多方法掛Global，這裡也可以用provide處理
 app.config.globalProperties.$httpMessageState = $httpMessageState
 
+// 提供home頁面使用
+app.provide('emitter', emitter)
+
 app.use(VueAxios, axios)
 app.use(router)
-// Use VueClipboard插件
-// app.use(VueClipboard)
+app.use(pinia)
+
 // 全域註冊loading套件，因可能很多地方都會用到
 app.component('LoadingComponent', Loading)
 

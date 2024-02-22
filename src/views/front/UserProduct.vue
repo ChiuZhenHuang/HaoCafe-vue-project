@@ -39,7 +39,7 @@
       <div class="col-12 col-lg-7 description" style="display: flex; flex-direction: column;">
         <h5 class="title">{{ product.title }}</h5>
         <div class="category mb-5">{{ product.category }}</div>
-        <p class="mb-5" style="white-space: pre-line">{{ product.description }}</p>
+        <p class="mb-2" style="white-space: pre-line">{{ product.description }}</p>
         <div class="d-flex" style="margin-top: auto;align-items: end;">
           <div>
             <div class="h5" v-if="!product.price">NT$ {{ $filters.currency(product.origin_price) }}</div>
@@ -148,6 +148,8 @@
 </template>
 
 <script>
+import scrollButton from '@/mixins/scrollButton'
+
 export default {
   data () {
     return {
@@ -164,6 +166,7 @@ export default {
     }
   },
   inject: ['emitter'],
+  mixins: [scrollButton],
   methods: {
     // emitCategory (category) {
     //   this.$emit('category-selected', category)
@@ -263,6 +266,7 @@ export default {
       this.$router.push(`/user/product/${id}`).then(() => {
         this.$router.go(0)
       })
+      this.scrollToTop()
     }
   },
   created () {

@@ -16,6 +16,7 @@
     "bootstrap-icons": "^1.11.3",
     "core-js": "^3.8.3",
     "mitt": "^3.0.1",
+    "pinia": "^2.1.7",
     "popper.js": "^1.16.1",
     "vee-validate": "^4.12.4",
     "vue": "^3.2.13",

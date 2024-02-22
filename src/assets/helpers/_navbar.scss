@@ -1,6 +1,7 @@
 .navbar {
   transition: .5s ease;
   z-index: 150;
+  padding: 0 15px;
 }
 /* 設置初始背景為透明 */
 .bg-transparent {
@@ -17,6 +18,7 @@
 .navbar-nav{
   background-color: transparent;
   .nav-item{
+    font-weight: bolder;
     background-color: transparent;
     position: relative;
     transform: translateY(0px);
@@ -48,29 +50,42 @@
     left: 0%;
     right: 0%;
   }
+  // .d-lg-none{
+  //   display: none;
+  // }
 }
-
-
-
-
 
 
 // 手機側邊欄
 @media screen and (max-width: 992px) {
+  .navbar{
+    padding: 0;
+  }
   .offcanvas{
     background-color:  rgb(98, 97, 97);
   }
   .navbar-nav{
     display: flex;
+    flex-direction: row;
     align-items: center;
     justify-content: center;
+    gap: 15px;
     .nav-item{
       font-size: 1.25rem;
       margin: 20px 0;
+      &:hover{
+        color: white;
+      }
+      &::after{
+        bottom: 0; 
+        }
     }
-    .nav-item::after{
-    border-bottom: 1px solid #ffffff;
-    }
+    // .d-lg-none{
+    //   display: block;
+    // }
+    // .nav-item::after{
+    // border-bottom: 1px solid #ffffff;
+    // }
   }
   .navbar-toggler{
     color: rgb(255, 255, 255);
@@ -84,4 +99,8 @@
       margin-top:0px;
     }
   }
+}
+.nav-item {
+  font-size: 1.25em;
+  color: white;
 }

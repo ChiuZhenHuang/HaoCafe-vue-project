@@ -59,7 +59,7 @@
                 </button>
               </div>
             </div>
-            <div class="d-flex w-100 justify-content-between" v-if="cart.final_total < 3000">
+            <div class="d-flex w-100 justify-content-between" v-if="cart.total < 3000">
               <h6>運費</h6>
               <h6>+$120</h6>
             </div>
@@ -70,13 +70,13 @@
             <!-- 沒使用優惠券 -->
             <div class="d-flex w-100 justify-content-between" v-if="!hasCoupons">
               <h5>總計</h5>
-              <h5 v-if="cart.final_total < 3000">NT$ {{ $filters.currency(parseInt(cart.total) + 120) }}</h5>
+              <h5 v-if="cart.total < 3000">NT$ {{ $filters.currency(parseInt(cart.total) + 120) }}</h5>
               <h5 v-else>NT$ {{ $filters.currency(parseInt(cart.total)) }}</h5>
             </div>
             <!-- 有使用優惠券 -->
             <div class="d-flex w-100 justify-content-between" v-else>
               <h5>總計</h5>
-              <h5 v-if="cart.final_total < 3000">NT$ {{ $filters.currency(parseInt(cart.final_total) + 120) }}</h5>
+              <h5 v-if="cart.total < 3000">NT$ {{ $filters.currency(parseInt(cart.final_total) + 120) }}</h5>
               <h5 v-else>NT$ {{ $filters.currency(cart.final_total) }}</h5>
             </div>
           </div>
@@ -88,7 +88,7 @@
             <h3>訂購人資訊</h3>
           </div>
           <div>
-            <div class="my-5 row justify-content-center">
+            <div class="row justify-content-center">
               <Form v-slot="{ errors }" ref="myForm"
                   @submit="createOrder">
                 <div class="mb-3">
