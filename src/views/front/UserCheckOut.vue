@@ -154,7 +154,6 @@ export default {
       const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/order/${this.orderId}`
       this.$http.get(url)
         .then((res) => {
-          console.log('取得資料', res)
           if (res.data.success) {
             this.order = res.data.order
           }

@@ -19,6 +19,11 @@
               </router-link>
             </li>
             <li class="nav-item">
+              <button class="nav-link" @click.prevent="openSearchModal">
+                訂單查詢
+              </button>
+            </li>
+            <li class="nav-item">
               <router-link class="nav-link" to="/dashboard/productComponent" @click.prevent="scrollToTop">
                 管理產品
               </router-link>
@@ -41,21 +46,6 @@
           </div>
         <!-- 桌機導覽列 -->
           <ul id="navbarNav" class="navbar-nav collapse navbar-collapse bg-transparent">
-            <!-- <li class="nav-item">
-              <router-link class="nav-link" to="/about" @click.prevent="scrollToTop">
-                關於我們
-              </router-link>
-            </li>
-            <li class="nav-item">
-              <router-link class="nav-link" to="/user/shopping" @click.prevent="scrollToTop">
-                商品列表
-              </router-link>
-            </li>
-            <li class="nav-item">
-              <router-link class="nav-link" to="/dashboard/productComponent" @click.prevent="scrollToTop">
-                管理產品
-              </router-link>
-            </li> -->
             <li class="nav-item">
               <router-link class="nav-link" to="/user/favorites" @click.prevent="scrollToTop">
                 <i class="bi bi-heart"></i>
@@ -78,7 +68,6 @@
     <!-- 手機側邊欄 -->
     <div class="offcanvas offcanvas-start" tabindex="-1" id="sidebar" aria-labelledby="sidebarLabel">
       <div class="offcanvas-header">
-        <!-- <h5 class="offcanvas-title" id="sidebarLabel">導覽列</h5> -->
         <button type="button" class="btn-close text-reset ms-auto" data-bs-dismiss="offcanvas" aria-label="Close"></button>
       </div>
       <div class="offcanvas-body">
@@ -94,9 +83,9 @@
             </router-link>
           </li>
           <li class="nav-item">
-            <router-link class="nav-link" to="/dashboard/productComponent" @click.prevent="scrollToTop">
-              管理產品
-            </router-link>
+            <button class="nav-link" @click.prevent="openSearchModal">
+              訂單查詢
+            </button>
           </li>
           <li class="nav-item">
             <router-link class="nav-link" to="/user/favorites" @click.prevent="scrollToTop">
@@ -117,9 +106,13 @@
       </div>
     </div>
   </div>
+
+  <orderSearch ref="search"></orderSearch>
 </template>
 
 <script>
+import orderSearch from '@/components/OrderSearch.vue'
+
 export default {
   data () {
     return {
@@ -129,6 +122,9 @@ export default {
       initialHeight: 100, // 初始navbar高度
       scrolledHeight: 76 // 下滑頁面時navbar高度
     }
+  },
+  components: {
+    orderSearch
   },
   watch: {
     // 螢幕寬度改變時觸發handleScroll，取得高度資料
@@ -164,6 +160,10 @@ export default {
         top: 0,
         behavior: 'smooth'
       })
+    },
+    // 打開訂單查詢
+    openSearchModal () {
+      this.$refs.search.showModal()
     }
   },
   mounted () {
