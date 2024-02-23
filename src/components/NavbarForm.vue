@@ -1,22 +1,20 @@
 <template>
-    <nav class="navbar navbar-expand-lg bg-body-tertiary">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="#">範例作品</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-    </button>
-    <div class="collapse navbar-collapse" id="navbarText">
-      <div class="navbar-nav me-auto mb-2 mb-lg-0">
-        <router-link  class="nav-link" aria-current="page" to="/dashboard/productComponent">產品</router-link>
-        <router-link  class="nav-link" aria-current="page" to="/dashboard/orders">訂單</router-link>
-        <router-link  class="nav-link" aria-current="page" to="/dashboard/coupons">優惠券</router-link>
-        <a class="nav-link" href="#" @click.prevent="logout">登出</a>
-      </div>
-      <div>
-        <router-link  class="nav-link" aria-current="page" to="/user/shopping">產品介面</router-link>
+  <nav class="navbar navbar-expand-lg bg-body-tertiary admin-nav">
+    <div class="container-fluid">
+      <!-- <a class="navbar-brand" href="#">範例作品</a> -->
+      <router-link class="nav-link mx-3" aria-current="page" to="/">用戶介面</router-link>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+      </button>
+      <div class="collapse navbar-collapse" id="navbarText">
+        <div class="navbar-nav me-auto mb-2 mb-lg-0">
+          <router-link class="nav-link" aria-current="page" to="/dashboard/productComponent">產品</router-link>
+          <router-link class="nav-link" aria-current="page" to="/dashboard/orders">訂單</router-link>
+          <router-link class="nav-link" aria-current="page" to="/dashboard/coupons">優惠券</router-link>
+          <a class="nav-link" href="#" @click.prevent="logout">登出</a>
+        </div>
       </div>
     </div>
-  </div>
-</nav>
+  </nav>
 </template>
 
 <script>

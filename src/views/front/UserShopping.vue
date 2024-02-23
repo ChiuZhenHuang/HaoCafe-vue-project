@@ -48,9 +48,10 @@
               </div>
               <div class="card-body w-100">
                 <h5 class="title" style="cursor: pointer" @click="getProduct(item.id)">{{ item.title }}</h5>
+                <div class="category">{{ item.category }} </div>
                 <div class="d-flex justify-content-between">
                   <div class="left">
-                    <div class="category">{{ item.category }} </div>
+                    <!-- <div class="category">{{ item.category }} </div> -->
                     <div class="h5" v-if="!item.price">NT$ {{ $filters.currency(item.origin_price) }}</div>
                     <del class="h5" v-if="item.price">NT$ {{ $filters.currency(item.origin_price) }}</del>
                     <div class="h6" v-if="item.price">NT$ {{ $filters.currency(item.price) }}</div>
@@ -60,7 +61,8 @@
                       :disabled="this.status.loadingItem === item.id"
                       @click="addCart(item.id)">
                       <span v-if="this.status.loadingItem === item.id" class="spinner-border spinner-border-sm" aria-hidden="true"></span>
-                      <i class="bi bi-cart4"></i>
+                      <!-- <i class="bi bi-cart4"></i> -->
+                      加入購物車
                     </button>
                   </div>
                 </div>

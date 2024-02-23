@@ -1,10 +1,10 @@
 <template>
   <LoadingComponent :active="isLoading"></LoadingComponent>
-    <table class="table mt-4">
+    <table class="table mt-4 admin">
     <thead>
       <tr>
         <th width="120">購買時間</th>
-        <th width="120">名字</th>
+        <th width="120">訂單編號</th>
         <th>email</th>
         <th width="120">購買品項</th>
         <th width="120">應付金額</th>
@@ -18,7 +18,7 @@
             :class="{'text-secondary': !item.is_paid}"> -->
       <tr>
         <td>{{ $filters.date(item.create_at) }}</td>
-        <td>{{ item.user.name }}</td>
+        <td>{{ item.id }}</td>
         <td><span v-text="item.user.email" v-if="item.user"></span></td>
         <td>
             <ul class="list-unstyled" style="width: 150px;">
@@ -44,7 +44,7 @@
           </td>
           <td>
             <div class="btn-group">
-              <button class="btn btn-outline-primary btn-sm"
+              <button class="btn btn-outline-dark btn-sm"
                       @click="openModal(item)">檢視</button>
               <button class="btn btn-outline-danger btn-sm"
                       @click="openDelOrderModal(item)"

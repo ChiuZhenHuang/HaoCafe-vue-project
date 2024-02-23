@@ -1,9 +1,9 @@
 <template>
   <LoadingComponent :active="isLoading"></LoadingComponent>
   <div class="text-end">
-    <button type="button" class="btn btn-primary" @click="openModal(true)">增加一個產品</button>
+    <button type="button" class="btn btn-dark" @click="openModal(true)">增加一個產品</button>
   </div>
-    <table class="table mt-4">
+    <table class="table mt-4 admin">
     <thead>
       <tr>
         <th width="120">分類</th>
@@ -31,7 +31,7 @@
         </td>
         <td>
           <div class="btn-group">
-            <button class="btn btn-outline-primary btn-sm" @click="openModal(false, item)">編輯</button>
+            <button class="btn btn-outline-dark btn-sm" @click="openModal(false, item)">編輯</button>
             <button class="btn btn-outline-danger btn-sm" @click="openDelProductModal(item)">刪除</button>
           </div>
         </td>

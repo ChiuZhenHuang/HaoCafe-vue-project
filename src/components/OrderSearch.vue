@@ -7,13 +7,13 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <li class="mt-2 mb-1">
+          <div class="mt-2 mb-1">
             <input type="search" value="" v-model="orderNumber" placeholder="請輸入訂單編號">
             <button><i class="bi bi-search"></i></button>
-          </li>
+          </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn">確定</button>
+          <button type="button" class="btn" @click.prevent="hideModal">確定</button>
         </div>
       </div>
     </div>
@@ -27,7 +27,7 @@ export default {
   data () {
     return {
       modal: '',
-      orderNumber: '' // 訂單編號
+      orderNumber: '' // 用戶輸入訂單編號
     }
   },
   methods: {

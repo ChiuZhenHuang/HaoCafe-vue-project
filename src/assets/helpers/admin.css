@@ -1,0 +1,14 @@
+.admin {
+  background-color: transparent;
+}
+.admin tr {
+  background-color: var(--main-color);
+  background-color: rgba(255, 255, 255, 0.8);
+}
+.admin tr th, .admin tr td {
+  background-color: transparent;
+}
+
+.admin-nav .nav-link {
+  font-weight: bolder;
+}/*# sourceMappingURL=admin.css.map */

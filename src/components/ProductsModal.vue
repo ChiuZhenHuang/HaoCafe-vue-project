@@ -71,7 +71,7 @@
                   "
                 >
                   <button
-                    class="btn btn-outline-primary btn-sm d-block w-100"
+                    class="btn btn-outline-dark btn-sm d-block w-100"
                     @click="tempProduct.images.push('')"
                   >
                     新增圖片
@@ -182,7 +182,7 @@
           </button>
           <button
             type="button"
-            class="btn btn-primary"
+            class="btn btn-dark"
             @click="$emit('update-product', tempProduct)"
           >
           <!-- 將使用者輸入後的資料emit給外層 -->

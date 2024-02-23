@@ -1,5 +1,6 @@
 <template>
   <div class="container-fluid"  id="login">
+    <ToastMessages/>
     <form class="row h-100 justify-content-center align-items-center"
     @submit.prevent="signIn">
     <div class="mask d-flex justify-content-center align-items-center">
@@ -14,18 +15,20 @@
             class="form-control"
             required
             autofocus
-            v-model="user.username"
-          />
+            v-model="user.username"/>
         </div>
         <div class="mb-2">
           <label for="inputPassword">Password</label>
-          <input
-            type="password"
+          <div class="password-input">
+            <input
+            :type="showPassword ? 'text' : 'password'"
             id="inputPassword"
             class="form-control"
             required
-            v-model="user.password"
-          />
+            v-model="user.password"/>
+            <i v-if="showPassword" class="bi bi-eye" @click.prevent="showPassword = !showPassword"></i>
+            <i v-else class="bi bi-eye-slash" @click.prevent="showPassword = !showPassword"></i>
+          </div>
         </div>
         <div class="mt-4 w-100 d-flex justify-content-end">
           <button class="btn login-button" type="submit">登入</button>
@@ -37,6 +40,7 @@
 </template>
 
 <script>
+import ToastMessages from '@/components/ToastMessages.vue'
 
 export default {
   data () {
@@ -44,9 +48,12 @@ export default {
       user: {
         username: '',
         password: ''
-      }
+      },
+      showPassword: false
     }
   },
+  components: { ToastMessages },
+  inject: ['emitter'],
   methods: {
     signIn () {
       const api = `${process.env.VUE_APP_API}admin/signin`
@@ -63,6 +70,11 @@ export default {
             console.log(res)
             // 轉到dashboard頁面
             this.$router.push('./dashboard/productComponent')
+          } else {
+            this.emitter.emit('push-message', {
+              style: 'danger',
+              title: '登入失敗，請重新再試'
+            })
           }
         })
     }

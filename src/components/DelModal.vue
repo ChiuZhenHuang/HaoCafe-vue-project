@@ -3,11 +3,11 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header bg-danger">
-          <h5 class="modal-title">刪除{{ item.title }}</h5>
+          <h5 class="modal-title">刪除訂單</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <p>是否確定要刪除{{ item.title }}?</p>
+          <p>是否確定要刪除訂單編號{{ item.id }}?</p>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>

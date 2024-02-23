@@ -89,13 +89,13 @@
 
 Form{
   .next{
-    color: white;
-    background-color: var(--main-color);
+    background-color:rgba(255, 255, 255,.9);
     padding:5px 10px;
     transition: .5s;
     &:hover{
-      background-color: rgba(255, 255, 255, .9);
-      color:black;
+      background-color: var(--second-color);
+      color:rgb(255, 255, 255);
+      border-color: white;
     }  
   }
   .form-control{

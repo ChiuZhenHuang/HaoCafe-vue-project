@@ -252,7 +252,7 @@ export default {
         })
     },
     // 更新購物車數量
-    updateCart (item) {
+    updateCart (item, triggerMessage = true) {
       const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart/${item.id}`
       this.isLoading = true // 轉換購物車數量同時整個頁面loading
       const cart = {
@@ -262,7 +262,10 @@ export default {
       this.$http.put(url, { data: cart }).then((res) => {
         this.getCart()
         this.isLoading = false
-        this.$httpMessageState(res, '更新數量')
+
+        if (triggerMessage) {
+          this.$httpMessageState(res, '更新數量')
+        }
       })
     },
     // 清空購物車
@@ -281,7 +284,10 @@ export default {
     removeCartItem (item) {
       const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart/${item.id}`
       this.$http.delete(url).then((res) => {
-        this.updateCart(item)
+        // 用於判斷updateCart是否為removeCartItem所觸發，避免刪除時觸發更新產品通知
+        const triggerMessage = false
+        this.updateCart(item, triggerMessage)
+
         this.emitter.emit('push-message', {
           style: 'warning',
           title: '已刪除產品'

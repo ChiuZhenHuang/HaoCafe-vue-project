@@ -3,6 +3,7 @@
     <ToastMessages/>
     <userNav/>
   </div>
+
   <!-- 幻燈片 -->
   <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel" ref="carousel">
     <div class="carousel-inner">
@@ -109,12 +110,13 @@ import getCoupon from '@/components/getCoupon.vue'
 import subscription from '@/components/Subscription.vue'
 import Footer from '@/components/Footer.vue'
 import scrollButton from '@/mixins/scrollButton'
-import { Carousel } from 'bootstrap/dist/js/bootstrap.bundle'
+// import Carousel from 'bootstrap/js/dist/carousel'
+// 輪播可使用但有時無有時有，輪播時間無法控制
 
 export default {
   data () {
     return {
-      initCarousel: {}
+      // initCarousel: {}
     }
   },
   name: 'HomeView',
@@ -124,15 +126,15 @@ export default {
   mixins: [scrollButton],
   inject: ['emitter'],
   methods: {
-    initializeCarousel () {
-      this.initCarousel = new Carousel(this.$refs.carousel, {
-        interval: 3000,
-        wrap: false
-      })
-    }
+    // initializeCarousel () {
+    //   this.initCarousel = new Carousel(this.$refs.carousel, {
+    //     interval: 2000,
+    //     wrap: false
+    //   })
+    // }
   },
   mounted () {
-    this.initializeCarousel()
+    // this.initializeCarousel()
   },
   created () {
     // console.log(process.env.VUE_APP_API, process.env.VUE_APP_PATH)

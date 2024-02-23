@@ -67,6 +67,10 @@ const routes = [
         component: () => import('../views/front/Favorites.vue')
       }
     ]
+  },
+  {
+    path: '/:pathMatch(.*)*',
+    component: () => import('../views/front/NotFound.vue')
   }
 ]
 

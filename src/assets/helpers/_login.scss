@@ -48,6 +48,20 @@
           outline: none;
         }
       }
+      .password-input{
+        display: flex;
+        align-items: center;
+        position: relative;      
+        .bi{
+          color: white;
+          cursor: pointer;
+          position: absolute;
+          right: 0px; 
+          top: 50%; 
+          transform: translateY(-50%);
+        }
+      }
+
       .login-button{
         font-size: 1.1em;
         border-radius: 0;

@@ -222,3 +222,41 @@
   }
 }
 
+// 404頁面
+.not-found{
+  width: 100%;
+  height: 100vh;
+  background-image: url('https://doqvf81n9htmm.cloudfront.net/data/crop_article/62831/60-f-s.jpg_1140x855.jpg');
+  background-position: 50%;
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  .wrapper{
+    position: absolute;
+    top:20%;
+    left:20%;
+    transform: translate(-20%,-20%);
+    h1,h2{
+    color: white;
+    font-size: 8em;
+    text-shadow: rgba(0, 0, 0, 0.3) 4px 4px 10px;
+    }
+    h2{
+      font-size: 4em;
+    }
+    button{
+      font-size: 2em;
+      color: white;
+      background-color: var(--second-color);
+      padding:5px 10px;
+      transition: .5s;
+      &:hover{
+        background-color: white;
+        color:black;
+      }
+    }
+  }
+}
