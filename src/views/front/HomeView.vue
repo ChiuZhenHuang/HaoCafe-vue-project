@@ -110,8 +110,10 @@ import getCoupon from '@/components/getCoupon.vue'
 import subscription from '@/components/Subscription.vue'
 import Footer from '@/components/Footer.vue'
 import scrollButton from '@/mixins/scrollButton'
-// import Carousel from 'bootstrap/js/dist/carousel'
-// 輪播可使用但有時無有時有，輪播時間無法控制
+
+import { mapState, mapActions } from 'pinia'
+import favoriteStore from '@/stores/favoriteStore'
+import cartStore from '@/stores/cartStore'
 
 export default {
   data () {
@@ -122,13 +124,21 @@ export default {
   components: {
     userNav, Footer, getCoupon, subscription, ToastMessages
   },
+  computed: {
+    ...mapState(favoriteStore, ['isFavorites']),
+    ...mapState(cartStore, ['cart'])
+  },
   mixins: [scrollButton],
   inject: ['emitter'],
   methods: {
+    ...mapActions(favoriteStore, ['loadFavoritesFromLocalStorage']),
+    ...mapActions(cartStore, ['getCart'])
   },
   mounted () {
   },
   created () {
+    this.loadFavoritesFromLocalStorage()
+    this.getCart()
     // console.log(process.env.VUE_APP_API, process.env.VUE_APP_PATH)
   }
 }

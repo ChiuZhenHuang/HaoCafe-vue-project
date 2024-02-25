@@ -17,7 +17,7 @@ export default defineStore('favoriteStore', {
     saveFavoritesToLocalStorage () {
       localStorage.setItem('favorites', JSON.stringify(this.isFavorites))
     },
-    // 收藏產品比對頁面產品
+    // 收藏產品比對頁面產品，用於產品頁面新增判斷，是否為收藏產品
     isProductFavorite (product) {
       return this.isFavorites.some(favProduct => favProduct.id === product.id)
     },
@@ -50,6 +50,11 @@ export default defineStore('favoriteStore', {
       this.isFavorites = []
       localStorage.removeItem('favorites')
     }
+    // goOtherProduct (id) {
+    //   this.$router.push(`/user/product/${id}`).then(() => {
+    //     this.$router.go(0)
+    //   })
+    // }
   },
   getters: {
     favoritesLength: function (state) {

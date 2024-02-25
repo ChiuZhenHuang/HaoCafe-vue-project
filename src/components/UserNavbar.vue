@@ -56,6 +56,8 @@
             <li class="nav-item">
               <router-link class="nav-link" to="/user/cart" @click.prevent="scrollToTop">
                 <i class="bi bi-cart"></i>
+                <span v-if="!cartLength"></span>
+                <span v-else>{{ cartLength }}</span>
               </router-link>
             </li>
             <li class="nav-item">
@@ -116,6 +118,7 @@
 import orderSearch from '@/components/OrderSearch.vue'
 import { mapState } from 'pinia'
 import favoriteStore from '@/stores/favoriteStore'
+import cartStore from '@/stores/cartStore'
 
 export default {
   data () {
@@ -138,6 +141,7 @@ export default {
   },
   computed: {
     ...mapState(favoriteStore, ['favoritesLength']),
+    ...mapState(cartStore, ['cartLength']),
     // navbar高度設定
     dynamicHeight () {
       // 手機板navbar高度保持76px

@@ -47,9 +47,9 @@
             <div class="h6" v-if="product.price">NT$ {{ $filters.currency(product.price) }}</div>
           </div>
           <div class="add-cart">
-            <button type="button" class="btn qty-handler" @click="decrementQuantity(quantity)">-</button>
+            <button type="button" class="btn qty-handler" @click="productDecrementQuantity(quantity)">-</button>
             <input type="number" v-model="quantity"  readonly  min="1" :max="product.unit"/>
-            <button type="button" class="btn qty-handler" @click="incrementQuantity(quantity)">+</button>
+            <button type="button" class="btn qty-handler" @click="productIncrementQuantity(quantity)">+</button>
             <button type="button add-cart" class="btn  btn-outline-dark"
               :disabled="this.status.loadingItem === product.id" @click="addToCart (product.id)">
               <span v-if="this.status.loadingItem === product.id" class="spinner-border spinner-border-sm" aria-hidden="true"></span>
@@ -143,39 +143,48 @@
 
 <script>
 import scrollButton from '@/mixins/scrollButton'
+import { mapState, mapActions } from 'pinia'
+import favoriteStore from '@/stores/favoriteStore'
+import cartStore from '@/stores/cartStore'
 
 export default {
   data () {
     return {
       product: {},
       id: '',
-      favorites: [], // 收藏產品列表
+      // isFavorites: [], // 收藏產品列表
       selectedImage: null, // 追蹤主圖顯示
       changeImage: false, // 用於更換主圖
-      quantity: 1, // 加入購物車數量
+      // quantity: 1, // 加入購物車數量
       status: {
         loadingItem: ''
       },
-      allProducts: [] // 所有產品列表
+      allProducts: [] // 所有產品列表，用於顯示相關產品
     }
   },
   inject: ['emitter'],
   mixins: [scrollButton],
+  computed: {
+    ...mapState(favoriteStore, ['isFavorites']),
+    ...mapState(cartStore, ['quantity'])
+  },
   methods: {
+    ...mapActions(favoriteStore, ['addToFavorites', 'removeToFavorites', 'getProduct', 'loadFavoritesFromLocalStorage']),
+    ...mapActions(cartStore, ['addToCart', 'getCart', 'productDecrementQuantity', 'productIncrementQuantity']),
     // 取得產品資料
     getProduct () {
       const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/product/${this.id}`
       this.isLoading = true
       // 取得收藏清單資料
-      const favorites = JSON.parse(localStorage.getItem('favorites')) || []
-      this.favorites = favorites
-
+      this.loadFavoritesFromLocalStorage()
+      // const favorites = JSON.parse(localStorage.getItem('favorites')) || []
+      // this.isFavorites = favorites
       this.$http.get(api).then((response) => {
         this.isLoading = false
         if (response.data.success) {
           this.product = response.data.product
           // 新增是否於收藏此產品屬性
-          this.product.isFavorite = favorites.some(item => item.id === this.product.id)
+          this.product.isFavorite = this.isFavorites.some(item => item.id === this.product.id)
         }
       })
     },
@@ -187,45 +196,45 @@ export default {
       })
     },
     // 加到購物車
-    addToCart (id, qty = 1) {
-      const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`
-      this.status.loadingItem = id
-      const cart = {
-        product_id: id,
-        qty: this.quantity
-      }
-      this.$http.post(url, { data: cart }).then((res) => {
-        this.status.loadingItem = ''
-        this.$httpMessageState(res, '加入購物車')
-      })
-    },
+    // addToCart (id, qty = 1) {
+    //   const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`
+    //   this.status.loadingItem = id
+    //   const cart = {
+    //     product_id: id,
+    //     qty: this.quantity
+    //   }
+    //   this.$http.post(url, { data: cart }).then((res) => {
+    //     this.status.loadingItem = ''
+    //     this.$httpMessageState(res, '加入購物車')
+    //   })
+    // },
     // 加到收藏
-    addToFavorites (product) {
-      this.favorites.push(product)
-      this.emitter.emit('push-message', {
-        style: 'success',
-        title: '已加入收藏'
-      })
-      product.isFavorite = true
-      this.saveFavoritesToLocalStorage()
-    },
+    // addToFavorites (product) {
+    //   this.isFavorites.push(product)
+    //   this.emitter.emit('push-message', {
+    //     style: 'success',
+    //     title: '已加入收藏'
+    //   })
+    //   product.isFavorite = true
+    //   this.saveFavoritesToLocalStorage()
+    // },
     // 移除收藏
-    removeToFavorites (product) {
-      const index = this.favorites.findIndex(favProduct => favProduct.id === product.id)
-      if (index !== -1) {
-        this.favorites.splice(index, 1)
-        this.emitter.emit('push-message', {
-          style: 'warning',
-          title: '已移除收藏'
-        })
-      }
-      product.isFavorite = false
-      this.saveFavoritesToLocalStorage()
-    },
+    // removeToFavorites (product) {
+    //   const index = this.isFavorites.findIndex(favProduct => favProduct.id === product.id)
+    //   if (index !== -1) {
+    //     this.isFavorites.splice(index, 1)
+    //     this.emitter.emit('push-message', {
+    //       style: 'warning',
+    //       title: '已移除收藏'
+    //     })
+    //   }
+    //   product.isFavorite = false
+    //   this.saveFavoritesToLocalStorage()
+    // },
     // 將收藏資料儲存LocalStorage
-    saveFavoritesToLocalStorage () {
-      localStorage.setItem('favorites', JSON.stringify(this.favorites))
-    },
+    // saveFavoritesToLocalStorage () {
+    //   localStorage.setItem('favorites', JSON.stringify(this.isFavorites))
+    // },
     // 點擊其他圖片取代主圖
     handleImageClick (image) {
       this.selectedImage = image
@@ -239,18 +248,18 @@ export default {
         this.changeImage = false
       }, 500)
     },
-    // 減少數量
-    decrementQuantity (qty) {
-      if (qty > 1) {
-        this.quantity--
-      }
-    },
-    // 增加數量
-    incrementQuantity (qty) {
-      if (this.quantity < this.product.unit) {
-        this.quantity++
-      }
-    },
+    // // 減少數量
+    // decrementQuantity (qty) {
+    //   if (qty > 1) {
+    //     this.quantity--
+    //   }
+    // },
+    // // 增加數量
+    // incrementQuantity (qty) {
+    //   if (this.quantity < this.product.unit) {
+    //     this.quantity++
+    //   }
+    // },
     // 前往相關產品頁面
     goOtherProduct (id) {
       this.$router.push(`/user/product/${id}`).then(() => {
@@ -261,6 +270,7 @@ export default {
   },
   created () {
     this.id = this.$route.params.productId
+    this.getCart()
     this.getProduct()
     this.getAllProducts()
   }

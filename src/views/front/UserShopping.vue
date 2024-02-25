@@ -59,7 +59,7 @@
                   <div class="right ml-auto">
                     <button type="button add-cart" class="btn btn-outline-dark"
                       :disabled="this.status.loadingItem === item.id"
-                      @click="addCart(item.id)">
+                      @click="addToCart(item.id)">
                       <span v-if="this.status.loadingItem === item.id" class="spinner-border spinner-border-sm" aria-hidden="true"></span>
                       <!-- <i class="bi bi-cart4"></i> -->
                       加入購物車
@@ -87,6 +87,7 @@ import Pagination from '@/components/Pagination.vue'
 import scrollButton from '@/mixins/scrollButton'
 import { mapState, mapActions } from 'pinia'
 import favoriteStore from '@/stores/favoriteStore'
+import cartStore from '@/stores/cartStore'
 
 export default {
   data () {
@@ -95,9 +96,9 @@ export default {
       allProducts: [], // 所有產品
       search: '', // 搜尋內容
       selectedCategory: '', // 烘培類型
-      status: {
-        loadingItem: '' // 對應品項id
-      },
+      // status: {
+      //   loadingItem: '' // 對應品項id
+      // },
       pagination: {}, // 分頁
       isLoading: false, // 整個頁面loading
       // favorites: [], // 收藏的商品
@@ -110,6 +111,7 @@ export default {
   mixins: [scrollButton],
   computed: {
     ...mapState(favoriteStore, ['isFavorites']),
+    ...mapState(cartStore, ['status']),
     // 搜尋及篩選
     filterProducts () {
       // 輸入搜尋，從所有產品中查找
@@ -128,6 +130,8 @@ export default {
     }
   },
   methods: {
+    ...mapActions(favoriteStore, ['loadFavoritesFromLocalStorage', 'addToFavorites', 'removeToFavorites', 'isProductFavorite']),
+    ...mapActions(cartStore, ['addToCart', 'getCart']),
     // 取得單頁產品資料
     getProducts (page = 1) {
       // 一頁最多只能取得10筆資料
@@ -153,27 +157,26 @@ export default {
       this.$router.push(`/user/product/${id}`)
     },
     // 加到購物車
-    addCart (id) {
-      const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`
-      // 讀取資料前先讓loadingItem等於id資料，觸發disabled避免用戶重複加入購物車
-      this.status.loadingItem = id
-      const cart = {
-        product_id: id,
-        qty: 1
-      }
-      this.$http.post(url, { data: cart })
-        .then((res) => {
-          console.log(res)
-          // 讀取資料完成將disabled取消，讓用戶知道已經完成加入購物車
-          this.status.loadingItem = ''
-          this.$httpMessageState(res, '加入購物車')
-        })
-    },
+    // addCart (id) {
+    //   const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`
+    //   // 讀取資料前先讓loadingItem等於id資料，觸發disabled避免用戶重複加入購物車
+    //   this.status.loadingItem = id
+    //   const cart = {
+    //     product_id: id,
+    //     qty: 1
+    //   }
+    //   this.$http.post(url, { data: cart })
+    //     .then((res) => {
+    //       console.log(res)
+    //       // 讀取資料完成將disabled取消，讓用戶知道已經完成加入購物車
+    //       this.status.loadingItem = ''
+    //       this.$httpMessageState(res, '加入購物車')
+    //     })
+    // },
     // 收藏產品比對頁面產品
     // isProductFavorite (product) {
     //   return this.favorites.some(favProduct => favProduct.id === product.id)
     // },
-    ...mapActions(favoriteStore, ['loadFavoritesFromLocalStorage', 'addToFavorites', 'removeToFavorites', 'isProductFavorite']),
     // 加到收藏
     // addToFavorites (item) {
     //   this.favorites.push(item)
@@ -258,6 +261,7 @@ export default {
   created () {
     this.getProducts()
     this.getAllProducts()
+    this.getCart()
     this.loadFavoritesFromLocalStorage()
   }
 }

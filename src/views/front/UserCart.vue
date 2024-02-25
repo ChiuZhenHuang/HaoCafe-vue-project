@@ -13,85 +13,6 @@
       <li><i class="fa-solid fa-money-check-dollar"></i>付款完成</li>
     </ul>
   </div>
-  <!-- <div class="container">
-    <div class="row mt-4">
-      <div class="col-12" >
-        <div class="sticky-top">
-          <table class="table align-middle">
-            <tbody>
-            <template v-if="cart.carts">
-              <tr v-for="item in cart.carts" :key="item.id">
-                <td>
-                  <button type="button" class="btn btn-outline-danger btn-sm"
-                          @click="removeCartItem(item)">
-                          <i class="bi bi-trash"></i>
-                  </button>
-                </td>
-                <td>
-                  {{ item.product.title }}
-                  <div class="text-success" v-if="item.coupon">
-                    已套用優惠券( {{ item.coupon.title }} )
-                  </div>
-                </td>
-                <td>
-                  <div class="input-group input-group-sm">
-                    <input type="number" class="form-control" min="1" :max="item.product.unit"
-                      v-model.number="item.qty" @change="updateCart(item)">
-                  </div>
-                </td>
-                <td>
-                  <div class="input-group">{{ item.product.unit }} 件</div>
-                </td>
-                <td class="text-end">
-                  <small  v-if="item.coupon" class="text-success">金額：</small>
-                  {{ $filters.currency(item.final_total) }}
-                </td>
-              </tr>
-            </template>
-            </tbody>
-            <tfoot>
-            <tr  v-if="cart.final_total == cart.total">
-              <td colspan="3" class="text-end">總計</td>
-              <td class="text-end">{{ $filters.currency(cart.total) }}</td>
-            </tr>
-            <tr v-else>
-              <td colspan="3" class="text-end">總計</td>
-              <td class="text-end"><del>{{ $filters.currency(cart.total) }}</del></td>
-            </tr>
-            <tr v-if="cart.final_total !== cart.total">
-              <td colspan="3" class="text-end">已折扣</td>
-              <td class="text-end">{{ $filters.currency(cart.total - cart.final_total) }}</td>
-            </tr>
-            <tr v-show="cart.final_total < 3000 && cart.carts.length > 0">
-              <td colspan="3" class="text-end">運費</td>
-              <td class="text-end">+$ 120 (只差NT$ {{ $filters.currency(3000-parseInt(cart.final_total)) }}達成免運！)</td>
-            </tr>
-            <tr v-show="cart.final_total >= 3000">
-              <td colspan="3" class="text-end">恭喜達成免運！</td>
-            </tr>
-            <tr v-show="cart.total < 3000">
-              <td colspan="3" class="text-end text-success">應付金額</td>
-              <td class="text-end text-success">{{ $filters.currency(parseInt(cart.final_total)+120) }}</td>
-            </tr>
-            <tr v-show="cart.total >= 3000">
-              <td colspan="3" class="text-end text-success">應付金額</td>
-              <td class="text-end text-success">{{ $filters.currency(cart.final_total) }}</td>
-            </tr>
-            </tfoot>
-          </table>
-          <div class="input-group mb-3 input-group-sm">
-            <input  type="text" class="form-control" v-model="coupon_code" placeholder="請輸入優惠碼">
-            <div class="input-group-append">
-              <button class="btn btn-outline-secondary" type="button" @click="addCouponCode">
-                套用優惠碼
-              </button>
-            </div>
-          </div>
-          <button class="btn btn-success" @click="pushForm">確認訂單</button>
-        </div>
-      </div>
-    </div>
-  </div> -->
 
   <div class="container cart-product">
     <div class="row mt-5 mb-5">
@@ -224,93 +145,97 @@
 
 <script>
 import scrollButton from '@/mixins/scrollButton'
-// import { mapState, mapActions } from 'pinia'
-// import productStore from '@/stores/productStore'
+import { mapState, mapActions } from 'pinia'
+import favoriteStore from '@/stores/favoriteStore'
+import cartStore from '@/stores/cartStore'
 
 export default {
   data () {
     return {
-      cart: {}, // 存放目前已加至購物車內產品
-      isLoading: false
+      // cart: {}, // 存放目前已加至購物車內產品
+      // isLoading: false
     }
   },
   inject: ['emitter'],
   mixins: [scrollButton],
   computed: {
-    // ...mapState(productStore, ['cart'])
+    // ...mapState(favoriteStore, ['isFavorites']),
+    ...mapState(cartStore, ['cart', 'isLoading'])
   },
   methods: {
-    // ...mapActions(productStore, ['getCart']),
+    ...mapActions(favoriteStore, ['loadFavoritesFromLocalStorage']),
+    ...mapActions(cartStore, ['getCart', 'updateCart', 'clearCart', 'removeCartItem', 'decrementQuantity', 'incrementQuantity'])
     // 取得購物車列表
-    getCart () {
-      const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`
-      this.isLoading = true
-      this.$http.get(url)
-        .then((res) => {
-          this.cart = res.data.data
-          this.isLoading = false
-        })
-    },
+    // getCart () {
+    //   const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`
+    //   this.isLoading = true
+    //   this.$http.get(url)
+    //     .then((res) => {
+    //       this.cart = res.data.data
+    //       this.isLoading = false
+    //     })
+    // },
     // 更新購物車數量
-    updateCart (item, triggerMessage = true) {
-      const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart/${item.id}`
-      this.isLoading = true // 轉換購物車數量同時整個頁面loading
-      const cart = {
-        product_id: item.product_id,
-        qty: item.qty
-      }
-      this.$http.put(url, { data: cart }).then((res) => {
-        this.getCart()
-        this.isLoading = false
+    // updateCart (item, triggerMessage = true) {
+    //   const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart/${item.id}`
+    //   this.isLoading = true // 轉換購物車數量同時整個頁面loading
+    //   const cart = {
+    //     product_id: item.product_id,
+    //     qty: item.qty
+    //   }
+    //   this.$http.put(url, { data: cart }).then((res) => {
+    //     this.getCart()
+    //     this.isLoading = false
 
-        if (triggerMessage) {
-          this.$httpMessageState(res, '更新數量')
-        }
-      })
-    },
+    //     if (triggerMessage) {
+    //       this.$httpMessageState(res, '更新數量')
+    //     }
+    //   })
+    // },
     // 清空購物車
-    clearCart () {
-      const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/carts`
-      this.$http.delete(url).then((res) => {
-        console.log('this', res)
-        this.getCart()
-        this.emitter.emit('push-message', {
-          style: 'warning',
-          title: '已刪除產品'
-        })
-      })
-    },
+    // clearCart () {
+    //   const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/carts`
+    //   this.$http.delete(url).then((res) => {
+    //     console.log('this', res)
+    //     this.getCart()
+    //     this.emitter.emit('push-message', {
+    //       style: 'warning',
+    //       title: '已刪除產品'
+    //     })
+    //   })
+    // },
     // 刪除購物車品項
-    removeCartItem (item) {
-      const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart/${item.id}`
-      this.$http.delete(url).then((res) => {
-        // 用於判斷updateCart是否為removeCartItem所觸發，避免刪除時觸發更新產品通知
-        const triggerMessage = false
-        this.updateCart(item, triggerMessage)
+    // removeCartItem (item) {
+    //   const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart/${item.id}`
+    //   this.$http.delete(url).then((res) => {
+    //     // 用於判斷updateCart是否為removeCartItem所觸發，避免刪除時觸發更新產品通知
+    //     const triggerMessage = false
+    //     this.updateCart(item, triggerMessage)
 
-        this.emitter.emit('push-message', {
-          style: 'warning',
-          title: '已刪除產品'
-        })
-      })
-    },
+    //     this.emitter.emit('push-message', {
+    //       style: 'warning',
+    //       title: '已刪除產品'
+    //     })
+    //   })
+    // },
     // 減少數量
-    decrementQuantity (item, qty) {
-      if (qty > 1) {
-        item.qty--
-      }
-      this.updateCart(item)
-    },
-    // 增加數量
-    incrementQuantity (item, qty) {
-      if (qty < item.product.unit) {
-        item.qty++
-      }
-      this.updateCart(item)
-    }
+    // decrementQuantity (item, qty) {
+    //   if (qty > 1) {
+    //     item.qty--
+    //   }
+    //   this.updateCart(item)
+    // },
+    // // 增加數量
+    // incrementQuantity (item, qty) {
+    //   if (qty < item.product.unit) {
+    //     item.qty++
+    //   }
+    //   this.updateCart(item)
+    // }
   },
   created () {
     this.getCart()
+    this.loadFavoritesFromLocalStorage()
   }
 }
 </script>

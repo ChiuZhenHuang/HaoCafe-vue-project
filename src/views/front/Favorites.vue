@@ -64,6 +64,7 @@ import subscription from '@/components/Subscription.vue'
 import scrollButton from '@/mixins/scrollButton'
 import { mapState, mapActions } from 'pinia'
 import favoriteStore from '@/stores/favoriteStore'
+import cartStore from '@/stores/cartStore'
 
 export default {
   data () {
@@ -81,6 +82,7 @@ export default {
   },
   methods: {
     ...mapActions(favoriteStore, ['loadFavoritesFromLocalStorage', 'removeToFavorites', 'clearFavorites']),
+    ...mapActions(cartStore, ['addToCart', 'getCart']),
     // 取得儲存收藏產品資料
     // loadFavoritesFromLocalStorage () {
     //   const favoritesData = JSON.parse(localStorage.getItem('favorites')) || []
@@ -144,6 +146,7 @@ export default {
   created () {
   // 從 localStorage 中加載收藏資料
     this.loadFavoritesFromLocalStorage()
+    this.getCart()
   }
 }
 </script>
