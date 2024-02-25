@@ -4,7 +4,7 @@
       <h1>404</h1>
       <h2>OOPS! PAGE NOT FOUND</h2>
       <router-link to="/">
-        <button type="button" class="previous">回首頁</button>
+        <button type="button">回首頁</button>
       </router-link>
     </div>
   </div>

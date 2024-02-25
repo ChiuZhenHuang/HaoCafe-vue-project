@@ -116,7 +116,6 @@ import scrollButton from '@/mixins/scrollButton'
 export default {
   data () {
     return {
-      // initCarousel: {}
     }
   },
   name: 'HomeView',
@@ -126,15 +125,8 @@ export default {
   mixins: [scrollButton],
   inject: ['emitter'],
   methods: {
-    // initializeCarousel () {
-    //   this.initCarousel = new Carousel(this.$refs.carousel, {
-    //     interval: 2000,
-    //     wrap: false
-    //   })
-    // }
   },
   mounted () {
-    // this.initializeCarousel()
   },
   created () {
     // console.log(process.env.VUE_APP_API, process.env.VUE_APP_PATH)

@@ -85,6 +85,8 @@
 <script>
 import Pagination from '@/components/Pagination.vue'
 import scrollButton from '@/mixins/scrollButton'
+import { mapState, mapActions } from 'pinia'
+import favoriteStore from '@/stores/favoriteStore'
 
 export default {
   data () {
@@ -98,7 +100,7 @@ export default {
       },
       pagination: {}, // 分頁
       isLoading: false, // 整個頁面loading
-      favorites: [], // 收藏的商品
+      // favorites: [], // 收藏的商品
       isActive: false, // 篩選欄是否被選擇
       isComposing: false // 是否進行中文輸入
     }
@@ -107,6 +109,7 @@ export default {
   inject: ['emitter'],
   mixins: [scrollButton],
   computed: {
+    ...mapState(favoriteStore, ['isFavorites']),
     // 搜尋及篩選
     filterProducts () {
       // 輸入搜尋，從所有產品中查找
@@ -167,43 +170,44 @@ export default {
         })
     },
     // 收藏產品比對頁面產品
-    isProductFavorite (product) {
-      return this.favorites.some(favProduct => favProduct.id === product.id)
-    },
+    // isProductFavorite (product) {
+    //   return this.favorites.some(favProduct => favProduct.id === product.id)
+    // },
+    ...mapActions(favoriteStore, ['loadFavoritesFromLocalStorage', 'addToFavorites', 'removeToFavorites', 'isProductFavorite']),
     // 加到收藏
-    addToFavorites (item) {
-      this.favorites.push(item)
-      this.emitter.emit('push-message', {
-        style: 'success',
-        title: '已加入收藏'
-      })
-      item.isFavorite = true
-      // 先變更isFavorite的值再儲存至localStorage
-      this.saveFavoritesToLocalStorage()
-    },
+    // addToFavorites (item) {
+    //   this.favorites.push(item)
+    //   this.emitter.emit('push-message', {
+    //     style: 'success',
+    //     title: '已加入收藏'
+    //   })
+    //   item.isFavorite = true
+    //   // 先變更isFavorite的值再儲存至localStorage
+    //   this.saveFavoritesToLocalStorage()
+    // },
     // 移除收藏
-    removeToFavorites (item) {
-      const index = this.favorites.findIndex(favProduct => favProduct.id === item.id)
-      if (index !== -1) {
-        this.favorites.splice(index, 1)
-        this.emitter.emit('push-message', {
-          style: 'warning',
-          title: '已移除收藏'
-        })
-      }
-      item.isFavorite = false
-      // 先變更isFavorite的值再儲存至localStorage
-      this.saveFavoritesToLocalStorage()
-    },
+    // removeToFavorites (item) {
+    //   const index = this.favorites.findIndex(favProduct => favProduct.id === item.id)
+    //   if (index !== -1) {
+    //     this.favorites.splice(index, 1)
+    //     this.emitter.emit('push-message', {
+    //       style: 'warning',
+    //       title: '已移除收藏'
+    //     })
+    //   }
+    //   item.isFavorite = false
+    //   // 先變更isFavorite的值再儲存至localStorage
+    //   this.saveFavoritesToLocalStorage()
+    // },
     // 將收藏資料儲存LocalStorage
-    saveFavoritesToLocalStorage () {
-      localStorage.setItem('favorites', JSON.stringify(this.favorites))
-    },
+    // saveFavoritesToLocalStorage () {
+    //   localStorage.setItem('favorites', JSON.stringify(this.favorites))
+    // },
     // 從 localStorage 中提取資料到 favorites
-    loadFavoritesFromLocalStorage () {
-      const favoritesFromStorage = JSON.parse(localStorage.getItem('favorites')) || []
-      this.favorites = favoritesFromStorage
-    },
+    // loadFavoritesFromLocalStorage () {
+    //   const favoritesFromStorage = JSON.parse(localStorage.getItem('favorites')) || []
+    //   this.favorites = favoritesFromStorage
+    // },
     // 滾動至最上方
     scrollToTop () {
       window.scrollTo({

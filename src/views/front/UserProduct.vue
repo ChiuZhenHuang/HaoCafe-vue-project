@@ -10,8 +10,8 @@
       <ul class="breadcrumb mt-5">
         <li class="breadcrumb-item"><router-link to="/user/shopping">全部商品</router-link></li>
         <!-- <li class="breadcrumb-item"><router-link to="/user/shopping" :@click="emitCategory(product.category)">{{ product.category }}</router-link></li> -->
-        <li class="breadcrumb-item" aria-current="page">{{ product.category }}</li>
-        <li class="breadcrumb-item" aria-current="page">{{ product.title }}</li>
+        <li class="breadcrumb-item">{{ product.category }}</li>
+        <li class="breadcrumb-item">{{ product.title }}</li>
       </ul>
     </nav>
 
@@ -114,12 +114,6 @@
               v-for="item in allProducts" :key="item.id">
               <div class="card">
                 <div class="card-top">
-                  <!-- <button v-if="!item.isFavorite" type="button" class="btn btn-outline-info" @click="addToFavorites(item)">
-                    <i class="bi bi-heart"></i>
-                  </button>
-                  <button v-else type="button" class="btn btn-outline-info" @click="removeToFavorites(item)">
-                    <i class="bi bi-heart-fill"></i>
-                  </button> -->
                   <img :src="item.imageUrl"  alt="產品圖片">
                   <div class="more">
                     <button type="button" class="btn btn-outline-secondary"
@@ -129,9 +123,9 @@
                 </div>
                 <div class="card-body w-100">
                   <h5 class="title" style="cursor: pointer" @click="goOtherProduct(item.id)">{{ item.title }}</h5>
+                  <div class="category">{{ item.category }} </div>
                   <div class="d-flex justify-content-between">
                     <div class="left">
-                      <div class="category">{{ item.category }} </div>
                       <div class="h5" v-if="!item.price">NT$ {{ $filters.currency(item.origin_price) }}</div>
                       <del class="h5" v-if="item.price">NT$ {{ $filters.currency(item.origin_price) }}</del>
                       <div class="h6" v-if="item.price">NT$ {{ $filters.currency(item.price) }}</div>
@@ -168,9 +162,6 @@ export default {
   inject: ['emitter'],
   mixins: [scrollButton],
   methods: {
-    // emitCategory (category) {
-    //   this.$emit('category-selected', category)
-    // },
     // 取得產品資料
     getProduct () {
       const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/product/${this.id}`
@@ -206,7 +197,6 @@ export default {
       this.$http.post(url, { data: cart }).then((res) => {
         this.status.loadingItem = ''
         this.$httpMessageState(res, '加入購物車')
-        // this.$router.push('/user/cart')
       })
     },
     // 加到收藏
@@ -266,7 +256,7 @@ export default {
       this.$router.push(`/user/product/${id}`).then(() => {
         this.$router.go(0)
       })
-      this.scrollToTop()
+      // this.scrollToTop()
     }
   },
   created () {

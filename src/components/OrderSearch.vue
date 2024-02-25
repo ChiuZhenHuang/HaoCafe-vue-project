@@ -27,7 +27,8 @@ export default {
   data () {
     return {
       modal: '',
-      orderNumber: '' // 用戶輸入訂單編號
+      orderNumber: '', // 用戶輸入訂單編號
+      orders: {}
     }
   },
   methods: {

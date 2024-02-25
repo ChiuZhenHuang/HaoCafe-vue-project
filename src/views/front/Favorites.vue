@@ -19,10 +19,7 @@
           <div class="frame" v-for="item in isFavorites" :key="item.id">
             <div class="card">
               <div class="card-top">
-                <button v-if="!item.isFavorite" type="button" class="btn btn-outline-info" @click="addToFavorites(item)">
-                  <i class="bi bi-heart"></i>
-                </button>
-                <button v-else type="button" class="btn btn-outline-info" @click="removeToFavorites(item)">
+                <button type="button" class="btn btn-outline-info" @click="removeToFavorites(item)">
                   <i class="bi bi-heart-fill"></i>
                 </button>
                 <img :src="item.imageUrl"  alt="產品圖片">
@@ -34,9 +31,9 @@
               </div>
               <div class="card-body w-100">
                 <h5 class="title" style="cursor: pointer" @click="getProduct(item.id)">{{ item.title }}</h5>
+                <div class="category">{{ item.category }}</div>
                 <div class="d-flex justify-content-between">
                   <div class="left">
-                    <div class="category">{{ item.category }}</div>
                     <div class="h5" v-if="!item.price">NT$ {{ $filters.currency(item.origin_price) }}</div>
                     <del class="h5" v-if="item.price">NT$ {{ $filters.currency(item.origin_price) }}</del>
                     <div class="h6" v-if="item.price">NT$ {{ $filters.currency(item.price) }}</div>
@@ -65,31 +62,34 @@
 <script>
 import subscription from '@/components/Subscription.vue'
 import scrollButton from '@/mixins/scrollButton'
-// import { mapState, mapActions } from 'pinia'
-// import favorites from '@/stores/favorites'
+import { mapState, mapActions } from 'pinia'
+import favoriteStore from '@/stores/favoriteStore'
 
 export default {
   data () {
     return {
-      isFavorites: [],
+      // isFavorites: [],
       status: {
         loadingItem: '' // 對應品項id
       }
     }
   },
   components: { subscription },
-  inject: ['emitter'],
   mixins: [scrollButton],
+  computed: {
+    ...mapState(favoriteStore, ['isFavorites'])
+  },
   methods: {
+    ...mapActions(favoriteStore, ['loadFavoritesFromLocalStorage', 'removeToFavorites', 'clearFavorites']),
     // 取得儲存收藏產品資料
-    loadFavoritesFromLocalStorage () {
-      const favoritesData = JSON.parse(localStorage.getItem('favorites')) || []
-      this.isFavorites = favoritesData
-    },
+    // loadFavoritesFromLocalStorage () {
+    //   const favoritesData = JSON.parse(localStorage.getItem('favorites')) || []
+    //   this.isFavorites = favoritesData
+    // },
     // 將收藏資料儲存LocalStorage
-    saveFavoritesToLocalStorage () {
-      localStorage.setItem('favorites', JSON.stringify(this.isFavorites))
-    },
+    // saveFavoritesToLocalStorage () {
+    //   localStorage.setItem('favorites', JSON.stringify(this.isFavorites))
+    // },
     // 前往詳細資料頁面
     getProduct (id) {
       this.$router.push(`/user/product/${id}`)
@@ -111,35 +111,35 @@ export default {
           this.status.loadingItem = ''
           this.$httpMessageState(res, '加入購物車')
         })
-    },
-    // 加到收藏
-    addToFavorites (item) {
-      this.isFavorites.push(item)
-      this.emitter.emit('push-message', {
-        style: 'success',
-        title: '已加入收藏'
-      })
-      item.isFavorite = true
-      this.saveFavoritesToLocalStorage()
-    },
-    // 移除收藏
-    removeToFavorites (item) {
-      const index = this.isFavorites.findIndex(favProduct => favProduct.id === item.id)
-      if (index !== -1) {
-        this.isFavorites.splice(index, 1)
-        this.emitter.emit('push-message', {
-          style: 'warning',
-          title: '已移除收藏'
-        })
-      }
-      item.isFavorite = false
-      this.saveFavoritesToLocalStorage()
-    },
-    clearFavorites () {
-      // 清空 isFavorites 及LocalStorage
-      this.isFavorites = []
-      localStorage.removeItem('favorites')
     }
+    // 加到收藏
+    // addToFavorites (item) {
+    //   this.isFavorites.push(item)
+    //   this.emitter.emit('push-message', {
+    //     style: 'success',
+    //     title: '已加入收藏'
+    //   })
+    //   item.isFavorite = true
+    //   this.saveFavoritesToLocalStorage()
+    // },
+    // 移除收藏
+    // removeToFavorites (item) {
+    //   const index = this.isFavorites.findIndex(favProduct => favProduct.id === item.id)
+    //   if (index !== -1) {
+    //     this.isFavorites.splice(index, 1)
+    //     this.emitter.emit('push-message', {
+    //       style: 'warning',
+    //       title: '已移除收藏'
+    //     })
+    //   }
+    //   item.isFavorite = false
+    //   this.saveFavoritesToLocalStorage()
+    // },
+    // clearFavorites () {
+    //   // 清空 isFavorites 及LocalStorage
+    //   this.isFavorites = []
+    //   localStorage.removeItem('favorites')
+    // }
   },
   created () {
   // 從 localStorage 中加載收藏資料

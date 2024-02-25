@@ -49,6 +49,8 @@
             <li class="nav-item">
               <router-link class="nav-link" to="/user/favorites" @click.prevent="scrollToTop">
                 <i class="bi bi-heart"></i>
+                <span v-if="!favoritesLength"></span>
+                <span v-else>{{ favoritesLength }}</span>
               </router-link>
             </li>
             <li class="nav-item">
@@ -112,6 +114,8 @@
 
 <script>
 import orderSearch from '@/components/OrderSearch.vue'
+import { mapState } from 'pinia'
+import favoriteStore from '@/stores/favoriteStore'
 
 export default {
   data () {
@@ -133,6 +137,7 @@ export default {
     }
   },
   computed: {
+    ...mapState(favoriteStore, ['favoritesLength']),
     // navbar高度設定
     dynamicHeight () {
       // 手機板navbar高度保持76px
