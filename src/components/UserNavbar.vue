@@ -36,10 +36,17 @@
           <div class="ml-auto bg-transparent d-flex navbar-nav">
             <router-link class=" nav-item d-lg-none" to="/user/favorites" @click.prevent="scrollToTop">
               <i class="bi bi-heart"></i>
+                <span v-if="!favoritesLength" :style="{ display: favoritesLength ? 'block' : 'none' }"></span>
+                <span v-else><h5>{{ favoritesLength }}</h5></span>
             </router-link>
             <router-link class=" nav-item d-lg-none" to="/user/cart" @click.prevent="scrollToTop">
               <i class="bi bi-cart"></i>
+                <span v-if="!cartLength" :style="{ display: cartLength ? 'block' : 'none' }"></span>
+                <span v-else><h5>{{ cartLength }}</h5></span>
             </router-link>
+            <router-link class="nav-item d-lg-none" to="/login" @click.prevent="scrollToTop">
+                <i class="bi bi-person-gear"></i>
+              </router-link>
             <button class="navbar-toggler ml-auto bg-transparent" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebar" aria-controls="sidebar">
               <i class="bi bi-border-width"></i>
             </button>
@@ -49,15 +56,15 @@
             <li class="nav-item">
               <router-link class="nav-link" to="/user/favorites" @click.prevent="scrollToTop">
                 <i class="bi bi-heart"></i>
-                <span v-if="!favoritesLength"></span>
-                <span v-else>{{ favoritesLength }}</span>
+                <span v-if="!favoritesLength" :style="{ display: favoritesLength ? 'block' : 'none' }"></span>
+                <span v-else><h5>{{ favoritesLength }}</h5></span>
               </router-link>
             </li>
             <li class="nav-item">
               <router-link class="nav-link" to="/user/cart" @click.prevent="scrollToTop">
                 <i class="bi bi-cart"></i>
-                <span v-if="!cartLength"></span>
-                <span v-else>{{ cartLength }}</span>
+                <span v-if="!cartLength" :style="{ display: cartLength ? 'block' : 'none' }"></span>
+                <span v-else><h5>{{ cartLength }}</h5></span>
               </router-link>
             </li>
             <li class="nav-item">
@@ -75,7 +82,7 @@
         <button type="button" class="btn-close text-reset ms-auto" data-bs-dismiss="offcanvas" aria-label="Close"></button>
       </div>
       <div class="offcanvas-body">
-        <ul class="navbar-nav flex-column">
+        <ul class="navbar-nav flex-column h-100 justify-content-around">
           <li class="nav-item">
             <router-link class="nav-link" to="/about" @click.prevent="scrollToTop">
               關於我們
@@ -94,11 +101,15 @@
           <li class="nav-item">
             <router-link class="nav-link" to="/user/favorites" @click.prevent="scrollToTop">
               <i class="bi bi-heart"></i>
+                <span v-if="!favoritesLength" :style="{ display: favoritesLength ? 'block' : 'none' }"></span>
+                <span v-else><h5>{{ favoritesLength }}</h5></span>
             </router-link>
           </li>
           <li class="nav-item">
             <router-link class="nav-link" to="/user/cart" @click.prevent="scrollToTop">
               <i class="bi bi-cart"></i>
+                <span v-if="!cartLength" :style="{ display: cartLength ? 'block' : 'none' }"></span>
+                <span v-else><h5>{{ cartLength }}</h5></span>
             </router-link>
           </li>
           <li class="nav-item">

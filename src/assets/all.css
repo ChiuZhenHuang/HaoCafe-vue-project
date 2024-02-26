@@ -12427,6 +12427,24 @@ textarea.form-control-lg {
 .navbar-nav .nav-item .nav-link i {
   background-color: rgba(255, 255, 255, 0);
 }
+.navbar-nav .nav-item span {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 0;
+  right: -5px;
+  height: 18px;
+  width: 18px;
+  background-color: red;
+  border-radius: 50%;
+  text-align: center;
+}
+.navbar-nav .nav-item span h5, .navbar-nav .nav-item span .h5 {
+  margin: 0;
+  font-weight: bolder;
+  font-size: 0.6em;
+}
 .navbar-nav .nav-item::after {
   content: "";
   position: absolute;
@@ -12458,8 +12476,11 @@ textarea.form-control-lg {
     gap: 15px;
   }
   .navbar-nav .nav-item {
-    font-size: 1.25rem;
-    margin: 20px 0;
+    margin: 0 5px;
+  }
+  .navbar-nav .nav-item span {
+    top: -5px;
+    right: -10px;
   }
   .navbar-nav .nav-item:hover {
     color: white;

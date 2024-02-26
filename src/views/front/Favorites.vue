@@ -39,11 +39,12 @@
                     <div class="h6" v-if="item.price">NT$ {{ $filters.currency(item.price) }}</div>
                   </div>
                   <div class="right ml-auto">
-                    <button type="button add-cart" class="btn btn-outline-danger"
+                    <button type="button add-cart" class="btn btn-outline-dark"
                       :disabled="this.status.loadingItem === item.id"
-                      @click="addCart(item.id)">
+                      @click="addToCart(item.id)">
                       <span v-if="this.status.loadingItem === item.id" class="spinner-border spinner-border-sm" aria-hidden="true"></span>
-                      <i class="bi bi-cart4"></i>
+                      <!-- <i class="bi bi-cart4"></i> -->
+                      加入購物車
                     </button>
                   </div>
                 </div>
@@ -96,24 +97,24 @@ export default {
     getProduct (id) {
       this.$router.push(`/user/product/${id}`)
       this.scrollToTop()
-    },
-    // 加到購物車
-    addCart (id) {
-      const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`
-      // 讀取資料前先讓loadingItem等於id資料，觸發disabled避免用戶重複加入購物車
-      this.status.loadingItem = id
-      const cart = {
-        product_id: id,
-        qty: 1
-      }
-      this.$http.post(url, { data: cart })
-        .then((res) => {
-          console.log(res)
-          // 讀取資料完成將disabled取消，讓用戶知道已經完成加入購物車
-          this.status.loadingItem = ''
-          this.$httpMessageState(res, '加入購物車')
-        })
     }
+    // 加到購物車
+    // addCart (id) {
+    //   const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`
+    //   // 讀取資料前先讓loadingItem等於id資料，觸發disabled避免用戶重複加入購物車
+    //   this.status.loadingItem = id
+    //   const cart = {
+    //     product_id: id,
+    //     qty: 1
+    //   }
+    //   this.$http.post(url, { data: cart })
+    //     .then((res) => {
+    //       console.log(res)
+    //       // 讀取資料完成將disabled取消，讓用戶知道已經完成加入購物車
+    //       this.status.loadingItem = ''
+    //       this.$httpMessageState(res, '加入購物車')
+    //     })
+    // }
     // 加到收藏
     // addToFavorites (item) {
     //   this.isFavorites.push(item)

@@ -16,28 +16,7 @@ export default defineStore('cartStore', {
     }
   },
   actions: {
-    // shopping頁面加入購物車
-    addCart (id) {
-      const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`
-      // 讀取資料前先讓loadingItem等於id資料，觸發disabled避免用戶重複加入購物車
-      this.status.loadingItem = id
-      const cart = {
-        product_id: id,
-        qty: 1
-      }
-      axios.post(url, { data: cart })
-        .then((res) => {
-          // console.log(res)
-          // 讀取資料完成將disabled取消，讓用戶知道已經完成加入購物車
-          this.status.loadingItem = ''
-          emitter.emit('push-message', {
-            style: 'success',
-            title: '加入購物車成功'
-          })
-        })
-      this.updateCart(id, false)
-    },
-    // product頁面加入購物車(增加數量選擇)
+    // favorites,shopping,product頁面加入購物車
     addToCart (id, qty = 1) {
       const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`
       this.status.loadingItem = id

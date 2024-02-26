@@ -43,10 +43,27 @@ import userNav from '@/components/UserNavbar.vue'
 import Footer from '@/components/Footer.vue'
 import scrollButton from '@/mixins/scrollButton'
 
+import { mapState, mapActions } from 'pinia'
+import favoriteStore from '@/stores/favoriteStore'
+import cartStore from '@/stores/cartStore'
+
 export default {
   components: {
     userNav, Footer
   },
-  mixins: [scrollButton]
+  computed: {
+    ...mapState(favoriteStore, ['isFavorites']),
+    ...mapState(cartStore, ['cart'])
+  },
+  mixins: [scrollButton],
+  methods: {
+    ...mapActions(favoriteStore, ['loadFavoritesFromLocalStorage']),
+    ...mapActions(cartStore, ['getCart'])
+  },
+  created () {
+    this.loadFavoritesFromLocalStorage()
+    this.getCart()
+    // console.log(process.env.VUE_APP_API, process.env.VUE_APP_PATH)
+  }
 }
 </script>

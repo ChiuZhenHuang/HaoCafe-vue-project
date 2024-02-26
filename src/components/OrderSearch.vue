@@ -22,18 +22,25 @@
 
 <script>
 import modalMixin from '@/mixins/modalMixin'
+// import { mapState, mapActions } from 'pinia'
+// import cartStore from '@/stores/cartStore'
 
 export default {
   data () {
     return {
       modal: '',
-      orderNumber: '', // 用戶輸入訂單編號
-      orders: {}
+      orderNumber: '' // 用戶輸入訂單編號
+      // orders: {}
     }
   },
+  computed: {
+    // ...mapState(cartStore, ['orders', 'ordersList'])
+  },
   methods: {
+    // ...mapActions(cartStore, ['getOrders'])
   },
   created () {
+    // this.getOrders()
   },
   mixins: [modalMixin]
 }
