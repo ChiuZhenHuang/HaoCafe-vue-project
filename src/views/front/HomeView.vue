@@ -38,15 +38,15 @@
       <div class="col-12 col-md-4 mt-3 mb-3">
         <div class="main-item">
           <div class="left">
-            <div class="item">
+            <div class="item animate__animated" :class="{'animate__bounceInLeft': showNews, 'animate__fadeOutLeft': !showNews}">
               <img src="https://i.imgur.com/Ee0Isz0.jpg">
               <router-link class="nav-link" to="/about" @click.prevent="scrollToTop">關於我們</router-link>
             </div>
-            <div class="item">
+            <div class="item animate__animated" :class="{'animate__bounceInLeft':showNews, 'animate__fadeOutLeft': !showNews}">
               <img src="https://i.imgur.com/LqGBzES.jpg">
               <router-link class="nav-link" to="/user/shopping" @click.prevent="scrollToTop">產品列表</router-link>
             </div>
-            <div class="item">
+            <div class="item animate__animated" :class="{'animate__bounceInLeft':showNews, 'animate__fadeOutLeft': !showNews}">
               <img src="https://i.imgur.com/zXIMLuE.jpg">
               <router-link class="nav-link" to="/user/favorites" @click.prevent="scrollToTop">收藏列表</router-link>
             </div>

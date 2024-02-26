@@ -6,7 +6,8 @@
           <strong>享受折扣商品優惠</strong>
           <h5>感謝祭活動期間快來領取優惠券！</h5>
         </div>
-        <div class="d-flex flex-column align-items-center">
+        <div class="d-flex flex-column align-items-center animate__animated"
+        :class="{'animate__fadeIn': getCoupon, 'animate__fadeOut': !getCoupon}">
           <div class="d-flex coupon">
             <div class="mt-3 mb-3">
               <p>好康</p>
@@ -22,6 +23,7 @@
 </template>
 
 <script>
+import scrollButton from '@/mixins/scrollButton'
 
 export default {
   data () {
@@ -29,6 +31,7 @@ export default {
     }
   },
   inject: ['emitter'],
+  mixins: [scrollButton],
   methods: {
     // 複製優惠
     copyText () {

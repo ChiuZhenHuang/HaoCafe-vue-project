@@ -44,7 +44,7 @@
                 <h6 class="text-start price">單價：NT$ {{ item.product.price }}</h6>
                 <div class="d-flex">
                   <div class="change-qty">
-                    <button type="button" class="btn qty-handler" @click="decrementQuantity(item,item.qty)">-</button>
+                    <button type="button" class="btn qty-handler" @click="decrementQuantity(item,item.qty)" :disabled="item.qty === 1">-</button>
                     <input type="number" v-model.number="item.qty" min="1" :max="item.product.unit" @change="updateCart(item)"/>
                     <button type="button" class="btn qty-handler" @click="incrementQuantity(item,item.qty)">+</button>
                   </div>
