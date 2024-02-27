@@ -7,22 +7,22 @@
   }
 }
 
-#product{
-  .frame{
+.l-product-content{
+  .l-frame{
     .card{
       .card-top{
-        .main-image{
+        .main-img{
           transition: .5s;
           aspect-ratio: 2/2;
         }
       }
-      .images{
+      .other-img-content{
         display: flex;
         gap: 10px; 
         width: 100%;
         flex: 0 0 auto; 
         white-space: nowrap;   
-        .img-fluid {
+        img{
           flex: 1; 
           max-width: 100%;
           height:auto;
@@ -37,9 +37,9 @@
   }
 }
 
-.description{
+.product-description{
   padding: 25px;
-  .title{
+  .product-title{
     font-weight: bolder;
     font-size: 2em;
     margin: 20px;
@@ -72,6 +72,7 @@
       display: flex;
       justify-content: flex-end;
       .qty-handler{
+        width: 30px;
         padding: 10px 15px;
         display:flex;
         justify-content: center;
@@ -98,6 +99,7 @@
         }
       }
       input{
+        border-radius: 0;
         outline: none;
         border: none;
         border-top: 1px solid black;
@@ -114,7 +116,7 @@
   }
 }
 
-.notice{
+.product-notice{
   .accordion-item{
     .accordion-button{
       &:focus{
@@ -131,7 +133,7 @@
 
 .other-product{
   padding: 30px 0;
-  .title{
+  .about-product-title{
     text-align: center;
     h2{
     font-weight: bolder;

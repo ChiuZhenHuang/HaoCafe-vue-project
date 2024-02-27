@@ -1,6 +1,4 @@
-// about
-.main-about{
-  // margin-top: -85px;
+.about{
   background-color: rgb(21, 21, 21);
   position: relative;
   .about-item{
@@ -19,10 +17,7 @@
       transform: translate(-50%,-50%);
       font-size: 5rem;
     }
-    img{
-      width: 100%;
-    }
-    .middle-img{
+    .about-middleImg{
       position: absolute;
       left:50%;
       top:50%;
@@ -36,12 +31,15 @@
       padding: 0 30px;
       line-height: 2.5rem;
     }
+    .about-img{
+      width: 100%;
+    }
   }
 }
 
 // 平板
 @media screen and (max-width: 992px){
-  .main-about{
+  .about{
     .about-item{
       h3{
         position: static;
@@ -53,12 +51,12 @@
 
 // 手機
 @media screen and (max-width: 768px){
-  .main-about{
+  .about{
     .about-item{
       h3{
         margin-top: 50px;
       }
-      .middle-img{
+      .about-middleImg{
         width: 200px;
         height: 200px;
         border-radius: 10px;

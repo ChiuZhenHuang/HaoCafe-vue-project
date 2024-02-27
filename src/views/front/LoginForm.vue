@@ -1,11 +1,11 @@
 <template>
-  <div class="container-fluid"  id="login">
+  <div class="container-fluid" id="login">
     <ToastMessages/>
     <form class="row h-100 justify-content-center align-items-center"
     @submit.prevent="signIn">
     <div class="mask d-flex justify-content-center align-items-center">
-      <div class="col-9 mt-5 mb-5 frame">
-        <h1 class="h3 mb-3 font-weight-normal">Login</h1>
+      <div class="col-9 mt-5 mb-5 login-frame">
+        <h1 class="h3 mb-3 font-weight-normal login-title">Login</h1>
         <router-link to="/" class="btn go-home"><i class="bi bi-arrow-90deg-up"></i> 回首頁</router-link>
         <div class="mb-2">
           <label for="inputEmail">Email address</label>

@@ -1,23 +1,8 @@
-// *{
-//   font-family: 'Great Vibes', cursive;
-// }
-
 // 幻燈片
-.carousel-item {
-  // 圖片大小高低不同，先用vh
-  height: 100vh;
-  background-size: cover;
-  img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-}
 .carousel-inner{
-  // 讓navbar呈現幻燈片在上層
-  // margin-top: -76px;
   position: relative;
-  .text {
+  height: 100vh;
+  .carousel-text {
     position: absolute;
     top: 70%;
     left: 70%;
@@ -26,7 +11,7 @@
     color: white; 
     z-index: 5;
     font-size: 1.5rem;
-    .nav-link{
+    .go-shopping{
       display: inline-block;
       margin-top: 20px;
       font-size: 1.5rem;
@@ -36,29 +21,29 @@
       padding: 5px 20px;
       border: 1px solid white;
       transition: .7s;
+      &:hover{
+        background-color: rgba(255, 255, 255, .3);
+      }
     }
-    .nav-link:hover{
-      background-color: rgba(255, 255, 255, .3);
+  }
+  .carousel-item {
+    height: 100%;
+    background-size: cover;
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
     }
   }
 }
 
 // 消息背景
-.home-main{
+.news-wrapper{
   position: relative;
   background-size: cover;
   background-image: url('https://i.imgur.com/yR8HxLG.jpg');
   color: white;
-  // 黑色遮罩  
-  .mask{
-    position: absolute;
-    top:0;
-    left: 0;
-    height: 100%;
-    width: 100%;
-    background-color: rgba(0, 0, 0, 0.2);
-  }
-  //背脊模糊
+  //背景模糊
   &::before {
     content: "";
     position: absolute;
@@ -68,21 +53,30 @@
     width: 100%;
     background-image: url('https://i.imgur.com/yR8HxLG.jpg');
     background-size: cover;
-    filter: blur(5px); 
-  }
+    filter: blur(5px);
+  }  
+  // 黑色遮罩  
+  .mask{
+    position: absolute;
+    top:0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.2);
+    } 
 
-  .main-item{    
+  .news-content{    
     width: 100%;
     height: 100%;
     position: relative; //用於使用z-index
     z-index: 2;
-    .left{
+    .side{
       height: 100%;
       flex-direction: column;
       display: flex;
       align-items: end;
       justify-content: space-between;
-      .item{
+      .news-item{
         width: 55%;
         flex-direction: column;
         display: flex;
@@ -131,7 +125,7 @@
     }
   }
   // 最新消息文字
-  .news{
+  .news-content {
     height: 100%;
     text-align: center;
     display: flex;
@@ -142,17 +136,17 @@
       font-family: 'Dancing Script', cursive;
       font-size: 4rem;
     }
-    .txt{
+    .news-txt{
       font-family:'Zen Kurenaido', sans-serif;
       margin: 60px;
       line-height: 30px;
       color: rgb(255, 255, 255);
-      div {
+      .date{
+        font-size: 1em;
         color:rgba(230, 177, 107, 0.911);
       }
     }
   }
-    
 }
 
 // 滾動按鈕
@@ -178,7 +172,7 @@
 @media screen and (max-width: 768px) {
   // 幻燈片
   .carousel-inner{
-    .text{
+    .carousel-text{
       top: 85%;
       left: 50%;
       transform: translate(-50%, -50%);
@@ -187,31 +181,19 @@
     }
   }
   // 消息背景
-  .home-main{
-    .main-item{
-      .text{
-        writing-mode: horizontal-tb;
-        margin-top:0;
-        text-align:center;
-        line-height: 40px;
-        p:nth-of-type(1) {
-          margin-top: 20px;
-        }
-        p:nth-of-type(2) {
-          margin-top:0px;
-        }
-      }
-      .left{
+  .news-wrapper{
+    .news-content{
+      .side{
         flex-direction: row;
         justify-content: space-around;
-        .item{
+        .news-item {
+          img{
+            width: 90%;
+          }
           .nav-link{
             width: 80%;
             font-size:1em;
           }
-        }
-        img{
-          width: 90%;
         }
       }
     }

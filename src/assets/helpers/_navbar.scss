@@ -24,12 +24,15 @@
     transform: translateY(0px);
     transition: .3s;
     margin: 0 10px;
+    font-size: 1.25em;
+    color: white;
     .nav-link{
       i{
         background-color: rgba(255, 255, 255, 0);
       }
       color: white;
     }
+    // 顯示數量
     span{
       display: flex;
       justify-content: center;
@@ -67,9 +70,6 @@
     left: 0%;
     right: 0%;
   }
-  // .d-lg-none{
-  //   display: none;
-  // }
 }
 
 
@@ -100,27 +100,9 @@
         bottom: 0; 
         }
     }
-    // .d-lg-none{
-    //   display: block;
-    // }
-    // .nav-item::after{
-    // border-bottom: 1px solid #ffffff;
-    // }
   }
   .navbar-toggler{
     color: rgb(255, 255, 255);
     border: 1px solid white;
   }
-}
-
-@media screen and (max-width: 768px) {
-  .item{
-    .text{
-      margin-top:0px;
-    }
-  }
-}
-.nav-item {
-  font-size: 1.25em;
-  color: white;
 }

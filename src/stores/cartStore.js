@@ -19,7 +19,7 @@ export default defineStore('cartStore', {
   actions: {
     // 用於搜尋訂單，再研究
     getOrders (currentPage = 1) {
-      const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/orders?page=${currentPage}`
+      const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/orders?page=${currentPage}`
       this.isLoading = true
       axios.get(api)
         .then((res) => {

@@ -23,23 +23,18 @@
                 訂單查詢
               </button>
             </li>
-            <li class="nav-item">
-              <router-link class="nav-link" to="/dashboard/productComponent" @click.prevent="scrollToTop">
-                管理產品
-              </router-link>
-            </li>
           </ul>
         </div>
 
         <div>
         <!-- 手機漢堡鈕 -->
           <div class="ml-auto bg-transparent d-flex navbar-nav">
-            <router-link class=" nav-item d-lg-none" to="/user/favorites" @click.prevent="scrollToTop">
+            <router-link class="nav-item d-lg-none" to="/user/favorites" @click.prevent="scrollToTop">
               <i class="bi bi-heart"></i>
                 <span v-if="!favoritesLength" :style="{ display: favoritesLength ? 'block' : 'none' }"></span>
                 <span v-else><h5>{{ favoritesLength }}</h5></span>
             </router-link>
-            <router-link class=" nav-item d-lg-none" to="/user/cart" @click.prevent="scrollToTop">
+            <router-link class="nav-item d-lg-none" to="/user/cart" @click.prevent="scrollToTop">
               <i class="bi bi-cart"></i>
                 <span v-if="!cartLength" :style="{ display: cartLength ? 'block' : 'none' }"></span>
                 <span v-else><h5>{{ cartLength }}</h5></span>

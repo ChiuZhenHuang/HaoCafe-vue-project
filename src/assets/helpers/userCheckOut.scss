@@ -9,21 +9,23 @@
 .check-out{
   background-color:rgb(255, 255, 255,.9);
   padding: 0;
+  max-width: 90%;
   .card-header{
     background-color: var(--second-color);
     color: white;
   }
-  .frame{
+  .check-out-frame{
     padding:20px;
     min-height: 300px;
     position: relative;
     .pay-success{
+      width: 100%;
       position: absolute;
       top:50%;
       left:50%;
       transform: translate(-50%,-50%);
       font-weight: bolder;
-      .fa-check{
+      .fa-solid {
         font-size: 2em;
       }
       h5{
@@ -46,7 +48,7 @@
     .accordion-item{
       margin: 20px 0;
       .accordion-body{
-        .product{
+        .check-out-product{
           border-bottom: 1px solid var(--main-color);
           h5,p{
           margin: 0;
@@ -100,4 +102,29 @@
       }
     }
   }
+}
+
+
+@media screen and (max-width: 576px){
+  .check-out{
+    .check-out-frame{
+      .accordion-item{
+        margin: 20px 0;
+        .accordion-body{
+          .check-out-product{
+            h5{
+              font-size: .9em;
+            }
+            p{
+              font-size: .8em;
+            }
+            h6{
+              font-size: .8em;
+            }
+          }
+        }
+      }
+    }
+  }
+
 }

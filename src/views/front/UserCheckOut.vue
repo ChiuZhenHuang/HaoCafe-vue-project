@@ -1,7 +1,7 @@
 <template>
   <LoadingComponent :active="isLoading"></LoadingComponent>
 
-  <div class="banner bg-user-checkout">
+  <div class="l-banner bg-user-checkout">
     <div class="mask"></div>
     <h2>付款確認</h2>
   </div>
@@ -20,13 +20,13 @@
         <div class="card-header">
           <h2 class="text-center py-3">訂單資訊</h2>
         </div>
-        <div class="frame">
+        <div class="check-out-frame">
           <div v-if="order.is_paid === true" class="d-flex flex-column text-center pay-success">
             <i class="fa-solid fa-check mb-2"></i>
             <h5>付款成功</h5>
             <div class="mt-2 mb-2">訂單編號：{{ order.id }}  <i @click="copyText" class="fa-regular fa-copy"></i></div>
             <router-link to="/user/shopping" @click.prevent="scrollToTop">
-              <button type="button" class="button w-100">繼續購物</button>
+              <button type="button" class="button w-50">繼續購物</button>
             </router-link>
           </div>
           <div v-else>
@@ -43,17 +43,17 @@
                 <div id="collapseOne"  v-for="item in order.products" :key="item.id"
                   class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                   <div class="accordion-body">
-                    <div class="d-flex align-items-center product">
+                    <div class="d-flex align-items-center check-out-product">
                       <div>
                         <img :src="item.product.imageUrl" alt="產品圖片" style="width: 100px; height: 100px;">
                       </div>
-                      <div class="d-flex flex-column">
+                      <div class="d-flex flex-column mx-1">
                         <h5>{{ item.product.title }}</h5>
                         <p>數量：{{ item.qty }}</p>
                       </div>
                       <div class="ms-auto">
-                        <div v-if="item.final_total">NT$ {{ $filters.currency(item.final_total) }}</div>
-                        <div v-else>>NT$ {{ $filters.currency(item.product.price) }}</div>
+                        <h6 v-if="item.final_total">NT$ {{ $filters.currency(item.final_total) }}</h6>
+                        <h6 v-else>>NT$ {{ $filters.currency(item.product.price) }}</h6>
                       </div>
                     </div>
                   </div>

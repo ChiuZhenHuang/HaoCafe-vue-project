@@ -1,13 +1,13 @@
 <template>
   <LoadingComponent :active="isLoading"></LoadingComponent>
-  <div class="banner bg-product">
+  <div class="l-banner bg-product">
     <div class="mask"></div>
     <h2>商品列表</h2>
   </div>
 
   <div class="container mt-3">
     <div class="row">
-      <!-- 左側選單 -->
+      <!-- 選單 -->
       <div class="col-md-4 col-lg-3" id="select">
         <ul class="list-group">
           <li class="mt-2 mb-1">
@@ -27,21 +27,21 @@
           style="cursor: pointer" @click="search === '' && selectCategory('周邊商品')">周邊商品</li>
         </ul>
       </div>
-      <!-- 右側產品 -->
-      <div class="col-md-8 col-lg-9" id="product">
+      <!-- 產品 -->
+      <div class="col-md-8 col-lg-9 l-product-content">
         <div class="row row-cols-sm-2 row-cols-lg-3">
-          <div class="frame" v-for="item in filterProducts" :key="item.id">
+          <div class="l-frame" v-for="item in filterProducts" :key="item.id">
             <div class="card">
               <div class="card-top">
-                <button v-if="!item.isFavorite" type="button" class="btn btn-outline-info" @click="addToFavorites(item)">
+                <button v-if="!item.isFavorite" type="button" class="btn btn-outline-info btn-love" @click="addToFavorites(item)">
                   <i class="bi bi-heart"></i>
                 </button>
-                <button v-else type="button" class="btn btn-outline-info" @click="removeToFavorites(item)">
+                <button v-else type="button" class="btn btn-outline-info btn-love" @click="removeToFavorites(item)">
                   <i class="bi bi-heart-fill"></i>
                 </button>
                 <img :src="item.imageUrl"  alt="產品圖片">
                 <div class="more">
-                  <button type="button" class="btn btn-outline-secondary"
+                  <button type="button" class="btn btn-outline-secondary btn-more"
                     @click="getProduct(item.id)">More...
                   </button>
                 </div>
@@ -50,18 +50,16 @@
                 <h5 class="title" style="cursor: pointer" @click="getProduct(item.id)">{{ item.title }}</h5>
                 <div class="category">{{ item.category }} </div>
                 <div class="d-flex justify-content-between">
-                  <div class="left">
-                    <!-- <div class="category">{{ item.category }} </div> -->
+                  <div class="price">
                     <div class="h5" v-if="!item.price">NT$ {{ $filters.currency(item.origin_price) }}</div>
                     <del class="h5" v-if="item.price">NT$ {{ $filters.currency(item.origin_price) }}</del>
                     <div class="h6" v-if="item.price">NT$ {{ $filters.currency(item.price) }}</div>
                   </div>
-                  <div class="right ml-auto">
-                    <button type="button add-cart" class="btn btn-outline-dark"
+                  <div class="add-cart ml-auto">
+                    <button type="button" class="btn btn-outline-dark"
                       :disabled="this.status.loadingItem === item.id"
                       @click="addToCart(item.id)">
                       <span v-if="this.status.loadingItem === item.id" class="spinner-border spinner-border-sm" aria-hidden="true"></span>
-                      <!-- <i class="bi bi-cart4"></i> -->
                       加入購物車
                     </button>
                   </div>

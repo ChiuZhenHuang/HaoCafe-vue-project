@@ -8,26 +8,16 @@
 
 .cart-product{
   //購物清單
-  .list{
+  .cart-list{
     background-color: var(--main-color);
     padding: 30px;
     position: relative;
-    .frame{
+    .cart-frame{
       text-align: center; 
       h3{
         font-weight: bolder;
       }
-      .clear{
-        font-size: .85em;
-        background-color: transparent;
-        padding:5px 10px;
-        transition: .5s;
-        &:hover{
-          background-color: black;
-          color: white;
-        }
-      }
-      .item{
+      .cart-item{
         background-color:rgba(255, 255, 255, 0.5);
         .product-image-container {
           width: 40%;

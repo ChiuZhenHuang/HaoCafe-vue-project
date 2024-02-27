@@ -1,35 +1,35 @@
 <template>
   <footer>
     <div class="container">
-      <div class="row">
+      <div class="row advertise">
         <div class="col-12 col-md-4">
-          <div class="item">
-            <div class="icon">
+          <div class="advertise-item">
+            <div class="advertise-icon">
               <i class="fa-solid fa-truck-fast"></i>
             </div>
-            <div class="text">
+            <div class="advertise-text">
               <p>Free shopping</p>
               <p>滿$ 3,000免運</p>
             </div>
           </div>
         </div>
         <div class="col-12 col-md-4 second-item">
-          <div class="item ">
-            <div class="icon">
+          <div class="advertise-item">
+            <div class="advertise-icon">
               <i class="fa-solid fa-gifts"></i>
             </div>
-            <div class="text">
+            <div class="advertise-text">
               <p>Bonus</p>
               <p>購買皆附贈禮盒裝袋</p>
             </div>
           </div>
         </div>
         <div class="col-12 col-md-4">
-          <div class="item">
-            <div class="icon">
+          <div class="advertise-item">
+            <div class="advertise-icon">
               <i class="fa-solid fa-sack-dollar"></i>
             </div>
-            <div class="text">
+            <div class="advertise-text">
               <p>Payment Method</p>
               <span><i class="fa-brands fa-cc-visa"></i></span>
               <span><i class="fa-brands fa-cc-apple-pay"></i></span>

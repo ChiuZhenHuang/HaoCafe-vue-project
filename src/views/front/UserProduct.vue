@@ -1,6 +1,6 @@
 <template>
   <LoadingComponent :active="isLoading"></LoadingComponent>
-  <div class="banner bg-product">
+  <div class="l-banner bg-product">
     <div class="mask"></div>
     <h2>商品列表</h2>
   </div>
@@ -16,28 +16,28 @@
     </nav>
 
     <div class="row d-flex justify-content-center">
-      <div class="col-12 col-md-8 col-lg-5 d-flex justify-content-center" id="product">
-        <div class="frame h-100">
+      <div class="col-12 col-md-8 col-lg-5 d-flex justify-content-center l-product-content">
+        <div class="l-frame h-100">
           <div class="card">
             <div class="card-top h-auto">
-              <button v-if="!product.isFavorite" type="button" class="btn btn-outline-info" @click="addToFavorites(product)">
+              <button v-if="!product.isFavorite" type="button" class="btn btn-outline-info btn-love" @click="addToFavorites(product)">
                 <i class="bi bi-heart"></i>
               </button>
-              <button v-else type="button" class="btn btn-outline-info" @click="removeToFavorites(product)">
+              <button v-else type="button" class="btn btn-outline-info btn-love" @click="removeToFavorites(product)">
                 <i class="bi bi-heart-fill"></i>
               </button>
-              <img class="main-image animate__animated" :class="{ 'animate__fadeIn': changeImage }" :src="selectedImage || product.imageUrl" alt="產品主圖">
+              <img class="main-img animate__animated" :class="{ 'animate__fadeIn': changeImage }" :src="selectedImage || product.imageUrl" alt="產品主圖">
             </div>
-            <div class="card-body images">
-              <img class="img-fluid" :src="product.imageUrl" alt="產品小圖" @click="handleImageClick(null)">
-              <img class="img-fluid" v-for="(image, key) in product.images" :key="key"
+            <div class="card-body other-img-content">
+              <img :src="product.imageUrl" alt="產品小圖" @click="handleImageClick(null)">
+              <img  v-for="(image, key) in product.images" :key="key"
                 :src="image" alt="產品圖" @click="handleImageClick(image)">
             </div>
           </div>
         </div>
       </div>
-      <div class="col-12 col-lg-7 description" style="display: flex; flex-direction: column;">
-        <h5 class="title">{{ product.title }}</h5>
+      <div class="col-12 col-lg-7 product-description" style="display: flex; flex-direction: column;">
+        <h5 class="product-title">{{ product.title }}</h5>
         <div class="category mb-5">{{ product.category }}</div>
         <p class="mb-2" style="white-space: pre-line">{{ product.description }}</p>
         <div class="d-flex" style="margin-top: auto;align-items: end;">
@@ -60,7 +60,7 @@
       </div>
     </div>
 
-    <div class="row mb-3 notice">
+    <div class="row mb-3 product-notice">
       <div class="col-12 col-md-6">
         <div class="accordion" id="accordionPanelsStayOpenExample">
           <div class="accordion-item mb-2">
@@ -106,17 +106,17 @@
 
     <!-- 相關產品 -->
     <div class="row other-product">
-      <div class="title"><h2>相關產品</h2></div>
+      <div class="about-product-title"><h2>相關產品</h2></div>
       <div class="col-12">
-        <div class="col-md-8 col-lg-9" id="product">
+        <div class="col-md-8 col-lg-9 l-product-content">
           <div class="row row-cols-sm-2 row-cols-lg-3">
-            <div class="frame" v-show="product.category === item.category && product.title !== item.title"
+            <div class="l-frame" v-show="product.category === item.category && product.title !== item.title"
               v-for="item in allProducts" :key="item.id">
               <div class="card">
                 <div class="card-top">
                   <img :src="item.imageUrl"  alt="產品圖片">
                   <div class="more">
-                    <button type="button" class="btn btn-outline-secondary"
+                    <button type="button" class="btn btn-outline-secondary btn-more"
                       @click="goOtherProduct(item.id)">More...
                     </button>
                   </div>
@@ -125,7 +125,7 @@
                   <h5 class="title" style="cursor: pointer" @click="goOtherProduct(item.id)">{{ item.title }}</h5>
                   <div class="category">{{ item.category }} </div>
                   <div class="d-flex justify-content-between">
-                    <div class="left">
+                    <div class="price">
                       <div class="h5" v-if="!item.price">NT$ {{ $filters.currency(item.origin_price) }}</div>
                       <del class="h5" v-if="item.price">NT$ {{ $filters.currency(item.origin_price) }}</del>
                       <div class="h6" v-if="item.price">NT$ {{ $filters.currency(item.price) }}</div>
@@ -156,9 +156,9 @@ export default {
       selectedImage: null, // 追蹤主圖顯示
       changeImage: false, // 用於更換主圖
       // quantity: 1, // 加入購物車數量
-      status: {
-        loadingItem: ''
-      },
+      // status: {
+      //   loadingItem: ''
+      // },
       allProducts: [] // 所有產品列表，用於顯示相關產品
     }
   },
@@ -166,7 +166,7 @@ export default {
   mixins: [scrollButton],
   computed: {
     ...mapState(favoriteStore, ['isFavorites']),
-    ...mapState(cartStore, ['quantity'])
+    ...mapState(cartStore, ['quantity', 'status'])
   },
   methods: {
     ...mapActions(favoriteStore, ['addToFavorites', 'removeToFavorites', 'getProduct', 'loadFavoritesFromLocalStorage']),

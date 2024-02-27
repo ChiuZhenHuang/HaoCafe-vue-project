@@ -5,25 +5,16 @@
 }
 body{
   background-color: var(--main-color);
-  // background-color: #e1dfdf;
-  // background-image: url('https://i.pinimg.com/736x/7f/a3/42/7fa342abcaa90aabe3bfdbf12778b621.jpg');
-  // background-position: 50%;
-  // background-size: cover;
 }
 
 .bg-product::before {
   background-image:var(--product-background-image-1) ;
 }
 
-.banner{  
-  //不明原因無法靠最上方，先-15px
-  margin-top: -15px;
+.l-banner{
   width: 100%;
   height: 400px;
   position: relative;
-  // background-size: cover;
-  // background-position: 50%; 
-  // background-repeat: no-repeat; 
   .mask{
     content: '';
     position: absolute;
@@ -58,7 +49,6 @@ body{
   display: flex;
   align-items: start;
   justify-content: center;
-  
   .list-group{
     position: sticky;
     top: 76px;
@@ -90,7 +80,6 @@ body{
     }
       input, button {
         padding: 5px 10px;
-        width: 80px;
         outline: none;
         background-color: white;
         border: 2px solid black;
@@ -105,6 +94,7 @@ body{
         }
       }
       input{
+        width: 120px;
         border-right:none;
         border-radius: 200px 0 0 200px;
       }
@@ -113,15 +103,14 @@ body{
 }
 
 // 產品
-#product{
-  .frame{
+.l-product-content{
+  .l-frame{
     padding:17px;
     display: flex;
     justify-content: center;
     .card{
       box-shadow: 5px 5px 10px #888888;
       width: 100%;
-      // aspect-ratio: 2/2;
       height: 100%;
       position: relative;
       display: flex;
@@ -130,11 +119,9 @@ body{
       border-radius: 0;
       .card-top{
         width: 100%;
-        // height: 100%;
         overflow: hidden;
         text-align: center;
         position: relative;
-        // 產品圖片
         img{
           aspect-ratio: 1/1;
           width: 100%;
@@ -142,8 +129,7 @@ body{
           transition: opacity 0.5s ease;
           object-fit:contain;
         }
-        // 收藏鈕
-        .btn-outline-info{
+        .btn-love{
           border: none;
           position:absolute;
           top:0;
@@ -165,7 +151,7 @@ body{
           opacity: 0;
           background-color: rgba(0,0,0,.6);
           transition: opacity 0.5s ease;
-          .btn-outline-secondary{
+          .btn-more{
             &:hover{
               color: black;
             }
@@ -174,7 +160,7 @@ body{
         &:hover .more{
           opacity: 1;
         }
-        &:hover .btn-outline-secondary{
+        &:hover .btn-more{
           border: 1px solid rgb(255, 255, 255);
           background-color: rgb(255, 255, 0);
         }
@@ -197,15 +183,17 @@ body{
           border: 1px solid black;
           margin: 5px 0;
         }
-        .right{
+        .price, .add-cart{
+          display: flex;
+          flex-direction: column;
+          justify-content: end;
+        }
+        .add-cart{
           button{
             font-size: .85em;
           }
         }
-        .left, .right{
-          display: flex;
-          flex-direction: column;
-          justify-content: end;
+        .price{
           .h5{
             font-size: .7em;
             color: rgb(68, 68, 68);
@@ -214,9 +202,6 @@ body{
             font-weight:bolder;
             color: rgb(0, 0, 0);
             font-size: .85em;
-          }
-          .btn{
-            margin: 2px;
           }
         }
       }
@@ -240,7 +225,7 @@ body{
 
 
 @media screen and (max-width: 768px){
-  .banner{
+  .l-banner{
     height: 240px;
   }
   #select{
@@ -250,15 +235,21 @@ body{
   }
 }
 @media screen and (max-width: 576px){
-  #product{
+  .l-product-content{
     .row{
       display: flex;
       justify-content: center;
     }
-    .frame{
+    .l-frame{
       max-width: 350px;
     }
   }
-
-  
+  #select{
+    .list-group{
+      width: 60%;
+      input{
+        width: 100px;
+      }
+    }
+  }
 }

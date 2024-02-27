@@ -1,7 +1,7 @@
 <template>
   <LoadingComponent :active="isLoading"></LoadingComponent>
 
-  <div class="banner bg-user-form">
+  <div class="l-banner bg-user-form">
     <div class="mask"></div>
     <h2>資料填寫</h2>
   </div>
@@ -16,11 +16,11 @@
 
     <div class="container cart-product">
     <div class="row mt-5 mb-5">
-      <div class="col-12 col-md-6 list">
-        <div class="frame" v-if="cart.carts">
+      <div class="col-12 col-md-6 cart-list">
+        <div class="cart-frame" v-if="cart.carts">
           <h3>訂單內容</h3>
           <div class="overflow-auto mt-5 mb-2" style="max-height: 500px;">
-          <div class="item d-flex justify-content-center" v-for="item in cart.carts" :key="item.id">
+          <div class="cart-item d-flex justify-content-center" v-for="item in cart.carts" :key="item.id">
             <div class="product-image-container">
               <img :src="item.product.imageUrl" alt="產品圖片">
             </div>
@@ -83,7 +83,7 @@
         </div>
       </div>
       <div class="col-12 col-md-6 shop-notice">
-        <div class="frame">
+        <div class="shop-notice-frame">
           <div style="text-align: center;margin-bottom: 2em;">
             <h3>訂購人資訊</h3>
           </div>
@@ -153,10 +153,6 @@
         <router-link class="nav-link" to="/user/cart" @click.prevent="scrollToTop">
           <button type="button" class="previous">返回購物車</button>
         </router-link>
-        <!-- <router-link class="nav-link" to="/user/form" @click.prevent="scrollToTop">
-          <button type="button" class="next">送出訂單</button>
-        </router-link> -->
-          <!-- <button class="next" @click.prevent="submitOrder">送出訂單</button> -->
       </div>
     </div>
   </div>

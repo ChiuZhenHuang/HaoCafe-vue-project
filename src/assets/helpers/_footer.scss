@@ -7,20 +7,20 @@ footer{
   background-color:rgba(0, 0, 0,.6);
   color: white;
   text-align: center;
-  .row{
+  .advertise{
     display: flex;
     align-items: center;
     padding: 60px 0;
-    .item{
+    .advertise-item{
       display: flex;
       justify-content: center;
       align-items: center;
-      .icon{
+      .advertise-icon{
         width: 45px;
         font-size: 2.5em;
         margin:0 20px;
       }
-      .text{
+      .advertise-text{
         text-align: start;
         font-weight: bolder;
         font-size: 1.2em;
@@ -56,10 +56,10 @@ footer{
 
 @media screen and (max-width: 992px){
   footer{
-    .row{
-      .item{
+    .advertise{
+      .advertise-item{
         flex-direction: column;
-        .text{
+        .advertise-text{
           text-align: center;
         }
       }
@@ -69,7 +69,7 @@ footer{
 
 @media screen and (max-width: 768px){
   footer{
-    .row{
+    .advertise{
       padding: 20px;
       .second-item{
         &::before{
@@ -79,11 +79,11 @@ footer{
           border-bottom: 1px solid white;
         }
       }
-      .item{
+      .advertise-item{
         justify-content:left;
         flex-direction:row;
         padding-top: 10px;
-        .text{
+        .advertise-text{
           text-align: start;
         }
       }

@@ -1,7 +1,7 @@
 <template>
 <LoadingComponent :active="isLoading"></LoadingComponent>
 
-  <div class="banner bg-user-cart">
+  <div class="l-banner bg-user-cart">
     <div class="mask"></div>
     <h2>訂單結帳</h2>
   </div>
@@ -17,8 +17,8 @@
   <div class="container cart-product">
     <div class="row mt-5 mb-5">
       <!-- 購物清單 -->
-      <div class="col-12 col-md-6 list">
-        <div class="frame" v-if="cart.carts">
+      <div class="col-12 col-md-6 cart-list">
+        <div class="cart-frame" v-if="cart.carts">
           <h3>購物清單</h3>
           <div v-if="cart.carts.length === 0" class="not-buy">
             <i class="bi bi-cart-x"></i>
@@ -28,10 +28,10 @@
             </router-link>
           </div>
           <div class="text-end">
-            <button type="button" v-if="cart.carts.length !==0" class="clear" @click="clearCart"><i class="bi bi-trash"></i>清空購物車</button>
+            <button type="button" v-if="cart.carts.length !==0" class="clear-cart" @click="clearCart"><i class="bi bi-trash"></i>清空購物車</button>
           </div>
           <div class="overflow-auto mt-2 mb-2" style="max-height: 500px;">
-          <div class="item d-flex justify-content-center" v-for="item in cart.carts" :key="item.id">
+          <div class="cart-item d-flex justify-content-center" v-for="item in cart.carts" :key="item.id">
             <div class="product-image-container">
               <img :src="item.product.imageUrl" alt="產品圖片">
             </div>
@@ -82,7 +82,7 @@
       </div>
       <!-- 購物須知 -->
       <div class="col-12 col-md-6 shop-notice">
-        <div class="frame">
+        <div class="shop-notice-frame">
           <div style="text-align: center;margin-bottom: 2em;">
             <h3>購物須知</h3>
           </div>

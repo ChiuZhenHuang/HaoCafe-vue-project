@@ -7,9 +7,9 @@
   <!-- 幻燈片 -->
   <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel" ref="carousel">
     <div class="carousel-inner">
-      <div class="text bg-transparent">
+      <div class="carousel-text bg-transparent">
         <p class="bg-transparent">咖啡是一種藝術，每一杯都是一幅畫，每一口都是一首詩。</p>
-        <router-link class="nav-link" to="/user/shopping" @click.prevent="scrollToTop">來去逛逛</router-link>
+        <router-link class="nav-link go-shopping" to="/user/shopping" @click.prevent="scrollToTop">來去逛逛</router-link>
       </div>
       <div class="carousel-item active">
         <img src="../../assets/images/coffee-5.avif"  class="d-block w-100" alt="...">
@@ -32,21 +32,21 @@
   </div>
 
   <!-- 消息 -->
-  <div class="container-fluid home-main">
+  <div class="container-fluid news-wrapper">
     <div class="row">
       <div class="mask"></div>
       <div class="col-12 col-md-4 mt-3 mb-3">
-        <div class="main-item">
-          <div class="left">
-            <div class="item animate__animated" :class="{'animate__bounceInLeft': showNews, 'animate__fadeOutLeft': !showNews}">
+        <div class="news-content">
+          <div class="side">
+            <div class="news-item animate__animated" :class="{'animate__bounceInLeft': showNews, 'animate__fadeOutLeft': !showNews}">
               <img src="https://i.imgur.com/Ee0Isz0.jpg">
               <router-link class="nav-link" to="/about" @click.prevent="scrollToTop">關於我們</router-link>
             </div>
-            <div class="item animate__animated" :class="{'animate__bounceInLeft':showNews, 'animate__fadeOutLeft': !showNews}">
+            <div class="news-item  animate__animated" :class="{'animate__bounceInLeft':showNews, 'animate__fadeOutLeft': !showNews}">
               <img src="https://i.imgur.com/LqGBzES.jpg">
               <router-link class="nav-link" to="/user/shopping" @click.prevent="scrollToTop">產品列表</router-link>
             </div>
-            <div class="item animate__animated" :class="{'animate__bounceInLeft':showNews, 'animate__fadeOutLeft': !showNews}">
+            <div class="news-item animate__animated" :class="{'animate__bounceInLeft':showNews, 'animate__fadeOutLeft': !showNews}">
               <img src="https://i.imgur.com/zXIMLuE.jpg">
               <router-link class="nav-link" to="/user/favorites" @click.prevent="scrollToTop">收藏列表</router-link>
             </div>
@@ -54,27 +54,27 @@
         </div>
       </div>
       <div class="col-12 col-md-8 mt-3 mb-3">
-        <div class="main-item news">
+        <div class="news-content">
           <h2>News</h2>
           <div>
-            <div class="txt">
-              <div>2024 / 01 / 19</div>
+            <div class="news-txt">
+              <h5 class="date">2024 / 01 / 19</h5>
               <p>周年慶！輸入優惠碼：9，享有九折</p>
             </div>
-            <div class="txt">
-              <div>2023 / 11 / 02</div>
+            <div class="news-txt">
+              <h5 class="date">2023 / 11 / 02</h5>
               <p>全館消費滿額3,000！即可免運</p>
             </div>
-            <div class="txt">
-              <div>2023 / 08 / 19</div>
+            <div class="news-txt">
+              <h5 class="date">2023 / 08 / 19</h5>
               <p>店長榮獲好咖品質金牌獎！全館優惠促銷中</p>
             </div>
-            <div class="txt">
-              <div>2023 / 05 / 20</div>
+            <div class="news-txt">
+              <h5 class="date">2023 / 05 / 20</h5>
               <p>好咖 即將上市</p>
             </div>
-            <div class="txt">
-              <div>2023 / 04 / 30</div>
+            <div class="news-txt">
+              <h5 class="date">2023 / 04 / 30</h5>
               <p>好咖 整修中，敬請期待！</p>
             </div>
           </div>

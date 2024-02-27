@@ -6,16 +6,16 @@
   background-image:var(--favorites-background-image-1) ;
 }
 
-.favorite-product{
+.favorite-content{
   .row{
     display: flex;
     justify-content: center;
     align-items: center;
-    #product{
+    .l-product-content{
       position: relative;
       min-height: 300px;
       text-align: end;
-      .clear{
+      .favorite-clear{
         background-color: transparent;
         padding:5px 10px;
         transition: .5s;
@@ -24,9 +24,9 @@
           color: white;
         }
       }
-      .district{
+      .favorite-wrap{
         justify-content:left;
-        .not-buy{
+        .favorite-not-buy{
           text-align: center;
           position: absolute;
           top:50%;
@@ -39,11 +39,11 @@
             font-weight: bolder;
           }
         }
-        .card{
+        .card-body{
           .title{
             font-size: 1em;
           }
-          .left{
+          .price{
             text-align: left;
           }
         }
@@ -53,12 +53,12 @@
 }
 
 @media screen and (max-width: 576px){
-  .favorite-product{
+  .favorite-content{
     .row{
-      #product{
-        .district{
+      .l-product-content{
+        .favorite-wrap{
           justify-content: center;
-          .frame{
+          .l-frame{
             width: 85%;
           }
         }
