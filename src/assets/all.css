@@ -13639,85 +13639,101 @@ Form .form-control {
 .check-out {
   background-color: rgba(255, 255, 255, 0.9);
   padding: 0;
+  max-width: 90%;
 }
 .check-out .card-header {
   background-color: var(--second-color);
   color: white;
 }
-.check-out .frame {
+.check-out .check-out-frame {
   padding: 20px;
   min-height: 300px;
   position: relative;
 }
-.check-out .frame .pay-success {
+.check-out .check-out-frame .pay-success {
+  width: 100%;
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   font-weight: bolder;
 }
-.check-out .frame .pay-success .fa-check {
+.check-out .check-out-frame .pay-success .fa-solid {
   font-size: 2em;
 }
-.check-out .frame .pay-success h5, .check-out .frame .pay-success .h5 {
+.check-out .check-out-frame .pay-success h5, .check-out .check-out-frame .pay-success .h5 {
   font-weight: bolder;
 }
-.check-out .frame .pay-success div i {
+.check-out .check-out-frame .pay-success div i {
   cursor: pointer;
   color: gray;
 }
-.check-out .frame .create {
+.check-out .check-out-frame .create {
   color: gray;
   font-weight: bolder;
 }
-.check-out .frame .create h5, .check-out .frame .create .h5 {
+.check-out .check-out-frame .create h5, .check-out .check-out-frame .create .h5 {
   font-size: 0.9em;
 }
-.check-out .frame .accordion-item {
+.check-out .check-out-frame .accordion-item {
   margin: 20px 0;
 }
-.check-out .frame .accordion-item .accordion-body .product {
+.check-out .check-out-frame .accordion-item .accordion-body .check-out-product {
   border-bottom: 1px solid var(--main-color);
 }
-.check-out .frame .accordion-item .accordion-body .product h5, .check-out .frame .accordion-item .accordion-body .product .h5, .check-out .frame .accordion-item .accordion-body .product p {
+.check-out .check-out-frame .accordion-item .accordion-body .check-out-product h5, .check-out .check-out-frame .accordion-item .accordion-body .check-out-product .h5, .check-out .check-out-frame .accordion-item .accordion-body .check-out-product p {
   margin: 0;
 }
-.check-out .frame .accordion-item .accordion-body .product h5, .check-out .frame .accordion-item .accordion-body .product .h5 {
+.check-out .check-out-frame .accordion-item .accordion-body .check-out-product h5, .check-out .check-out-frame .accordion-item .accordion-body .check-out-product .h5 {
   font-size: 1.1em;
   font-weight: bolder;
   margin-bottom: 10px;
 }
-.check-out .frame .accordion-item .accordion-button:focus {
+.check-out .check-out-frame .accordion-item .accordion-button:focus {
   box-shadow: none;
 }
-.check-out .frame .accordion-item .accordion-button:not(.collapsed) {
+.check-out .check-out-frame .accordion-item .accordion-button:not(.collapsed) {
   background-color: var(--main-color);
 }
-.check-out .frame .card-body table {
+.check-out .check-out-frame .card-body table {
   border-spacing: 0 20px;
   border-collapse: separate;
   width: 100%;
   font-weight: bolder;
 }
-.check-out .frame .card-body table tbody tr th, .check-out .frame .card-body table tbody tr td {
+.check-out .check-out-frame .card-body table tbody tr th, .check-out .check-out-frame .card-body table tbody tr td {
   border-bottom: 1px solid var(--main-color);
   background-color: transparent;
 }
-.check-out .frame .card-body table tbody tr td i {
+.check-out .check-out-frame .card-body table tbody tr td i {
   cursor: pointer;
   color: gray;
 }
-.check-out .frame .button {
+.check-out .check-out-frame .button {
   color: white;
   background-color: var(--second-color);
   padding: 5px 10px;
   transition: 0.5s;
 }
-.check-out .frame .button:hover {
+.check-out .check-out-frame .button:hover {
   background-color: white;
   color: black;
 }
 
+@media screen and (max-width: 576px) {
+  .check-out .check-out-frame .accordion-item {
+    margin: 20px 0;
+  }
+  .check-out .check-out-frame .accordion-item .accordion-body .check-out-product h5, .check-out .check-out-frame .accordion-item .accordion-body .check-out-product .h5 {
+    font-size: 0.9em;
+  }
+  .check-out .check-out-frame .accordion-item .accordion-body .check-out-product p {
+    font-size: 0.8em;
+  }
+  .check-out .check-out-frame .accordion-item .accordion-body .check-out-product h6, .check-out .check-out-frame .accordion-item .accordion-body .check-out-product .h6 {
+    font-size: 0.8em;
+  }
+}
 .admin {
   background-color: transparent;
 }

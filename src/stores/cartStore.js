@@ -12,24 +12,10 @@ export default defineStore('cartStore', {
       isLoading: false,
       status: {
         loadingItem: '' // 對應品項id
-      },
-      orders: []
+      }
     }
   },
   actions: {
-    // 用於搜尋訂單，再研究
-    getOrders (currentPage = 1) {
-      const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/orders?page=${currentPage}`
-      this.isLoading = true
-      axios.get(api)
-        .then((res) => {
-          this.isLoading = false
-          if (res.data.success) {
-            console.log(res)
-            this.orders = res.data.orders
-          }
-        })
-    },
     // favorites,shopping,product頁面加入購物車
     addToCart (id, qty = 1) {
       const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`

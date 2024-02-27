@@ -186,7 +186,7 @@ export default {
   computed: {
     // 用於判斷是否每個商品都有使用優惠
     hasCoupons () {
-      return this.cart.carts.every(item => item.coupon)
+      return this.cart.carts.every(item => item.coupon !== undefined)
     }
   },
   methods: {
