@@ -13734,6 +13734,31 @@ Form .form-control {
     font-size: 0.8em;
   }
 }
+.orderSearch-input-list {
+  display: flex;
+  justify-content: center;
+}
+.orderSearch-input-list input, .orderSearch-input-list button {
+  padding: 5px 10px;
+  outline: none;
+  background-color: white;
+  border: 2px solid black;
+}
+.orderSearch-input-list button {
+  width: 35px;
+  border-radius: 0 200px 200px 0;
+  background-color: white;
+  border-left: none;
+}
+.orderSearch-input-list button i {
+  background-color: transparent;
+}
+.orderSearch-input-list input {
+  width: 80%;
+  border-right: none;
+  border-radius: 200px 0 0 200px;
+}
+
 .admin {
   background-color: transparent;
 }

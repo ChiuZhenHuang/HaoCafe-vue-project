@@ -72,7 +72,7 @@
       </div>
     </nav>
     <!-- 手機側邊欄 -->
-    <div class="offcanvas offcanvas-start" tabindex="-1" id="sidebar" aria-labelledby="sidebarLabel">
+    <div class="offcanvas offcanvas-start" tabindex="-1" id="sidebar" data-bs-scroll="true" aria-labelledby="sidebarLabel">
       <div class="offcanvas-header">
         <button type="button" class="btn-close text-reset ms-auto" data-bs-dismiss="offcanvas" aria-label="Close"></button>
       </div>

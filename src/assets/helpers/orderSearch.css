@@ -21,4 +21,19 @@
   width: 80%;
   border-right: none;
   border-radius: 200px 0 0 200px;
+}
+
+.order-information {
+  cursor: pointer;
+  width: 100%;
+}
+.order-information th, .order-information td {
+  text-align: center;
+  font-size: 1em;
+}
+
+@media screen and (max-width: 576px) {
+  .order-information th, .order-information td {
+    font-size: 0.8em;
+  }
 }/*# sourceMappingURL=orderSearch.css.map */

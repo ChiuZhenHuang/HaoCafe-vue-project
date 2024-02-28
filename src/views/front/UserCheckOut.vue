@@ -120,7 +120,6 @@
 </template>
 
 <script>
-import scrollButton from '@/mixins/scrollButton'
 
 export default {
   data () {
@@ -134,7 +133,6 @@ export default {
       orderId: ''
     }
   },
-  mixins: [scrollButton],
   inject: ['emitter'],
   computed: {
     // 每筆訂單原始金額加總
@@ -152,10 +150,12 @@ export default {
   methods: {
     getOrder () {
       const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/order/${this.orderId}`
+      this.isLoading = true
       this.$http.get(url)
         .then((res) => {
           if (res.data.success) {
             this.order = res.data.order
+            this.isLoading = false
           }
         })
     },
@@ -170,7 +170,9 @@ export default {
             this.getOrder()
           }
         })
+      this.scrollToTop()
     },
+    // 複製訂單號碼
     copyText () {
       const textToCopy = this.order.id
       const textarea = document.createElement('textarea')
@@ -182,6 +184,12 @@ export default {
       this.emitter.emit('push-message', {
         style: 'success',
         title: '已複製訂單編號'
+      })
+    },
+    scrollToTop () {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
       })
     }
   },

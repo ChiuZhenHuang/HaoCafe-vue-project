@@ -22,3 +22,21 @@
     border-radius: 200px 0 0 200px;
   }
 }
+
+.order-information{
+  cursor: pointer;
+  width: 100%;
+  th,td{
+    text-align: center;
+    font-size: 1em;
+  }
+}
+
+
+@media screen and (max-width: 576px){
+  .order-information{
+    th,td{
+      font-size: .8em;
+    }
+  }
+}
