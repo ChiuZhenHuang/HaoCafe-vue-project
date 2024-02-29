@@ -5,7 +5,7 @@
       <div class="container-fluid bg-transparent">
         <div class="d-flex">
           <router-link to="/" @click.prevent="scrollToTop">
-            <img src="https://i.imgur.com/qToNLW6.jpg" class="d-block logo" style="height: 60px;width: 60px;margin-right: 20px;" alt="LOGO">
+            <img src="../assets/images/hao-coffee.png" class="d-block" style="height: 60px;width: 60px;margin-right: 20px;" alt="LOGO">
           </router-link>
           <ul id="navbarNav" class="navbar-nav collapse navbar-collapse bg-transparent">
             <li class="nav-item">
@@ -78,36 +78,36 @@
       </div>
       <div class="offcanvas-body">
         <ul class="navbar-nav flex-column h-100 justify-content-around">
-          <li class="nav-item">
+          <li class="nav-item"   data-bs-dismiss="offcanvas" >
             <router-link class="nav-link" to="/about" @click.prevent="scrollToTop">
               關於我們
             </router-link>
           </li>
-          <li class="nav-item">
+          <li class="nav-item" data-bs-dismiss="offcanvas" >
             <router-link class="nav-link" to="/user/shopping" @click.prevent="scrollToTop">
               前往購物
             </router-link>
           </li>
-          <li class="nav-item">
+          <li class="nav-item" data-bs-dismiss="offcanvas" >
             <button class="nav-link" @click.prevent="openSearchModal">
               訂單查詢
             </button>
           </li>
-          <li class="nav-item">
+          <li class="nav-item" data-bs-dismiss="offcanvas" >
             <router-link class="nav-link" to="/user/favorites" @click.prevent="scrollToTop">
               <i class="bi bi-heart"></i>
                 <span v-if="!favoritesLength" :style="{ display: favoritesLength ? 'block' : 'none' }"></span>
                 <span v-else><h5>{{ favoritesLength }}</h5></span>
             </router-link>
           </li>
-          <li class="nav-item">
+          <li class="nav-item" data-bs-dismiss="offcanvas" >
             <router-link class="nav-link" to="/user/cart" @click.prevent="scrollToTop">
               <i class="bi bi-cart"></i>
                 <span v-if="!cartLength" :style="{ display: cartLength ? 'block' : 'none' }"></span>
                 <span v-else><h5>{{ cartLength }}</h5></span>
             </router-link>
           </li>
-          <li class="nav-item">
+          <li class="nav-item" data-bs-dismiss="offcanvas" >
             <router-link class="nav-link" to="/login" @click.prevent="scrollToTop">
               <i class="bi bi-person-gear"></i>
             </router-link>

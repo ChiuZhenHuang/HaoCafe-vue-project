@@ -1,9 +1,9 @@
 <template>
   <div class="modal" tabindex="-1" ref="modal">
-    <div class="modal-dialog">
+    <div class="modal-dialog  modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title">查詢訂單</h5>
+          <strong class="modal-title">查詢訂單</strong>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" @click.prevent="closeModal"></button>
         </div>
         <div class="modal-body">
@@ -11,7 +11,10 @@
             <input type="search" value="" v-model="orderNumber" placeholder="請輸入訂單編號">
             <button @click.prevent="searchOrder"><i class="bi bi-search"></i></button>
           </div>
-          <table v-show="showOrderInformation" @click.prevent="pushToOrder" class="order-information mt-3 mb-3">
+          <div v-if="orderId === '未找到訂單'" class="text-center">
+            <h5>查無相關訂單</h5>
+          </div>
+          <table v-else v-show="showOrderInformation" @click.prevent="pushToOrder" class="order-information mt-3 mb-3">
             <thead>
               <tr>
                 <th>訂單編號</th>

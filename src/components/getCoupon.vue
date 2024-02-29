@@ -13,7 +13,7 @@
               <p>好康</p>
               <span>八折</span>
             </div>
-            <h5>goodcoffee888</h5>
+            <h5>haocafe888</h5>
           </div>
           <button type="button" @click="copyText">點擊領取</button>
         </div>
@@ -35,7 +35,7 @@ export default {
   methods: {
     // 複製優惠
     copyText () {
-      const textToCopy = 'goodcoffee888'
+      const textToCopy = 'haocafe888'
       // 創建一個 textarea 元素
       const textarea = document.createElement('textarea')
       textarea.value = textToCopy

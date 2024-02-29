@@ -59,7 +59,7 @@
           <div>
             <div class="news-txt">
               <h5 class="date">2024 / 01 / 19</h5>
-              <p>周年慶！輸入優惠碼：9，享有九折</p>
+              <p>周年慶！輸入優惠碼：haocafe888，享有八折</p>
             </div>
             <div class="news-txt">
               <h5 class="date">2023 / 11 / 02</h5>

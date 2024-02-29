@@ -47,8 +47,10 @@
               <h3>小計</h3>
               <h3>NT$ {{ $filters.currency(cart.total) }}</h3>
             </div>
-            <div class="d-flex w-100 justify-content-between" v-if="hasCoupons && cart.carts[0].coupon">
-              <h6>已優惠 <span>{{ hasCoupons ? cart.carts[0].coupon.title : '' }}</span></h6>
+            <div class="d-flex w-100 justify-content-between" v-if="hasCoupons">
+              <!-- <h6>已優惠 <span>{{ hasCoupons ? cart.carts[0].coupon.title : '' }}</span></h6> -->
+              <!-- <h6>已優惠 <span v-if="couponTitle">{{ this.couponTitle }}</span></h6> -->
+              <h6>已優惠</h6>
               <h6>-$ {{ $filters.currency(parseInt(cart.total)-parseInt(cart.final_total)) }}</h6>
             </div>
             <div class="input-group mb-3 input-group-sm">
@@ -177,7 +179,8 @@ export default {
       },
       coupon_code: '',
       cart: {}, // 存放目前已加至購物車內產品
-      isLoading: false
+      isLoading: false,
+      couponTitle: ''
     }
   },
   inject: ['emitter'],
@@ -202,7 +205,6 @@ export default {
         .then((res) => {
           this.cart = res.data.data
           this.isLoading = false
-          console.log('購物車產品', this.cart)
         })
     },
     // 套用優惠券
@@ -215,6 +217,9 @@ export default {
         .then((res) => {
           this.$httpMessageState(res, '套用優惠券')
           this.getCart()
+          if (res.data.success) {
+            this.couponTitle = this.cart.carts[0].coupon?.title
+          }
           // 優惠碼使用成功後清除優惠碼資料
           this.coupon_code = ''
         })
@@ -226,7 +231,6 @@ export default {
       const order = this.form
       // 將用戶建立訂單資料傳到api
       this.$http.post(url, { data: order }).then((res) => {
-        console.log('送出訂單資料', res)
         this.$httpMessageState(res, '訂單送出')
         this.getCart()
         // 前往付款頁面
