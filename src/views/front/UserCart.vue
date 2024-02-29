@@ -152,86 +152,16 @@ import cartStore from '@/stores/cartStore'
 export default {
   data () {
     return {
-      // cart: {}, // 存放目前已加至購物車內產品
-      // isLoading: false
     }
   },
   inject: ['emitter'],
   mixins: [scrollButton],
   computed: {
-    // ...mapState(favoriteStore, ['isFavorites']),
     ...mapState(cartStore, ['cart', 'isLoading'])
   },
   methods: {
     ...mapActions(favoriteStore, ['loadFavoritesFromLocalStorage']),
     ...mapActions(cartStore, ['getCart', 'updateCart', 'clearCart', 'removeCartItem', 'decrementQuantity', 'incrementQuantity'])
-    // 取得購物車列表
-    // getCart () {
-    //   const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`
-    //   this.isLoading = true
-    //   this.$http.get(url)
-    //     .then((res) => {
-    //       this.cart = res.data.data
-    //       this.isLoading = false
-    //     })
-    // },
-    // 更新購物車數量
-    // updateCart (item, triggerMessage = true) {
-    //   const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart/${item.id}`
-    //   this.isLoading = true // 轉換購物車數量同時整個頁面loading
-    //   const cart = {
-    //     product_id: item.product_id,
-    //     qty: item.qty
-    //   }
-    //   this.$http.put(url, { data: cart }).then((res) => {
-    //     this.getCart()
-    //     this.isLoading = false
-
-    //     if (triggerMessage) {
-    //       this.$httpMessageState(res, '更新數量')
-    //     }
-    //   })
-    // },
-    // 清空購物車
-    // clearCart () {
-    //   const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/carts`
-    //   this.$http.delete(url).then((res) => {
-    //     console.log('this', res)
-    //     this.getCart()
-    //     this.emitter.emit('push-message', {
-    //       style: 'warning',
-    //       title: '已刪除產品'
-    //     })
-    //   })
-    // },
-    // 刪除購物車品項
-    // removeCartItem (item) {
-    //   const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart/${item.id}`
-    //   this.$http.delete(url).then((res) => {
-    //     // 用於判斷updateCart是否為removeCartItem所觸發，避免刪除時觸發更新產品通知
-    //     const triggerMessage = false
-    //     this.updateCart(item, triggerMessage)
-
-    //     this.emitter.emit('push-message', {
-    //       style: 'warning',
-    //       title: '已刪除產品'
-    //     })
-    //   })
-    // },
-    // 減少數量
-    // decrementQuantity (item, qty) {
-    //   if (qty > 1) {
-    //     item.qty--
-    //   }
-    //   this.updateCart(item)
-    // },
-    // // 增加數量
-    // incrementQuantity (item, qty) {
-    //   if (qty < item.product.unit) {
-    //     item.qty++
-    //   }
-    //   this.updateCart(item)
-    // }
   },
   created () {
     this.getCart()

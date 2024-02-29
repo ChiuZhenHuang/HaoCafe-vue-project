@@ -1,7 +1,6 @@
 <template>
   <nav class="navbar navbar-expand-lg bg-body-tertiary admin-nav">
     <div class="container-fluid">
-      <!-- <a class="navbar-brand" href="#">範例作品</a> -->
       <router-link class="nav-link mx-3" aria-current="page" to="/">用戶介面</router-link>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
       </button>

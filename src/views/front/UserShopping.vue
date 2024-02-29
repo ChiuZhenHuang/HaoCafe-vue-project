@@ -94,12 +94,8 @@ export default {
       allProducts: [], // 所有產品
       search: '', // 搜尋內容
       selectedCategory: '', // 烘培類型
-      // status: {
-      //   loadingItem: '' // 對應品項id
-      // },
       pagination: {}, // 分頁
       isLoading: false, // 整個頁面loading
-      // favorites: [], // 收藏的商品
       isActive: false, // 篩選欄是否被選擇
       isComposing: false // 是否進行中文輸入
     }
@@ -154,61 +150,6 @@ export default {
       this.scrollToTop()
       this.$router.push(`/user/product/${id}`)
     },
-    // 加到購物車
-    // addCart (id) {
-    //   const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`
-    //   // 讀取資料前先讓loadingItem等於id資料，觸發disabled避免用戶重複加入購物車
-    //   this.status.loadingItem = id
-    //   const cart = {
-    //     product_id: id,
-    //     qty: 1
-    //   }
-    //   this.$http.post(url, { data: cart })
-    //     .then((res) => {
-    //       console.log(res)
-    //       // 讀取資料完成將disabled取消，讓用戶知道已經完成加入購物車
-    //       this.status.loadingItem = ''
-    //       this.$httpMessageState(res, '加入購物車')
-    //     })
-    // },
-    // 收藏產品比對頁面產品
-    // isProductFavorite (product) {
-    //   return this.favorites.some(favProduct => favProduct.id === product.id)
-    // },
-    // 加到收藏
-    // addToFavorites (item) {
-    //   this.favorites.push(item)
-    //   this.emitter.emit('push-message', {
-    //     style: 'success',
-    //     title: '已加入收藏'
-    //   })
-    //   item.isFavorite = true
-    //   // 先變更isFavorite的值再儲存至localStorage
-    //   this.saveFavoritesToLocalStorage()
-    // },
-    // 移除收藏
-    // removeToFavorites (item) {
-    //   const index = this.favorites.findIndex(favProduct => favProduct.id === item.id)
-    //   if (index !== -1) {
-    //     this.favorites.splice(index, 1)
-    //     this.emitter.emit('push-message', {
-    //       style: 'warning',
-    //       title: '已移除收藏'
-    //     })
-    //   }
-    //   item.isFavorite = false
-    //   // 先變更isFavorite的值再儲存至localStorage
-    //   this.saveFavoritesToLocalStorage()
-    // },
-    // 將收藏資料儲存LocalStorage
-    // saveFavoritesToLocalStorage () {
-    //   localStorage.setItem('favorites', JSON.stringify(this.favorites))
-    // },
-    // 從 localStorage 中提取資料到 favorites
-    // loadFavoritesFromLocalStorage () {
-    //   const favoritesFromStorage = JSON.parse(localStorage.getItem('favorites')) || []
-    //   this.favorites = favoritesFromStorage
-    // },
     // 滾動至最上方
     scrollToTop () {
       window.scrollTo({

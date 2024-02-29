@@ -69,10 +69,6 @@ import cartStore from '@/stores/cartStore'
 export default {
   data () {
     return {
-      // isFavorites: [],
-      // status: {
-      //   loadingItem: '' // 對應品項id
-      // }
     }
   },
   components: { subscription },
@@ -84,65 +80,11 @@ export default {
   methods: {
     ...mapActions(favoriteStore, ['loadFavoritesFromLocalStorage', 'removeToFavorites', 'clearFavorites']),
     ...mapActions(cartStore, ['addToCart', 'getCart']),
-    // 取得儲存收藏產品資料
-    // loadFavoritesFromLocalStorage () {
-    //   const favoritesData = JSON.parse(localStorage.getItem('favorites')) || []
-    //   this.isFavorites = favoritesData
-    // },
-    // 將收藏資料儲存LocalStorage
-    // saveFavoritesToLocalStorage () {
-    //   localStorage.setItem('favorites', JSON.stringify(this.isFavorites))
-    // },
     // 前往詳細資料頁面
     getProduct (id) {
       this.$router.push(`/user/product/${id}`)
       this.scrollToTop()
     }
-    // 加到購物車
-    // addCart (id) {
-    //   const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`
-    //   // 讀取資料前先讓loadingItem等於id資料，觸發disabled避免用戶重複加入購物車
-    //   this.status.loadingItem = id
-    //   const cart = {
-    //     product_id: id,
-    //     qty: 1
-    //   }
-    //   this.$http.post(url, { data: cart })
-    //     .then((res) => {
-    //       console.log(res)
-    //       // 讀取資料完成將disabled取消，讓用戶知道已經完成加入購物車
-    //       this.status.loadingItem = ''
-    //       this.$httpMessageState(res, '加入購物車')
-    //     })
-    // }
-    // 加到收藏
-    // addToFavorites (item) {
-    //   this.isFavorites.push(item)
-    //   this.emitter.emit('push-message', {
-    //     style: 'success',
-    //     title: '已加入收藏'
-    //   })
-    //   item.isFavorite = true
-    //   this.saveFavoritesToLocalStorage()
-    // },
-    // 移除收藏
-    // removeToFavorites (item) {
-    //   const index = this.isFavorites.findIndex(favProduct => favProduct.id === item.id)
-    //   if (index !== -1) {
-    //     this.isFavorites.splice(index, 1)
-    //     this.emitter.emit('push-message', {
-    //       style: 'warning',
-    //       title: '已移除收藏'
-    //     })
-    //   }
-    //   item.isFavorite = false
-    //   this.saveFavoritesToLocalStorage()
-    // },
-    // clearFavorites () {
-    //   // 清空 isFavorites 及LocalStorage
-    //   this.isFavorites = []
-    //   localStorage.removeItem('favorites')
-    // }
   },
   created () {
   // 從 localStorage 中加載收藏資料

@@ -60,7 +60,6 @@ export default {
   created () {
     this.loadFavoritesFromLocalStorage()
     this.getCart()
-    // console.log(process.env.VUE_APP_API, process.env.VUE_APP_PATH)
   }
 }
 </script>

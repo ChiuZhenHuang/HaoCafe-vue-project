@@ -9,7 +9,6 @@
     <nav aria-label="breadcrumb">
       <ul class="breadcrumb mt-5">
         <li class="breadcrumb-item"><router-link to="/user/shopping">全部商品</router-link></li>
-        <!-- <li class="breadcrumb-item"><router-link to="/user/shopping" :@click="emitCategory(product.category)">{{ product.category }}</router-link></li> -->
         <li class="breadcrumb-item">{{ product.category }}</li>
         <li class="breadcrumb-item">{{ product.title }}</li>
       </ul>
@@ -152,13 +151,8 @@ export default {
     return {
       product: {},
       id: '',
-      // isFavorites: [], // 收藏產品列表
       selectedImage: null, // 追蹤主圖顯示
       changeImage: false, // 用於更換主圖
-      // quantity: 1, // 加入購物車數量
-      // status: {
-      //   loadingItem: ''
-      // },
       allProducts: [] // 所有產品列表，用於顯示相關產品
     }
   },
@@ -177,8 +171,6 @@ export default {
       this.isLoading = true
       // 取得收藏清單資料
       this.loadFavoritesFromLocalStorage()
-      // const favorites = JSON.parse(localStorage.getItem('favorites')) || []
-      // this.isFavorites = favorites
       this.$http.get(api).then((response) => {
         this.isLoading = false
         if (response.data.success) {
@@ -195,46 +187,6 @@ export default {
         this.allProducts = res.data.products
       })
     },
-    // 加到購物車
-    // addToCart (id, qty = 1) {
-    //   const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`
-    //   this.status.loadingItem = id
-    //   const cart = {
-    //     product_id: id,
-    //     qty: this.quantity
-    //   }
-    //   this.$http.post(url, { data: cart }).then((res) => {
-    //     this.status.loadingItem = ''
-    //     this.$httpMessageState(res, '加入購物車')
-    //   })
-    // },
-    // 加到收藏
-    // addToFavorites (product) {
-    //   this.isFavorites.push(product)
-    //   this.emitter.emit('push-message', {
-    //     style: 'success',
-    //     title: '已加入收藏'
-    //   })
-    //   product.isFavorite = true
-    //   this.saveFavoritesToLocalStorage()
-    // },
-    // 移除收藏
-    // removeToFavorites (product) {
-    //   const index = this.isFavorites.findIndex(favProduct => favProduct.id === product.id)
-    //   if (index !== -1) {
-    //     this.isFavorites.splice(index, 1)
-    //     this.emitter.emit('push-message', {
-    //       style: 'warning',
-    //       title: '已移除收藏'
-    //     })
-    //   }
-    //   product.isFavorite = false
-    //   this.saveFavoritesToLocalStorage()
-    // },
-    // 將收藏資料儲存LocalStorage
-    // saveFavoritesToLocalStorage () {
-    //   localStorage.setItem('favorites', JSON.stringify(this.isFavorites))
-    // },
     // 點擊其他圖片取代主圖
     handleImageClick (image) {
       this.selectedImage = image
@@ -248,24 +200,11 @@ export default {
         this.changeImage = false
       }, 500)
     },
-    // // 減少數量
-    // decrementQuantity (qty) {
-    //   if (qty > 1) {
-    //     this.quantity--
-    //   }
-    // },
-    // // 增加數量
-    // incrementQuantity (qty) {
-    //   if (this.quantity < this.product.unit) {
-    //     this.quantity++
-    //   }
-    // },
     // 前往相關產品頁面
     goOtherProduct (id) {
       this.$router.push(`/user/product/${id}`).then(() => {
         this.$router.go(0)
       })
-      // this.scrollToTop()
     }
   },
   created () {

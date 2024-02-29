@@ -34,7 +34,7 @@
           </table>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn" @click.prevent="closeModal">確定</button>
+          <button type="button" class="btn" @click.prevent="searchOrder">確定</button>
         </div>
       </div>
     </div>
@@ -95,7 +95,9 @@ export default {
       this.hideModal()
     },
     pushToOrder () {
-      this.$router.push(`/user/checkout/${this.orderId}`)
+      this.$router.push(`/user/checkout/${this.orderId}`).then(() => {
+        window.location.reload()
+      })
     }
   },
   created () {

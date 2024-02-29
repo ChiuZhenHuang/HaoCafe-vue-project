@@ -8,7 +8,7 @@ export default defineStore('cartStore', {
       cart: {
         carts: []
       },
-      quantity: 1,
+      quantity: 1, // 加入購物車數量
       isLoading: false,
       status: {
         loadingItem: '' // 對應品項id
