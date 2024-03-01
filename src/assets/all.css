@@ -13055,6 +13055,7 @@ footer .footer p {
   color: white;
   border: none;
   text-align: center;
+  font-size: 0.9em;
   transition: 0.7s;
   width: 55px;
 }
@@ -13066,6 +13067,11 @@ footer .footer p {
   pointer-events: none;
 }
 
+@media screen and (max-width: 576px) {
+  .subscription .row Form button {
+    width: 60px;
+  }
+}
 .pagination .page {
   text-decoration: none;
   padding: 10px 15px;
@@ -13727,26 +13733,26 @@ Form .form-control {
   border-radius: 200px 0 0 200px;
 }
 
-.order-information {
+.orderSearch-information {
   cursor: pointer;
   width: 100%;
 }
-.order-information th, .order-information td {
+.orderSearch-information th, .orderSearch-information td {
   text-align: center;
   font-size: 1em;
 }
 
-.order-footer button {
+.orderSearch-footer button {
   border: 1px solid black;
   transition: 0.3s;
 }
-.order-footer button:hover {
+.orderSearch-footer button:hover {
   background-color: var(--second-color);
   color: white;
 }
 
 @media screen and (max-width: 576px) {
-  .order-information th, .order-information td {
+  .orderSearch-information th, .orderSearch-information td {
     font-size: 0.8em;
   }
 }

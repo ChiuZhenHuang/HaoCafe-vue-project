@@ -40,6 +40,7 @@
       color: white;
       border: none;
       text-align: center;
+      font-size:.9em;
       transition: .7s;
       width: 55px;
         &:hover{
@@ -49,6 +50,18 @@
       }
       button[disabled] {
         pointer-events: none;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 576px){
+  .subscription{
+    .row{
+      Form{
+        button{
+        width: 60px;
+        }
       }
     }
   }
