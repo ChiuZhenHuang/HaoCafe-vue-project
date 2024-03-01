@@ -22,8 +22,7 @@
     border-radius: 200px 0 0 200px;
   }
 }
-
-.order-information{
+.orderSearch-information{
   cursor: pointer;
   width: 100%;
   th,td{
@@ -31,10 +30,19 @@
     font-size: 1em;
   }
 }
-
+.orderSearch-footer{
+  button{
+    border: 1px solid black;
+    transition: .3s;
+    &:hover{
+      background-color: var(--second-color);
+      color: white;
+    }
+  }
+}
 
 @media screen and (max-width: 576px){
-  .order-information{
+  .orderSearch-information{
     th,td{
       font-size: .8em;
     }

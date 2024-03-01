@@ -49,7 +49,7 @@
             </div>
             <div class="d-flex w-100 justify-content-between" v-if="hasCoupons">
               <!-- <h6>已優惠 <span>{{ hasCoupons ? cart.carts[0].coupon.title : '' }}</span></h6> -->
-              <!-- <h6>已優惠 <span v-if="couponTitle">{{ this.couponTitle }}</span></h6> -->
+              <!-- <h6>已優惠 <span v-if="couponTitle">{{ couponTitle }}</span></h6> -->
               <h6>已優惠</h6>
               <h6>-$ {{ $filters.currency(parseInt(cart.total)-parseInt(cart.final_total)) }}</h6>
             </div>
@@ -163,6 +163,9 @@
 
 <script>
 import scrollButton from '@/mixins/scrollButton'
+import { mapState, mapActions } from 'pinia'
+import favoriteStore from '@/stores/favoriteStore'
+import cartStore from '@/stores/cartStore'
 
 export default {
   data () {
@@ -178,34 +181,26 @@ export default {
         message: ''
       },
       coupon_code: '',
-      cart: {}, // 存放目前已加至購物車內產品
       isLoading: false,
-      couponTitle: ''
+      couponTitle: '' // 顯示優惠碼名稱，暫無使用到
     }
   },
   inject: ['emitter'],
   mixins: [scrollButton],
   computed: {
+    ...mapState(cartStore, ['cart']),
     // 用於判斷是否每個商品都有使用優惠
     hasCoupons () {
       return this.cart.carts.every(item => item && item.coupon !== undefined)
     }
   },
   methods: {
+    ...mapActions(favoriteStore, ['loadFavoritesFromLocalStorage']),
+    ...mapActions(cartStore, ['getCart']),
     // 驗證電話是否正確
     isPhone (value) {
       const phoneNumber = /^(09)[0-9]{8}$/
       return phoneNumber.test(value) ? true : '需要正確的電話號碼'
-    },
-    // 取得購物車列表
-    getCart () {
-      const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`
-      this.isLoading = true
-      this.$http.get(url)
-        .then((res) => {
-          this.cart = res.data.data
-          this.isLoading = false
-        })
     },
     // 套用優惠券
     addCouponCode () {
@@ -240,6 +235,7 @@ export default {
   },
   created () {
     this.getCart()
+    this.loadFavoritesFromLocalStorage()
   }
 }
 </script>

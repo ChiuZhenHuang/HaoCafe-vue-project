@@ -13736,6 +13736,15 @@ Form .form-control {
   font-size: 1em;
 }
 
+.order-footer button {
+  border: 1px solid black;
+  transition: 0.3s;
+}
+.order-footer button:hover {
+  background-color: var(--second-color);
+  color: white;
+}
+
 @media screen and (max-width: 576px) {
   .order-information th, .order-information td {
     font-size: 0.8em;

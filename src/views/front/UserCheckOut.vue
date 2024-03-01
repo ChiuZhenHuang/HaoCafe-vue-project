@@ -120,6 +120,9 @@
 </template>
 
 <script>
+import { mapActions } from 'pinia'
+import favoriteStore from '@/stores/favoriteStore'
+import cartStore from '@/stores/cartStore'
 
 export default {
   data () {
@@ -148,6 +151,8 @@ export default {
     }
   },
   methods: {
+    ...mapActions(favoriteStore, ['loadFavoritesFromLocalStorage']),
+    ...mapActions(cartStore, ['getCart']),
     getOrder () {
       const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/order/${this.orderId}`
       this.isLoading = true
@@ -197,6 +202,8 @@ export default {
     // 將路由上的id並取出帶入api
     this.orderId = this.$route.params.orderId
     this.getOrder()
+    this.loadFavoritesFromLocalStorage()
+    this.getCart()
   }
 }
 </script>

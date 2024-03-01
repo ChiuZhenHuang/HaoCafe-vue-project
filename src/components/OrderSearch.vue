@@ -14,7 +14,7 @@
           <div v-if="orderId === '未找到訂單'" class="text-center">
             <h5>查無相關訂單</h5>
           </div>
-          <table v-else v-show="showOrderInformation" @click.prevent="pushToOrder" class="order-information mt-3 mb-3">
+          <table v-else v-show="showOrderInformation" @click.prevent="pushToOrder" class="orderSearch-information mt-3 mb-3">
             <thead>
               <tr>
                 <th>訂單編號</th>
@@ -33,8 +33,9 @@
             </tbody>
           </table>
         </div>
-        <div class="modal-footer">
+        <div class="modal-footer orderSearch-footer">
           <button type="button" class="btn" @click.prevent="searchOrder">確定</button>
+          <button type="button" class="btn" @click.prevent="closeModal">取消</button>
         </div>
       </div>
     </div>

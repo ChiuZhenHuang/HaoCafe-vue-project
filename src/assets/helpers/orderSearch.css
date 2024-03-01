@@ -23,17 +23,26 @@
   border-radius: 200px 0 0 200px;
 }
 
-.order-information {
+.orderSearch-information {
   cursor: pointer;
   width: 100%;
 }
-.order-information th, .order-information td {
+.orderSearch-information th, .orderSearch-information td {
   text-align: center;
   font-size: 1em;
 }
 
+.orderSearch-footer button {
+  border: 1px solid black;
+  transition: 0.3s;
+}
+.orderSearch-footer button:hover {
+  background-color: var(--second-color);
+  color: white;
+}
+
 @media screen and (max-width: 576px) {
-  .order-information th, .order-information td {
+  .orderSearch-information th, .orderSearch-information td {
     font-size: 0.8em;
   }
 }/*# sourceMappingURL=orderSearch.css.map */
