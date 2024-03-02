@@ -49,7 +49,6 @@ export default {
         this.nowPage = 1
       }
       this.updatePage(this.nowPage)
-      this.scrollToPosition()
     },
     // 參數為外層props進來的資料
     nextPage (page) {
@@ -60,13 +59,12 @@ export default {
         this.nowPage = page.total_pages
       }
       this.updatePage(this.nowPage)
-      this.scrollToPosition()
     },
     // 使用路由判斷滑動至特定位置
     scrollToPosition () {
       if (this.$route.name === 'user-shopping') {
         window.scrollTo({
-          top: 310,
+          top: 325,
           behavior: 'smooth'
         })
       }

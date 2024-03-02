@@ -197,6 +197,9 @@ export default {
       }
     }
   },
+  mounted () {
+    this.emitter.on('emit-category', this.selectCategory)
+  },
   created () {
     this.getProducts()
     this.getAllProducts()

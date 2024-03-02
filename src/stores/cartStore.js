@@ -44,6 +44,7 @@ export default defineStore('cartStore', {
           this.isLoading = false
         })
     },
+    // 更新購物車
     updateCart (item, triggerMessage = true) {
       const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart/${item.id}`
       this.isLoading = true // 轉換購物車數量同時整個頁面loading
@@ -54,16 +55,16 @@ export default defineStore('cartStore', {
       axios.put(url, { data: cart }).then((res) => {
         this.getCart()
         this.isLoading = false
-
+        // 若為刪除產品所觸發此方法，就不觸發吐司通知
         if (triggerMessage) {
           emitter.emit('push-message', {
             style: 'success',
             title: '更新數量成功'
           })
-          // this.$httpMessageState(res, '更新數量')
         }
       })
     },
+    // 清空購物車
     clearCart () {
       const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/carts`
       axios.delete(url).then((res) => {
@@ -75,6 +76,7 @@ export default defineStore('cartStore', {
         })
       })
     },
+    // 刪除購物車產品
     removeCartItem (item) {
       const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart/${item.id}`
       axios.delete(url).then((res) => {

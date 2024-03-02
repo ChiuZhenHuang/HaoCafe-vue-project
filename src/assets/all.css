@@ -13769,4 +13769,35 @@ Form .form-control {
 
 .admin-nav .nav-link {
   font-weight: bolder;
+}
+
+.category-wrapper {
+  list-style: none;
+  width: 100%;
+  height: 300px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+}
+.category-wrapper li {
+  flex: 1;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  writing-mode: vertical-rl;
+  transition: 0.5s;
+}
+.category-wrapper li:first-child {
+  background-image: url("https://i.pinimg.com/564x/e6/e8/69/e6e8691e77bd66ca772d620f22d61d9b.jpg");
+}
+.category-wrapper li:hover {
+  flex: 3;
+}
+.category-wrapper li a {
+  color: rgb(255, 255, 255);
+  text-decoration: none;
 }/*# sourceMappingURL=all.css.map */

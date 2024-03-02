@@ -9,7 +9,9 @@
     <nav aria-label="breadcrumb">
       <ul class="breadcrumb mt-5">
         <li class="breadcrumb-item"><router-link to="/user/shopping">全部商品</router-link></li>
-        <li class="breadcrumb-item">{{ product.category }}</li>
+        <li class="breadcrumb-item" @click.prevent="selectCategory(product.category)">
+          <router-link to="/user/shopping">{{ product.category }}</router-link>
+        </li>
         <li class="breadcrumb-item">{{ product.title }}</li>
       </ul>
     </nav>
@@ -116,12 +118,12 @@
                   <img :src="item.imageUrl"  alt="產品圖片">
                   <div class="more">
                     <button type="button" class="btn btn-outline-secondary btn-more"
-                      @click="goOtherProduct(item.id)">More...
+                      @click.prevent="goOtherProduct(item.id)">More...
                     </button>
                   </div>
                 </div>
                 <div class="card-body w-100">
-                  <h5 class="title" style="cursor: pointer" @click="goOtherProduct(item.id)">{{ item.title }}</h5>
+                  <h5 class="title" style="cursor: pointer" @click.prevent="goOtherProduct(item.id)">{{ item.title }}</h5>
                   <div class="category">{{ item.category }} </div>
                   <div class="d-flex justify-content-between">
                     <div class="price">
@@ -203,8 +205,13 @@ export default {
     // 前往相關產品頁面
     goOtherProduct (id) {
       this.$router.push(`/user/product/${id}`).then(() => {
-        this.$router.go(0)
+        // this.$router.go(0)
+        window.location.reload()
       })
+    },
+    // 麵包削篩選分類
+    selectCategory (category) {
+      this.emitter.emit('emit-category', category)
     }
   },
   created () {

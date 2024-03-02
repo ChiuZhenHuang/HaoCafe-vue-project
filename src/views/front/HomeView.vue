@@ -95,6 +95,9 @@
   <!-- 領取優惠 -->
   <getCoupon/>
 
+  <!-- 商品分類 -->
+  <category/>
+
   <!-- 訂閱我們 -->
   <subscription/>
 
@@ -107,6 +110,7 @@
 import ToastMessages from '@/components/ToastMessages.vue'
 import userNav from '@/components/UserNavbar.vue'
 import getCoupon from '@/components/getCoupon.vue'
+import category from '@/components/Category.vue'
 import subscription from '@/components/Subscription.vue'
 import Footer from '@/components/Footer.vue'
 import scrollButton from '@/mixins/scrollButton'
@@ -122,7 +126,7 @@ export default {
   },
   name: 'HomeView',
   components: {
-    userNav, Footer, getCoupon, subscription, ToastMessages
+    userNav, Footer, getCoupon, subscription, ToastMessages, category
   },
   computed: {
     ...mapState(favoriteStore, ['isFavorites']),
