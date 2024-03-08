@@ -60,7 +60,6 @@ export default {
       // 發送post請求到api，並傳入使用者輸入的資料
       this.$http.post(api, this.user)
         .then((res) => {
-          console.log(res)
           // 如果登入成功，將資料存留到cookie
           if (res.data.success) {
             // 解構賦值

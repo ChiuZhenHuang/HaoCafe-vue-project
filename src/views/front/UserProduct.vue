@@ -107,7 +107,9 @@
 
     <!-- 相關產品 -->
     <div class="row other-product">
-      <div class="about-product-title"><h2>相關產品</h2></div>
+      <div class="about-product-title">
+        <h2>相關產品</h2>
+      </div>
       <div class="col-12">
         <div class="col-md-8 col-lg-9 l-product-content">
           <div class="row row-cols-sm-2 row-cols-lg-3">

@@ -230,7 +230,6 @@ export default {
       formData.append('file-to-upload', uploadedFile)
       const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/upload`
       this.$http.post(url, formData).then((res) => {
-        console.log(res.data)
         if (res.data.success) {
           this.tempProduct.imageUrl = res.data.imageUrl
         }
