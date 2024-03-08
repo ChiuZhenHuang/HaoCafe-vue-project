@@ -65,9 +65,7 @@ export default {
           if (res.data.success) {
             // 解構賦值
             const { token, expired } = res.data
-            // console.log(token, expired)
             document.cookie = `hexToken=${token}; expires=${new Date(expired)}`
-            console.log(res)
             // 轉到dashboard頁面
             this.$router.push('./dashboard/productComponent')
           } else {

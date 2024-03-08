@@ -153,7 +153,7 @@ export default {
     // 滾動至最上方
     scrollToTop () {
       window.scrollTo({
-        top: 310, // 產品列表最上方
+        top: 325, // 產品列表最上方
         behavior: 'smooth' // 平滑滾動效果
       })
     },
@@ -199,6 +199,9 @@ export default {
   },
   mounted () {
     this.emitter.on('emit-category', this.selectCategory)
+  },
+  beforeUnmount () {
+    this.emitter.off('emit-category')
   },
   created () {
     this.getProducts()
