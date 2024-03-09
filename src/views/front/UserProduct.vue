@@ -39,8 +39,10 @@
       </div>
       <div class="col-12 col-lg-7 product-description" style="display: flex; flex-direction: column;">
         <h5 class="product-title">{{ product.title }}</h5>
-        <div class="category mb-5">{{ product.category }}</div>
-        <p class="mb-2" style="white-space: pre-line">{{ product.description }}</p>
+        <div class="category mb-5">{{ product.category }}
+        </div>
+        <p class="mb-2" style="white-space: pre-line">{{ product.description }}
+        </p>
         <div class="d-flex" style="margin-top: auto;align-items: end;">
           <div>
             <div class="h5" v-if="!product.price">NT$ {{ $filters.currency(product.origin_price) }}</div>

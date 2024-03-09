@@ -43,7 +43,6 @@ const routes = [
     children: [
       {
         path: 'shopping',
-        name: 'user-shopping', // 提供分頁使用
         component: () => import('../views/front/UserShopping.vue')
       },
       {

@@ -25,6 +25,8 @@
 </template>
 
 <script>
+import scrollButton from '@/mixins/scrollButton'
+
 export default {
   props: ['pages'],
   data () {
@@ -32,13 +34,14 @@ export default {
       nowPage: ''
     }
   },
+  mixins: [scrollButton],
   methods: {
     // 參數為目前的頁數
     updatePage (page) {
       // 向外emit目前頁數做更新
       this.$emit('emit-pages', page)
       this.nowPage = page
-      this.scrollToPosition()
+      this.scrollToTop()
     },
     // 參數為外層props進來的資料
     previousPage (page) {
@@ -59,15 +62,6 @@ export default {
         this.nowPage = page.total_pages
       }
       this.updatePage(this.nowPage)
-    },
-    // 使用路由判斷滑動至特定位置
-    scrollToPosition () {
-      if (this.$route.name === 'user-shopping') {
-        window.scrollTo({
-          top: 325,
-          behavior: 'smooth'
-        })
-      }
     }
   }
 }

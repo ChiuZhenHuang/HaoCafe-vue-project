@@ -9,21 +9,21 @@
     <div class="row">
       <!-- 選單 -->
       <div class="col-md-4 col-lg-3" id="select">
-        <ul class="list-group">
-          <li class="mt-2 mb-1">
+        <ul class="list-group mb-3">
+          <li class="mt-3 mb-3">
             <input type="search" v-model="search" value="" placeholder=""
             @input="handleInput" @compositionstart="handleCompositionStart" @compositionend="handleCompositionEnd">
             <button><i class="bi bi-search"></i></button>
           </li>
-          <li class="list-group-item mt-2 mb-1" :class="{'active': selectedCategory === ''}"
+          <li class="list-group-item " :class="{'active': selectedCategory === ''}"
           style="cursor: pointer" @click="search === '' && selectCategory('')">全部商品</li>
-          <li class="list-group-item mt-2 mb-1" :class="{'active': selectedCategory === '淺烘培'}"
+          <li class="list-group-item " :class="{'active': selectedCategory === '淺烘培'}"
           style="cursor: pointer" @click="search === '' && selectCategory('淺烘培')">淺烘培</li>
-          <li class="list-group-item mt-2 mb-1" :class="{'active': selectedCategory === '中烘培'}"
+          <li class="list-group-item " :class="{'active': selectedCategory === '中烘培'}"
           style="cursor: pointer" @click="search === '' && selectCategory('中烘培')">中烘培</li>
-          <li class="list-group-item mt-2 mb-1" :class="{'active': selectedCategory === '深烘培'}"
+          <li class="list-group-item " :class="{'active': selectedCategory === '深烘培'}"
           style="cursor: pointer" @click="search === '' && selectCategory('深烘培')">深烘培</li>
-          <li class="list-group-item mt-2 mb-1" :class="{'active': selectedCategory === '周邊商品'}"
+          <li class="list-group-item" :class="{'active': selectedCategory === '周邊商品'}"
           style="cursor: pointer" @click="search === '' && selectCategory('周邊商品')">周邊商品</li>
         </ul>
       </div>
@@ -149,13 +149,6 @@ export default {
     getProduct (id) {
       this.scrollToTop()
       this.$router.push(`/user/product/${id}`)
-    },
-    // 滾動至最上方
-    scrollToTop () {
-      window.scrollTo({
-        top: 325, // 產品列表最上方
-        behavior: 'smooth' // 平滑滾動效果
-      })
     },
     // 篩選烘培度
     selectCategory (category) {

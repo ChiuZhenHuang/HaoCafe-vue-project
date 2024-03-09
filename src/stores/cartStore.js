@@ -68,7 +68,6 @@ export default defineStore('cartStore', {
     clearCart () {
       const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/carts`
       axios.delete(url).then((res) => {
-        console.log('this', res)
         this.getCart()
         emitter.emit('push-message', {
           style: 'warning',
