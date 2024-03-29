@@ -3,7 +3,7 @@
 
   <div class="l-banner bg-user-checkout">
     <div class="mask"></div>
-    <h2>付款確認</h2>
+    <h2>Order Pay</h2>
   </div>
 
   <div class="order-progress mt-5">
@@ -168,7 +168,6 @@ export default {
       const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/pay/${this.orderId}`
       this.$http.post(url)
         .then((res) => {
-          console.log('付款成功', res)
           if (res.data.success) {
             // 成功後會將order.is_paid改為true
             // 付款完成重新取得資料渲染頁面

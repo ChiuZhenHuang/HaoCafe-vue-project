@@ -10,12 +10,18 @@
     h3{
       // google-font
       font-family: 'Dancing Script', cursive;
-      margin: 20px 0;
+      margin: 10px 0;
       position: absolute;
       top:10%;
       left: 50%;
       transform: translate(-50%,-50%);
       font-size: 5rem;
+      background-image: url('https://i.pinimg.com/564x/58/9b/98/589b9830647620d15d33b32ae9c1f286.jpg');
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-clip: text;
+      --webkit-background-clip:text;
+      color: transparent;
     }
     .about-middleImg{
       position: absolute;
@@ -27,9 +33,9 @@
       z-index: 10;
     }
     p{
-      font-family: 'Zen Kurenaido', sans-serif;
       padding: 0 30px;
       line-height: 2.5rem;
+      font-weight: bolder;
     }
     .about-img{
       width: 100%;
@@ -44,6 +50,14 @@
       h3{
         position: static;
         transform: translate(0%,0%);
+      }
+      p{
+        padding: 0px;
+        margin: 20px 0 ;
+      }
+      .about-middleImg{
+        width: 160px;
+        height: 160px;
       }
     }
   }

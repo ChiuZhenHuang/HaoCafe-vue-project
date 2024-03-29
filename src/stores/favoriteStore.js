@@ -50,11 +50,6 @@ export default defineStore('favoriteStore', {
       this.isFavorites = []
       localStorage.removeItem('favorites')
     }
-    // goOtherProduct (id) {
-    //   this.$router.push(`/user/product/${id}`).then(() => {
-    //     this.$router.go(0)
-    //   })
-    // }
   },
   getters: {
     favoritesLength: function (state) {

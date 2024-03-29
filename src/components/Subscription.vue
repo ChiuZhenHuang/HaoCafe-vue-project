@@ -30,7 +30,6 @@ export default {
   methods: {
     subscription () {
       this.userEmail = ''
-      console.log('訂閱成功')
       this.emitter.emit('push-message', {
         style: 'success',
         title: '訂閱成功，感謝您的訂閱'

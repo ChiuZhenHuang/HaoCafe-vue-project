@@ -3,7 +3,7 @@
 
   <div class="l-banner bg-user-cart">
     <div class="mask"></div>
-    <h2>訂單結帳</h2>
+    <h2>Order checkout</h2>
   </div>
 
   <div class="order-progress mt-5">

@@ -2,7 +2,7 @@
   <LoadingComponent :active="isLoading"></LoadingComponent>
   <div class="l-banner bg-product">
     <div class="mask"></div>
-    <h2>商品列表</h2>
+    <h2>Product</h2>
   </div>
 
   <div class="container mt-3">

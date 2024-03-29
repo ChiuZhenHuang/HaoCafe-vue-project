@@ -5,5 +5,4 @@
 <style lang="scss">
 @import "./assets/all";
 @import url('https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Zen+Kurenaido&display=swap');
 </style>

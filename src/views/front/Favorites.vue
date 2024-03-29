@@ -1,7 +1,7 @@
 <template>
   <div class="l-banner bg-favorites">
     <div class="mask"></div>
-    <h2>收藏列表</h2>
+    <h2>Collect</h2>
   </div>
 
   <div class="container favorite-content mt-3">

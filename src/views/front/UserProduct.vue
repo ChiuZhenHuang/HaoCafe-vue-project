@@ -2,7 +2,7 @@
   <LoadingComponent :active="isLoading"></LoadingComponent>
   <div class="l-banner bg-product">
     <div class="mask"></div>
-    <h2>商品列表</h2>
+    <h2>Product</h2>
   </div>
 
   <div class="container">
@@ -39,8 +39,7 @@
       </div>
       <div class="col-12 col-lg-7 product-description" style="display: flex; flex-direction: column;">
         <h5 class="product-title">{{ product.title }}</h5>
-        <div class="category mb-5">{{ product.category }}
-        </div>
+        <div class="category mb-5">{{ product.category }}</div>
         <p class="mb-2" style="white-space: pre-line">{{ product.description }}
         </p>
         <div class="d-flex" style="margin-top: auto;align-items: end;">

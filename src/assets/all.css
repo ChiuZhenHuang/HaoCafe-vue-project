@@ -12289,7 +12289,6 @@ textarea.form-control-lg {
   font-size: 4rem;
 }
 .news-wrapper .news-content .news-txt {
-  font-family: "Zen Kurenaido", sans-serif;
   margin: 60px;
   line-height: 30px;
   color: rgb(255, 255, 255);
@@ -12492,12 +12491,19 @@ textarea.form-control-lg {
 }
 .about .about-item h3, .about .about-item .h3 {
   font-family: "Dancing Script", cursive;
-  margin: 20px 0;
+  margin: 10px 0;
   position: absolute;
   top: 10%;
   left: 50%;
   transform: translate(-50%, -50%);
   font-size: 5rem;
+  background-image: url("https://i.pinimg.com/564x/58/9b/98/589b9830647620d15d33b32ae9c1f286.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  -webkit-background-clip: text;
+          background-clip: text;
+  --webkit-background-clip:text;
+  color: transparent;
 }
 .about .about-item .about-middleImg {
   position: absolute;
@@ -12509,9 +12515,9 @@ textarea.form-control-lg {
   z-index: 10;
 }
 .about .about-item p {
-  font-family: "Zen Kurenaido", sans-serif;
   padding: 0 30px;
   line-height: 2.5rem;
+  font-weight: bolder;
 }
 .about .about-item .about-img {
   width: 100%;
@@ -12521,6 +12527,14 @@ textarea.form-control-lg {
   .about .about-item h3, .about .about-item .h3 {
     position: static;
     transform: translate(0%, 0%);
+  }
+  .about .about-item p {
+    padding: 0px;
+    margin: 20px 0;
+  }
+  .about .about-item .about-middleImg {
+    width: 160px;
+    height: 160px;
   }
 }
 @media screen and (max-width: 768px) {
@@ -12572,11 +12586,20 @@ body {
   filter: blur(5px);
 }
 .l-banner h2, .l-banner .h2 {
-  color: white;
+  font-family: "Dancing Script", cursive;
+  font-size: 5em;
+  font-weight: 1000;
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  background-image: url("https://i.pinimg.com/564x/58/9b/98/589b9830647620d15d33b32ae9c1f286.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  -webkit-background-clip: text;
+          background-clip: text;
+  --webkit-background-clip:text;
+  color: transparent;
 }
 
 #select {
@@ -12752,6 +12775,9 @@ body {
 @media screen and (max-width: 768px) {
   .l-banner {
     height: 240px;
+  }
+  .l-banner h2, .l-banner .h2 {
+    font-size: 3em;
   }
   #select .list-group {
     width: 50%;
@@ -13238,6 +13264,7 @@ footer .footer p {
 }
 .product-description p {
   padding: 0.5em 0;
+  font-weight: bolder;
 }
 .product-description h5, .product-description .h5 {
   color: rgb(68, 68, 68);

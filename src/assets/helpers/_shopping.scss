@@ -36,11 +36,20 @@ body{
     filter: blur(5px); 
   }
   h2{
-    color: white;
+    // color: white;
+    font-family: 'Dancing Script', cursive;
+    font-size:5em;
+    font-weight:1000;
     position: absolute;
     top:50%;
     left:50%;
     transform: translate(-50%,-50%);
+    background-image: url('https://i.pinimg.com/564x/58/9b/98/589b9830647620d15d33b32ae9c1f286.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-clip: text;
+    --webkit-background-clip:text;
+    color: transparent;
   }
 }
 
@@ -111,7 +120,6 @@ body{
     justify-content: center;
     .card{
       box-shadow: 0 0 16px #4523001f ;
-      // box-shadow: 0px 5px 5px #888888;
       width: 100%;
       height: 100%;
       position: relative;
@@ -229,6 +237,9 @@ body{
 @media screen and (max-width: 768px){
   .l-banner{
     height: 240px;
+    h2{
+      font-size:3em;
+    }
   }
   #select{
     .list-group{

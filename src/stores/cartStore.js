@@ -82,7 +82,6 @@ export default defineStore('cartStore', {
         // 用於判斷updateCart是否為removeCartItem所觸發，避免刪除時觸發更新產品通知
         const triggerMessage = false
         this.updateCart(item, triggerMessage)
-
         emitter.emit('push-message', {
           style: 'warning',
           title: '已刪除產品'

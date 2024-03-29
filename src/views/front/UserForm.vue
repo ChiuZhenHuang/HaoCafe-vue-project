@@ -3,7 +3,7 @@
 
   <div class="l-banner bg-user-form">
     <div class="mask"></div>
-    <h2>資料填寫</h2>
+    <h2>Information</h2>
   </div>
 
   <div class="order-progress mt-5">
