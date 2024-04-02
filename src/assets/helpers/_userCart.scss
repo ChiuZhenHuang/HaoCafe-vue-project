@@ -147,12 +147,16 @@
               text-align: center;
               background-color:rgba(255, 255, 255, 0.5);
             }
-              
-          // 將input右方預設的+-欄隱藏
-            input::-webkit-inner-spin-button,
-            input::-webkit-outer-spin-button {
-              -webkit-appearance: none;
-              margin: 0;
+            // 將input右方預設的+-欄隱藏
+            input[type="number"]::-webkit-inner-spin-button,
+            input[type="number"]::-webkit-outer-spin-button {
+                -webkit-appearance: none;
+                margin: 0;
+            }
+            input[type="number"] {
+              -moz-appearance: textfield; /* Firefox */
+              -webkit-appearance: none; /* WebKit (Chrome, Safari) */
+              appearance: textfield; /* 其他瀏覽器 */
             }
           }
         }

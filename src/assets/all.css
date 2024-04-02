@@ -13310,6 +13310,7 @@ footer .footer p {
   background-color: rgba(70, 70, 70, 0.5);
 }
 .product-description .d-flex .add-cart input {
+  width: 70px;
   border-radius: 0;
   outline: none;
   border: none;
@@ -13320,6 +13321,16 @@ footer .footer p {
   color: rgb(0, 0, 0);
   text-align: center;
   background-color: rgba(255, 255, 255, 0.5);
+}
+.product-description .d-flex .add-cart input[type=number]::-webkit-inner-spin-button,
+.product-description .d-flex .add-cart input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.product-description .d-flex .add-cart input[type=number] {
+  -moz-appearance: textfield; /* Firefox */
+  -webkit-appearance: none; /* WebKit (Chrome, Safari) */
+  appearance: textfield; /* 其他瀏覽器 */
 }
 
 .product-notice .accordion-item .accordion-button:focus {
@@ -13490,10 +13501,15 @@ footer .footer p {
   text-align: center;
   background-color: rgba(255, 255, 255, 0.5);
 }
-.cart-product .cart-list .cart-frame .cart-item .info .change-qty input::-webkit-inner-spin-button,
-.cart-product .cart-list .cart-frame .cart-item .info .change-qty input::-webkit-outer-spin-button {
+.cart-product .cart-list .cart-frame .cart-item .info .change-qty input[type=number]::-webkit-inner-spin-button,
+.cart-product .cart-list .cart-frame .cart-item .info .change-qty input[type=number]::-webkit-outer-spin-button {
   -webkit-appearance: none;
   margin: 0;
+}
+.cart-product .cart-list .cart-frame .cart-item .info .change-qty input[type=number] {
+  -moz-appearance: textfield; /* Firefox */
+  -webkit-appearance: none; /* WebKit (Chrome, Safari) */
+  appearance: textfield; /* 其他瀏覽器 */
 }
 .cart-product .cart-list .cart-frame .total {
   display: flex;
